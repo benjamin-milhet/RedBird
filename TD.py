@@ -9,8 +9,8 @@ def hello_world():
     return "Hello, world!"
 
 @app.route("/calculatrice", methods=['POST'])
-def calculatrice(operateur, nombre1, nombre2):
-    return eval(nombre1 + operateur + nombre2)
+def calculatrice():
+    return eval(request.form.get('nombre1') + request.form.get('operateur') + request.form.get('nombre2'))
 
 
 
