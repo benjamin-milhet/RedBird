@@ -4,6 +4,7 @@ from flask import Flask, request
 app = Flask(__name__)
 
 id_cpt = [0]
+liste_calcule = []
 
 @app.route("/")
 def hello_world():
@@ -15,13 +16,14 @@ def calculatrice():
     #global id_cpt
     calcul = eval(request.form.get('nombre1') + request.form.get('operateur') + request.form.get('nombre2'))
     res = str(id_cpt[0]) + " : " + str(calcul)
+    liste_calcule.append(res)
     id_cpt[0] = id_cpt[0] + 1
     return res
 
 @app.route("/getId", methods=['GET'])
 def calculatrice_id():
     # curl -X GET http://127.0.0.1:5000/getId
-    return str(id_cpt)
+    return str(id_cpt[0])
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:
