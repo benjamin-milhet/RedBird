@@ -13,8 +13,7 @@ def hello_world():
 def calculatrice():
     # curl -X POST -d "nombre1=3" -d "operateur=*" -d "nombre2=4" http://127.0.0.1:5000/calculatrice
     #global id_cpt
-    recupCalcul = request.form.get('nombre1') + request.form.get('operateur') + request.form.get('nombre2')
-    calcul = eval(recupCalcul)
+    calcul = eval(request.form.get('nombre1') + request.form.get('operateur') + request.form.get('nombre2'))
     res = str(id_cpt[0]) + " : " + str(calcul)
     id_cpt[0] = id_cpt[0] + 1
     return res
