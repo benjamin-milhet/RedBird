@@ -16,6 +16,10 @@ def calculatrice():
     id_cpt += 1
     return res
 
+@app.route("/getId", methods=['GET'])
+def calculatrice_id():
+    return id_cpt
+
 if __name__ == '__main__':
     if len(sys.argv) > 1:
         if sys.argv[1] == "check_syntax":
