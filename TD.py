@@ -31,4 +31,5 @@ if __name__ == '__main__':
             print("Passed argument not supported ! Supported argument : check_syntax")
             exit(1)
     app.run(debug=True)
-#curl -X POST -d "nombre1=3"-d "operateur=*" -d "nombre2=4" http://127.0.0.1:5000/calculatrice
+
+#curl -X POST -d "nombre1=3" -d "operateur=*" -d "nombre2=4" http://127.0.0.1:5000/calculatrice
