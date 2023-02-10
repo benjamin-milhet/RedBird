@@ -11,7 +11,9 @@ def hello_world():
 
 @app.route("/calculatrice", methods=['POST'])
 def calculatrice():
-    calcul = eval(request.form.get('nombre1') + request.form.get('operateur') + request.form.get('nombre2'))
+    recupCalcul = request.form.get('nombre1') + request.form.get('operateur') + request.form.get('nombre2')
+    print(recupCalcul)
+    calcul = eval(recupCalcul)
     res = id_cpt + " : " + calcul
     id_cpt += 1
     return res
