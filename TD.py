@@ -11,6 +11,7 @@ def hello_world():
 
 @app.route("/calculatrice", methods=['POST'])
 def calculatrice():
+    # curl -X POST -d "nombre1=3" -d "operateur=*" -d "nombre2=4" http://127.0.0.1:5000/calculatrice
     global id_cpt
     recupCalcul = request.form.get('nombre1') + request.form.get('operateur') + request.form.get('nombre2')
     print(recupCalcul)
@@ -21,6 +22,7 @@ def calculatrice():
 
 @app.route("/getId", methods=['GET'])
 def calculatrice_id():
+    # curl -X GET http://127.0.0.1:5000/getId
     return str(id_cpt)
 
 if __name__ == '__main__':
@@ -33,4 +35,3 @@ if __name__ == '__main__':
             exit(1)
     app.run(debug=True)
 
-#curl -X POST -d "nombre1=3" -d "operateur=*" -d "nombre2=4" http://127.0.0.1:5000/calculatrice
