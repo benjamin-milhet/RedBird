@@ -3,6 +3,7 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
+id_cpt = 0
 
 @app.route("/")
 def hello_world():
@@ -10,9 +11,10 @@ def hello_world():
 
 @app.route("/calculatrice", methods=['POST'])
 def calculatrice():
-    return eval(request.form.get('nombre1') + request.form.get('operateur') + request.form.get('nombre2'))
-
-
+    calcul = eval(request.form.get('nombre1') + request.form.get('operateur') + request.form.get('nombre2'))
+    res = id_cpt + " : " + calcul
+    id_cpt += 1
+    return res
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:
