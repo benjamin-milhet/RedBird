@@ -1,10 +1,13 @@
 import sys
+import redis
+
 from flask import Flask, request
 
 app = Flask(__name__)
 
 id_cpt = [0]
 liste_calcule = []
+r = redis.Redis(host='localhost', port=6379, db=0)
 
 @app.route("/")
 def hello_world():
@@ -17,6 +20,7 @@ def calculatrice():
     calcul = eval(request.form.get('nombre1') + request.form.get('operateur') + request.form.get('nombre2'))
     res = str(id_cpt[0]) + " : " + str(calcul)
     liste_calcule.append(res)
+    r.set(str(id_cpt[0]), calcul)
     id_cpt[0] = id_cpt[0] + 1
     return res
 
@@ -24,6 +28,11 @@ def calculatrice():
 def calculatrice_id():
     # curl -X GET http://127.0.0.1:5000/getId
     return str(id_cpt[0])
+
+@app.route("/getCalcul", methods=['GET'])
+def get_calcul():
+    # curl GET -d "id=0" http://127.0.0.1:5000/getCalculatrice
+    return r.get(request.form.get('id'))
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:
