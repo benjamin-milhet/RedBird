@@ -12,5 +12,7 @@ jobs:
         run: python -m pip install --upgrade pip
       - name: Install dependencies
         run: python -m pip install Flask
+      - name: Install dependencies
+        run: python -m pip install redis
       - name: Check Syntax
         run: python3 main.py check_syntax
