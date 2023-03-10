@@ -1,0 +1,22 @@
+.input_div {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    margin-bottom: 26px;
+}
+
+.input_label {
+    flex: 1;
+    margin-right: 10%;
+    text-align: start;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 20px;
+}
+
+.input_input {
+    background-color: var(--second-color);
+    border-radius: 15px;
+    border: none;
+    height: 31px;
+}
