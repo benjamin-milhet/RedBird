@@ -5,7 +5,8 @@ import sys
 import redis
 
 app = Flask(__name__)
-r = redis.Redis(host='localhost', port=6379, db=0)
+rUser = redis.Redis(host='localhost', port=6379, db=0)
+rTweet = redis.Redis(host='localhost', port=6379, db=1)
 
 @app.route("/")
 def accueil():
@@ -17,7 +18,7 @@ def inscription():
     email = request.form['email']
     personne = Personne(nom, email)
 
-    r.set("email." + personne.name, personne.email)
+    rUser.set("email." + personne.name, personne.email)
 
     return "Bienvenue " + personne.name + "!"
 
