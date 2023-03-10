@@ -20,7 +20,7 @@ def inscription():
 
     tmp = rUser.get(request.form.get("email." + personne.name))
     if tmp != None:
-        return "Le nom d'utilisateur " + personne.name + " est deja pris !"
+        return "Le nom d'utilisateur " + personne.name + " n'est pas dispoible."
     else:
         rUser.set("email." + personne.name, personne.email)
         return "Bienvenue " + personne.name + "!"
