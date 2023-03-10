@@ -1,6 +1,6 @@
 from flask import Flask, request
-from personne import *
-from tweet import *
+from Back.personne import *
+from Back.tweet import *
 import sys
 import redis
 
