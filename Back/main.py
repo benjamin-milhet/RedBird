@@ -18,9 +18,12 @@ def inscription():
     email = request.form['email']
     personne = Personne(nom, email)
 
-    rUser.set("email." + personne.name, personne.email)
-
-    return "Bienvenue " + personne.name + "!"
+    tmp = rUser.get(request.form.get("email." + personne.name))
+    if tmp != None:
+        return "Le nom d'utilisateur " + personne.name + " est deja pris !"
+    else:
+        rUser.set("email." + personne.name, personne.email)
+        return "Bienvenue " + personne.name + "!"
 
 if __name__ == '__main__':
 	if len(sys.argv) > 1:
