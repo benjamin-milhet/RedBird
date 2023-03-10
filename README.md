@@ -27,3 +27,5 @@ docker build . --file back/Dockerfile --tag imagebackend
 ```
 docker run imagebackend
 ```
+
+![alt text](https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/blob/main/images/meme.jpg?raw=true)
