@@ -5,6 +5,7 @@ import './index.css';
 
 import reportWebVitals from './reportWebVitals';
 import { Connexion } from './pages/connexion';
+import { Inscription } from './pages/inscription';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -13,6 +14,7 @@ root.render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<Connexion />} />
+      <Route path="/inscription" element={<Inscription />} />
     </Routes>
   </BrowserRouter>
 );

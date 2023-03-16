@@ -8,7 +8,7 @@
 }
 
 .connexion_form {
- 
+    padding-top: 10px;
     width: 25%;
     display: flex;
     align-items: center;
@@ -17,10 +17,7 @@
     background: #f0eaea;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 }
-.connexion_components{
-    margin-top: 10px;
-  
-}
+
 
 .goToInscription {
     margin-top: 10px;
@@ -31,4 +28,8 @@
     line-height: 26px;
     text-align: center;
     text-decoration: none;
+}
+.connexion_button {
+    align-self: center;
+    
 }

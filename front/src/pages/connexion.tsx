@@ -14,11 +14,11 @@ export class Connexion extends React.Component {
                 <Title content="Connexion"/>    
                 <div className="connexion_div">
                     <form className="connexion_form">
-                        <div className="connexion_components">
+                       
                         <Input label="Nom"/>
-                        <Input label="mot de passe" type="password"/>
+                        <Input label="Mot de passe" type="password"/>
                         <Button content="Se connecter"/>
-                        </div>
+                  
                         <div className="goToInscription">
                 
                         <a href="./inscription">Pas encore inscrit ? </a>
@@ -27,7 +27,7 @@ export class Connexion extends React.Component {
                     
                 </div>
 
-               
+            
             </div>
             
         </main>
