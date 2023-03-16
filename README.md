@@ -21,11 +21,12 @@ docker run --name myredis -p 6379:6379 redis
 
 ### BACKEND
 ```
-docker build . --file back/Dockerfile --tag imagebackend
+docker build . --tag imagebackend
 ```
 
 ```
-docker run imagebackend
+docker run --name imagebackend -p 5000:5000 imagebackend
+```
 ```
 
 ![alt text](https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/blob/main/images/meme.jpg?raw=true)
