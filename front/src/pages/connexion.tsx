@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+//import ReactDOM from 'react-dom/client';
 import { Title } from '../component/title';
 import { Input } from '../component/form/input';
 import { Button } from '../component/button';
