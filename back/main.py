@@ -58,7 +58,7 @@ def getAllTweets():
     return liste_tweet
 
 
-@app.route("/getAllTweetsByUser", methods=['GET'])
+@app.route("/getAllTweetsByUser", methods=['POST'])
 def getAllTweetsByUser():
     nom = request.form['nom']
     liste_tweet = rUser.get(request.form.get("tweet." + nom))
