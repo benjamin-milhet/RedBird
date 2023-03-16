@@ -15,8 +15,9 @@ def accueil():
 
 @app.route("/inscription", methods=['POST'])
 def inscription():
-    nom = request.form['nom']
-    password = request.form['password']
+    data = request.get_json()
+    nom = data.get('nom')
+    password = data.get('password')
 
     tmp = rUser.get(request.form.get("nom." + nom, nom))
     if tmp is not None:
@@ -31,8 +32,9 @@ def inscription():
 def tweeter():
     # curl -X POST -d "nom=Lucas" -d "tweet=Salut l'élite, c'est El Pueblo, 18-25, 2 sucres #gange #pizza7Fromage" http://localhost:5000/tweeter
 
-    nom = request.form['nom']
-    tweet = request.form['tweet']
+    data = request.get_json()
+    nom = data.get('nom')
+    tweet = data.get('tweet')
 
     liste_tweet = rUser.get(request.form.get("tweet." + nom))
     taille = len(rTweet.keys())
@@ -60,7 +62,9 @@ def getAllTweets():
 
 @app.route("/getAllTweetsByUser", methods=['POST'])
 def getAllTweetsByUser():
-    nom = request.form['nom']
+    data = request.get_json()
+    nom = data.get('nom')
+    
     liste_tweet = rUser.get(request.form.get("tweet." + nom))
     liste_tweet_final = []
     for i in range(0, len(liste_tweet)):
