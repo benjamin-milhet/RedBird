@@ -16,27 +16,33 @@ def accueil():
 @app.route("/inscription", methods=['POST'])
 def inscription():
     nom = request.form['nom']
-    email = request.form['email']
     password = request.form['password']
 
-    tmp = rUser.get(request.form.get("email." + nom))
+    tmp = rUser.get(request.form.get("nom." + nom, nom))
     if tmp is not None:
         return "Le nom d'utilisateur " + nom + " n'est pas dispoible."
     else:
-        rUser.set("email." + nom, email)
+        rUser.set("nom." + nom, nom)
         rUser.set("password." + nom, password)
         rUser.set("tweet." + nom, [])
         return "Bienvenue " + nom + "!"
 
-
 @app.route("/tweeter", methods=['POST'])
 def tweeter():
+    # curl -X POST -d "nom=Lucas" -d "tweet=Salut l'élite, c'est El Pueblo, 18-25, 2 sucres #gange #pizza7Fromage" http://localhost:5000/tweeter
+
     nom = request.form['nom']
     tweet = request.form['tweet']
 
     liste_tweet = rUser.get(request.form.get("tweet." + nom))
-    taille = len(liste_tweet)
+    taille = len(rTweet.keys())
     liste_tweet[taille] = taille
+
+    liste_sujet = chercherHashtag(tweet)
+    for i in range(len(liste_sujet)):
+        liste_sujet[i] = liste_sujet[i].lower()
+        rTweet.set("sujet." + liste_sujet[i], {nom, taille})
+
     rUser.set("tweet." + nom, liste_tweet)
     rTweet.set("tweet." + str(taille), tweet)
 
