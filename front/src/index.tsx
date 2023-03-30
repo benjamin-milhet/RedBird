@@ -6,6 +6,7 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { Connexion } from './pages/connexion';
 import { Inscription } from './pages/inscription';
+import { Accueil } from './pages/accueil';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -13,7 +14,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<Connexion />} />
+      <Route path="/" element={<Accueil />} />
       <Route path="/inscription" element={<Inscription />} />
     </Routes>
   </BrowserRouter>
