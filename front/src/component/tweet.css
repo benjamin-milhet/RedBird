@@ -1,0 +1,41 @@
+.tweet {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .tweet-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  
+  .tweet-username {
+    font-weight: bold;
+  }
+  
+  .tweet-date {
+    color: #888;
+  }
+  
+  .tweet-text {
+    margin: 0;
+  }
+  
+  .tweet-reply-button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .tweet-reply-button:hover {
+    background-color: #3e8e41;
+  }
+  
