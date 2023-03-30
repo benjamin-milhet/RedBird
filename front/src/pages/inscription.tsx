@@ -7,6 +7,29 @@ import './inscription.css';
 
 export class Inscription extends React.Component{
 
+   
+ handleSignUp = () => {
+        const username = (document.getElementById("username") as HTMLInputElement).value;
+        const password = (document.getElementById("password") as HTMLInputElement).value;
+        fetch('http://localhost:3000/signup', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password
+            })
+        }).then((response) => {
+            if (response.status === 200) {
+                console.log("Inscription réussie");
+            } else {
+                console.log("Erreur lors de l'inscription");
+            }
+        });
+
+ }
+
 
     render(){
         return (
@@ -18,9 +41,8 @@ export class Inscription extends React.Component{
                     <form className="form_signup">
                         <Input label="Username"/>
                        
-                        <Input label="Mail"/>
-                       
-                        <Button content="Envoyer"/>
+                        <Input label="Password"/>
+                       <Button content="S'inscrire" onClick={this.handleSignUp}/>
                     </form>                        
                 </div>
             </div>

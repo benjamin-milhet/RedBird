@@ -28,7 +28,7 @@ export class Accueil extends React.Component{
         return (
             <main>
                 <div className="accueil">
-                    <Title content="Accueil" />
+                    <Title content="Tweeterrr" />
                     <Button className = "newTweetBtn" content="+" style={{   width: 50,height: 50}}  /> 
                   
                     <SearchBar onSearch={(query: string) => console.log(query)} />   

@@ -34,3 +34,9 @@ export class Connexion extends React.Component {
         );
     }
 }
+
+// Stocker le nom d'utilisateur dans le localStorage lorsque l'utilisateur se connecte
+//localStorage.setItem('username', 'nom d\'utilisateur');
+
+// Récupérer le nom d'utilisateur à partir du localStorage lorsque l'application est chargée
+//const username = localStorage.getItem('username');
