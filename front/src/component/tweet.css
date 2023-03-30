@@ -38,4 +38,9 @@
   .tweet-reply-button:hover {
     background-color: #3e8e41;
   }
-  
+  .tweet-replies {
+    margin-top: 10px;
+    margin-left: 20px;
+    border-left: 1px solid #ccc;
+    padding-left: 10px;
+  }
