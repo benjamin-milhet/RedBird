@@ -5,10 +5,13 @@ import re
 import json
 import calendar
 import time
+from flask_cors import CORS
 
 app = Flask(__name__)
 rUser = redis.Redis(host='localhost', port=6379, db=0)
 rTweet = redis.Redis(host='localhost', port=6379, db=1)
+
+
 
 
 @app.route("/", methods=['GET'])
