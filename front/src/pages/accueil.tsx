@@ -10,41 +10,31 @@ const replies = [
     {
       username: "JaneDoe",
       text: "This is a reply!",
-      date: new Date(),
+     
     },
     {
       username: "BobSmith",
       text: "This is another reply!",
-      date: new Date(),
+      
     },
   ];
 
-const reponse1: tweet = {
-    username: "BobSmith",
-    text: "This is another reply!",
-    date: new Date(),
-};
-const reponse2: tweet = {
-    username: "JaneDoe",
-    text: "This is a reply!",
-    date: new Date(),
-};
+
 
 const  tweetTest: tweet = {
+    id: 1,
     username: "John Doe",
     text: "Hello World",
-    date: new Date(),
-    tags: ["#react", "#typescript", "#javascript"],
-    replies: [
-       reponse1,reponse2
-    ],      
+    
+ 
 };
 
 const listeTweets: tweet[] = [tweetTest, {
+    id: 2,
     username: "John Doe",
-    text: "Hello World",
-    date: new Date(),
-    tags: ["#react", "#javascript"],
+    text: "Hello World #react yolo #javascript",
+   
+ 
 }];
 
 
@@ -80,11 +70,11 @@ export class Accueil extends React.Component{
                    <div className="tweets">
                         {listeTweets.map((tweet) => (
                             <Tweet
+                            id={tweet.id}
                             username={tweet.username}
                             text={tweet.text}
-                            date={tweet.date}
-                            tags={tweet.tags}
-                            replies={tweet.replies}
+                            
+                            
                             />
                         ))}
                     </div>
