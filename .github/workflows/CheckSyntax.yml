@@ -15,5 +15,7 @@ jobs:
         run: python -m pip install Flask
       - name: Install dependencies redis
         run: python -m pip install redis
+      - name: Install dependencies redis
+        run: python -m pip install flask-cors
       - name: Check Syntax
         run: python3 back/main.py check_syntax
