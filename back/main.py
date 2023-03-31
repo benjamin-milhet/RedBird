@@ -3,13 +3,15 @@ import sys
 import redis
 import re
 import json
+import calendar
+import time
 
 app = Flask(__name__)
 rUser = redis.Redis(host='localhost', port=6379, db=0)
 rTweet = redis.Redis(host='localhost', port=6379, db=1)
 
 
-@app.route("/")
+@app.route("/", methods=['GET'])
 def accueil():
     return "Bienvenue sur notre réseau social de la mère-patrie!"
 
@@ -41,16 +43,16 @@ def tweeter():
     tweet = data.get('tweet')
 
     liste_tweet = json.loads(rUser.get("tweet." + nom))
-    taille = len(liste_tweet)
-    liste_tweet.append(taille)
+    time_stamp = calendar.timegm(time.gmtime())
+    liste_tweet.append(time_stamp)
 
     liste_sujet = chercher_hashtag(tweet)
     for i in range(len(liste_sujet)):
         liste_sujet[i] = liste_sujet[i].lower()
-        rTweet.set("sujet." + liste_sujet[i], nom + "." + str(taille))
+        rTweet.set("sujet." + liste_sujet[i], nom + "." + str(time_stamp))
 
     rUser.set("tweet." + nom, json.dumps(liste_tweet))
-    rTweet.set("tweet." + str(taille), tweet)
+    rTweet.set("tweet." + str(time_stamp), tweet)
 
     return "True"
 
@@ -59,12 +61,15 @@ def tweeter():
 def get_all_tweets():
     # curl -X GET http://localhost:5000/getAllTweets
 
-    liste_tweet = []
+    liste_tweet_final = []
+    liste_users = get_all_users()
 
-    for i in range(0, len(rTweet.keys("tweet.*"))):
-        liste_tweet.append(rTweet.get("tweet." + str(i)).decode('utf-8'))
+    for i in range(0, len(liste_users)):
+        liste_tweet = json.loads(rUser.get(("tweet." + liste_users[i])))
+        for j in range(0, len(liste_tweet)):
+            liste_tweet_final.append(dict(tweet = rTweet.get("tweet." + str(liste_tweet[i])).decode('utf-8'), nom = liste_users[i], id = liste_tweet[i]))
 
-    return liste_tweet
+    return liste_tweet_final
 
 
 @app.route("/getAllTweetsByUser", methods=['POST'])
@@ -96,6 +101,14 @@ def get_all_sujet():
 
 def chercher_hashtag(tweet):
     return re.findall(r"#(\w+)", tweet)
+
+@app.route("/getAllUsers", methods=['GET'])
+def get_all_users():
+    liste_res = []
+    tmp = rUser.keys("nom.*")
+    for i in range(len(tmp)):
+        liste_res.append(tmp[i].decode('utf-8')[4:])
+    return liste_res
 
 
 if __name__ == '__main__':
