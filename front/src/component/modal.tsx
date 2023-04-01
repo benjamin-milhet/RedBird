@@ -11,7 +11,15 @@ interface ModalType {
   close: () => void;
   
 }
-async function postNewTweet(name: string, tweet: string): Promise<boolean> {
+
+  
+export default function Modal(props: ModalType) {
+  const [username, setUsername] = React.useState("");
+  const [text, setText] = React.useState("");
+
+
+
+  async function postNewTweet(name: string, tweet: string): Promise<boolean> {
 
     try {
       const response = await fetch("http://localhost:5000/tweeter", {
@@ -27,6 +35,7 @@ async function postNewTweet(name: string, tweet: string): Promise<boolean> {
         
       });
       console.log(response.ok);
+      props.close();
       return response.ok;
       
     
@@ -35,14 +44,6 @@ async function postNewTweet(name: string, tweet: string): Promise<boolean> {
       return false;
     }
   }
-  
-export default function Modal(props: ModalType) {
-  const [username, setUsername] = React.useState("");
-  const [text, setText] = React.useState("");
-
-
-
-  
       
   return (
     <>

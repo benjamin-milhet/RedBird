@@ -7,7 +7,7 @@ import SearchBar from '../component/searchBar';
 import  { Tweet , tweet} from '../component/tweet';
 import { Retweet, retweet } from '../component/retweet';
 import  Modal  from '../component/modal';
-
+import './accueil.css';
 
 
 interface props {
@@ -31,6 +31,7 @@ export class Accueil extends React.Component< any,props>{
    
 
     async componentDidMount(){
+      
         const response = await fetch("http://localhost:5000/getAllTweets");
         const tweets = await response.json();
         console.log(tweets);
@@ -47,23 +48,28 @@ export class Accueil extends React.Component< any,props>{
 
     
     
- showModal = () => {
-    this.setState({ isOpen: !this.state.isOpen });
-    };
+ 
 
-  
+  closeModal = () => {
+    this.setState({ isOpen: false });
+    this.componentDidMount();
+    };
+    openModal = () => {
+        this.setState({ isOpen: true });
+        
+        };
 
 
 
     
  render(){   
 
-   
         return (
             <main>
+                <div className="wrapper">
                 <div className="accueil">
                     <Title content="Tweeterrr" />
-                    <Button className = "newTweetBtn" content="+" style={{   width: 50,height: 50}} onClick={this.showModal} /> 
+                    <Button className = "newTweetBtn" content="+" style={{   width: 50,height: 50}} onClick={this.openModal} /> 
                   
                     <SearchBar onSearch={(query: string) => console.log(query)} />   
                    <div className="tweets">
@@ -79,7 +85,8 @@ export class Accueil extends React.Component< any,props>{
                     </div>
                            
                    </div>
-                   <Modal isOpen={this.state.isOpen} close={this.showModal} ></Modal>
+                   <Modal isOpen={this.state.isOpen} close={this.closeModal}  ></Modal>
+                </div>
             </main>
         );
     }
