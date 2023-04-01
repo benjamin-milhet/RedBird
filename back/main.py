@@ -9,8 +9,9 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
-rUser = redis.Redis(host='localhost', port=6379, db=0)
-rTweet = redis.Redis(host='localhost', port=6379, db=1)
+
+rUser = redis.Redis(host='twitter_redis', port=6379, db=0, decode_responses=True)
+rTweet = redis.Redis(host='twitter_redis', port=6379, db=1, decode_responses=True)
 
 
 @app.route("/", methods=['GET'])
