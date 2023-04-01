@@ -21,7 +21,10 @@ jobs:
       with:
         node-version: '16.x'
 
-
+    - name: Prepare environment
+      run: |
+        echo "CI=false" >> $GITHUB_ENV
+          
     - name: Install dependencies
       run: npm install --prefix front
 
