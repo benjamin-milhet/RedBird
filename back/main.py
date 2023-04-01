@@ -8,6 +8,7 @@ import time
 from flask_cors import CORS
 
 app = Flask(__name__)
+app.config['JSON_AS_ASCII'] = False
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 rUser = redis.Redis(host='twitter_redis', port=6379, db=0, decode_responses=True)
@@ -51,7 +52,7 @@ def tweeter():
 
     liste_sujet = chercher_hashtag(tweet)
     for i in range(len(liste_sujet)):
-        liste_sujet[i] = liste_sujet[i].lower()
+        liste_sujet[i] = liste_sujet[i]
         rTweet.set("sujet." + liste_sujet[i], nom + "." + str(time_stamp))
 
     rUser.set("tweet." + nom, json.dumps(liste_tweet))
@@ -67,10 +68,12 @@ def get_all_tweets():
     liste_tweet_final = []
     liste_users = get_all_users()
 
-    for i in range(0, len(liste_users)):
+    for i in range(len(liste_users)):
         liste_tweet = json.loads(rUser.get(("tweet." + liste_users[i])))
-        for j in range(0, len(liste_tweet)):
-            liste_tweet_final.append(dict(tweet = rTweet.get("tweet." + str(liste_tweet[i])).decode('utf-8'), nom = liste_users[i], id = liste_tweet[i]))
+        for j in range(len(liste_tweet)):
+            liste_tweet_final.append(
+                dict(tweet=rTweet.get("tweet." + str(liste_tweet[j])), nom=liste_users[i],
+                     id=liste_tweet[j]))
 
     return liste_tweet_final
 
@@ -86,7 +89,7 @@ def get_all_tweets_by_user():
     liste_tweet_final = []
 
     for i in range(len(liste_tweet)):
-        liste_tweet_final.append(rTweet.get("tweet." + str(liste_tweet[i])).decode('utf-8'))
+        liste_tweet_final.append(rTweet.get("tweet." + str(liste_tweet[i])))
 
     return liste_tweet_final
 
@@ -98,20 +101,54 @@ def get_all_sujet():
     liste_res = []
     tmp = rTweet.keys("sujet.*")
     for i in range(len(tmp)):
-        liste_res.append(tmp[i].decode('utf-8')[6:])
+        liste_res.append(tmp[i][6:])
     return liste_res
 
 
 def chercher_hashtag(tweet):
     return re.findall(r"#(\w+)", tweet)
 
+
 @app.route("/getAllUsers", methods=['GET'])
 def get_all_users():
     liste_res = []
     tmp = rUser.keys("nom.*")
     for i in range(len(tmp)):
-        liste_res.append(tmp[i].decode('utf-8')[4:])
+        liste_res.append(tmp[i][4:])
     return liste_res
+
+
+@app.route("/chargerDonnees", methods=['GET'])
+def charger_donnees():
+    # curl -X GET http://localhost:5000/chargerDonnees
+    # charger users
+    rUser.set("nom.Benjamin", "Benjamin")
+    rUser.set("password.Benjamin", "pechakuchaDeMerde")
+    rUser.set("tweet.Benjamin", json.dumps([1, 2, 3]))
+
+    rUser.set("nom.Clement", "Clement")
+    rUser.set("password.Clement", "pechakuchaDeMerde")
+    rUser.set("tweet.Clement", json.dumps([4, 5, 6]))
+
+    # charger tweets
+    rTweet.set("tweet.1", "Salut l'elite, c'est El Pueblo, 18-25, 2 sucres #gange #pizza7Fromage")
+    rTweet.set("tweet.2", "Tu vas repartir mal mon copain #gitan")
+    rTweet.set("tweet.3",
+               "Союз нерушимый республик свободных Сплотила навеки Великая Русь. Да здравствует созданный волей народов Единый, могучий Советский Союз! #USSR")
+    rTweet.set("tweet.4", "Franche-Comté > Bourgogne #Franc-Comtois")
+    rTweet.set("tweet.5", "Le Granier m'a écrasé avec ses courbes de baiser #THREEJS # Bezier")
+    rTweet.set("tweet.6", "ILC > SE > SQR")
+
+    # charger sujet
+    rTweet.set("sujet.gange", "Benjamin.1")
+    rTweet.set("sujet.pizza7Fromage", "Benjamin.1")
+    rTweet.set("sujet.gitan", "Benjamin.2")
+    rTweet.set("sujet.USSR", "Benjamin.3")
+    rTweet.set("sujet.Franc-Comtois", "Clement.4")
+    rTweet.set("sujet.THREEJS", "Clement.5")
+    rTweet.set("sujet.Bezier", "Clement.5")
+
+    return "True"
 
 
 if __name__ == '__main__':
