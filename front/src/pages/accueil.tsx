@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useState} from 'react';
 //import ReactDOM from 'react-dom/client';
 import { Title } from '../component/title';
 import { Input } from '../component/form/input';
@@ -6,6 +6,7 @@ import { Button } from '../component/button';
 import SearchBar from '../component/searchBar';
 import  { Tweet , tweet} from '../component/tweet';
 import { Retweet, retweet } from '../component/retweet';
+import  Modal  from '../component/modal';
 
 const  tweetTest: tweet = {
     id: 1,
@@ -24,6 +25,9 @@ const listeTweets: tweet[] = [tweetTest, {
 }];
 
 
+
+
+
 const retweetTest: retweet = {
     id: 1,
     nameRetweeter: "John Doe",
@@ -32,7 +36,8 @@ const retweetTest: retweet = {
 
 interface props {
     //liste de tweets
-    listOfTweets: tweet[],
+    listOfTweets: tweet[];
+    isOpen: boolean;
 }
 
 
@@ -41,12 +46,13 @@ export class Accueil extends React.Component< any,props>{
         super(props);
         this.state = {    
            //tableau de tweets
-            listOfTweets: []
-
+            listOfTweets: [],
+            isOpen: false
 
            
         };
     }
+   
 
     async componentDidMount(){
         const response = await fetch("http://localhost:5000/getAllTweets");
@@ -54,16 +60,21 @@ export class Accueil extends React.Component< any,props>{
         console.log(tweets);
     }
     
+ showModal = () => {
+    this.setState({ isOpen: !this.state.isOpen });
+    };
 
+
+
+
+    
+ render(){   
    
-
-
- render(){
         return (
             <main>
                 <div className="accueil">
                     <Title content="Tweeterrr" />
-                    <Button className = "newTweetBtn" content="+" style={{   width: 50,height: 50}}  /> 
+                    <Button className = "newTweetBtn" content="+" style={{   width: 50,height: 50}} onClick={this.showModal} /> 
                   
                     <SearchBar onSearch={(query: string) => console.log(query)} />   
                    <div className="tweets">
@@ -79,6 +90,7 @@ export class Accueil extends React.Component< any,props>{
                     </div>
                             <Retweet  id={1} nameRetweeter="John Doe" retweet={tweetTest} />
                    </div>
+                   <Modal isOpen={this.state.isOpen} close={this.showModal} ></Modal>
             </main>
         );
     }
