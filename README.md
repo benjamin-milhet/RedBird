@@ -4,6 +4,7 @@
 
 [![checkSyntax](https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/actions/workflows/CheckSyntax.yml/badge.svg)](https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/actions/workflows/CheckSyntax.yml)
 [![Docker Image CI](https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/actions/workflows/docker-image.yml/badge.svg)](https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/actions/workflows/docker-image.yml)
+[![Docker Image front](https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/actions/workflows/docker-image-front.yml/badge.svg)](https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/actions/workflows/docker-image-front.yml)
 
 
 ## Membres du groupe
