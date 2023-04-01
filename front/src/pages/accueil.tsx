@@ -5,21 +5,7 @@ import { Input } from '../component/form/input';
 import { Button } from '../component/button';
 import SearchBar from '../component/searchBar';
 import  { Tweet , tweet} from '../component/tweet';
-
-const replies = [
-    {
-      username: "JaneDoe",
-      text: "This is a reply!",
-     
-    },
-    {
-      username: "BobSmith",
-      text: "This is another reply!",
-      
-    },
-  ];
-
-
+import { Retweet, retweet } from '../component/retweet';
 
 const  tweetTest: tweet = {
     id: 1,
@@ -38,25 +24,38 @@ const listeTweets: tweet[] = [tweetTest, {
 }];
 
 
+const retweetTest: retweet = {
+    id: 1,
+    nameRetweeter: "John Doe",
+    retweet: tweetTest,
+};
+
+interface props {
+    //liste de tweets
+    listOfTweets: tweet[],
+}
 
 
+export class Accueil extends React.Component< any,props>{
+    constructor(props: any) {
+        super(props);
+        this.state = {    
+           //tableau de tweets
+            listOfTweets: []
 
-    const tags = ["#react", "#typescript", "#javascript"];
- 
 
-
-export class Accueil extends React.Component{
-
-    loadTweets(){
-        fetch('http://localhost:3000/tweets')
-        .then((response) => {
-            if (response.status === 200) {
-                console.log("Tweets chargés");
-            } else {
-                console.log("Erreur lors du chargement des tweets");
-            }
-        });
+           
+        };
     }
+
+    async componentDidMount(){
+        const response = await fetch("http://localhost:5000/getAllTweets");
+        const tweets = await response.json();
+        console.log(tweets);
+    }
+    
+
+   
 
 
  render(){
@@ -78,7 +77,7 @@ export class Accueil extends React.Component{
                             />
                         ))}
                     </div>
-
+                            <Retweet  id={1} nameRetweeter="John Doe" retweet={tweetTest} />
                    </div>
             </main>
         );

@@ -4,6 +4,7 @@ RUN apt-get update
 RUN apt-get install python3-pip -y
 RUN pip install Flask
 RUN pip install redis
+RUN pip install flask-cors
 
 ENV FLASK_APP=main.py
 ENV FLASK_ENV=development

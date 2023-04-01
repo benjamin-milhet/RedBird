@@ -1,0 +1,11 @@
+.retweet-username{
+    font-weight: bold;
+}
+.retweet{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
