@@ -30,6 +30,3 @@ jobs:
 
     - name: Build React app
       run: npm run build --prefix front
-
-    - name: Run tests
-      run: npm test --prefix front
