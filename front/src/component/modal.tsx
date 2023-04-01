@@ -11,7 +11,7 @@ interface ModalType {
   close: () => void;
   
 }
-async function postNewTweet(username: string, text: string): Promise<boolean> {
+async function postNewTweet(name: string, tweet: string): Promise<boolean> {
 
     try {
       const response = await fetch("http://localhost:5000/tweeter", {
@@ -21,11 +21,15 @@ async function postNewTweet(username: string, text: string): Promise<boolean> {
         },
         mode: "cors",
         body: JSON.stringify({
-          nom: username,
-          tweet: text,
+          nom: name,
+          tweet: tweet,
         }),
+        
       });
+      console.log(response.ok);
       return response.ok;
+      
+    
     } catch (error) {
       console.error(error);
       return false;
@@ -48,7 +52,7 @@ export default function Modal(props: ModalType) {
             {props.children}
             <Button content="Fermer" onClick={props.close} />
 
-            <Button content="Envoyer" onClick={() => postNewTweet(username, text)} />
+            <Button content="Envoyer" onClick={() => postNewTweet("Clement", "test de tweet")} />
 
           </div>
         </div>

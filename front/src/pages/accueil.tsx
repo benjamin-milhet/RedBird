@@ -8,31 +8,7 @@ import  { Tweet , tweet} from '../component/tweet';
 import { Retweet, retweet } from '../component/retweet';
 import  Modal  from '../component/modal';
 
-const  tweetTest: tweet = {
-    id: 1,
-    username: "John Doe",
-    text: "Hello World",
-    
- 
-};
 
-const listeTweets: tweet[] = [tweetTest, {
-    id: 2,
-    username: "John Doe",
-    text: "Hello World #react yolo #javascript",
-   
- 
-}];
-
-
-
-
-
-const retweetTest: retweet = {
-    id: 1,
-    nameRetweeter: "John Doe",
-    retweet: tweetTest,
-};
 
 interface props {
     //liste de tweets
@@ -58,17 +34,30 @@ export class Accueil extends React.Component< any,props>{
         const response = await fetch("http://localhost:5000/getAllTweets");
         const tweets = await response.json();
         console.log(tweets);
-    }
+        const listOfTweets = tweets.map((tweet: any) => {
+            return {
+                id: tweet.id,
+                username: tweet.nom,
+                text: tweet.tweet,
+                
+            };
+        });
+        this.setState({ listOfTweets });
+        }
+
+    
     
  showModal = () => {
     this.setState({ isOpen: !this.state.isOpen });
     };
 
+  
 
 
 
     
  render(){   
+
    
         return (
             <main>
@@ -78,7 +67,7 @@ export class Accueil extends React.Component< any,props>{
                   
                     <SearchBar onSearch={(query: string) => console.log(query)} />   
                    <div className="tweets">
-                        {listeTweets.map((tweet) => (
+                        {this.state.listOfTweets.map((tweet) => (
                             <Tweet
                             id={tweet.id}
                             username={tweet.username}
@@ -88,7 +77,7 @@ export class Accueil extends React.Component< any,props>{
                             />
                         ))}
                     </div>
-                            <Retweet  id={1} nameRetweeter="John Doe" retweet={tweetTest} />
+                           
                    </div>
                    <Modal isOpen={this.state.isOpen} close={this.showModal} ></Modal>
             </main>

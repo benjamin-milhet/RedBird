@@ -7,7 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import { Connexion } from './pages/connexion';
 import { Inscription } from './pages/inscription';
 import { Accueil } from './pages/accueil';
-
+fetch("http://localhost:5000/chargerDonnees");
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
