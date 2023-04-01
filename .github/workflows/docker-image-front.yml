@@ -1,0 +1,17 @@
+name: Docker Image front
+
+on:
+  workflow_dispatch:
+    
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+    - run: cd front
+    - run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
