@@ -1,0 +1,22 @@
+.radioboxlist_div {
+    display: flex;
+    width: 90%;
+    margin-bottom: 31px;
+}
+
+.radioboxlist_label {
+    flex: 1;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 20px;
+}
+
+.radioboxlist_container {
+    flex: 1;
+}
+
+.radiobox_span {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 19px;
+}

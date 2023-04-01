@@ -1,0 +1,35 @@
+.connexion_div {
+ 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+
+.connexion_form {
+    padding-top: 10px;
+    width: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: #f0eaea;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+
+.goToInscription {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: var(--main-color);
+    font-weight: 600;
+   
+    line-height: 26px;
+    text-align: center;
+    text-decoration: none;
+}
+.connexion_button {
+    align-self: center;
+    
+}
