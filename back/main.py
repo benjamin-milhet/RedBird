@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 import sys
 import redis
 import re
@@ -30,12 +30,12 @@ def inscription():
 
     tmp = rUser.get("nom." + nom)
     if tmp is not None:
-        return "Le nom d'utilisateur " + nom + " n'est pas disponible."
+        return jsonify({"message": "Le nom d'utilisateur " + nom + " n'est pas disponible."})
     else:
         rUser.set("nom." + nom, nom)
         rUser.set("password." + nom, password)
         rUser.set("tweet." + nom, json.dumps([]))
-        return "Bienvenue " + nom + "!"
+        return jsonify({"message": "Bienvenue " + nom + "!"})
 
 
 @app.route("/tweeter", methods=['POST'])
