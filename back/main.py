@@ -47,6 +47,10 @@ def tweeter():
     nom = data.get('nom')
     tweet = data.get('tweet')
 
+    nom_user = rUser.get("nom." + nom)
+    if nom_user is None:
+        return jsonify({"message": "Le nom d'utilisateur " + nom + " n'existe pas."}), 400
+
     liste_tweet = json.loads(rUser.get("tweet." + nom))
     time_stamp = calendar.timegm(time.gmtime())
     liste_tweet.append(time_stamp)
@@ -59,7 +63,7 @@ def tweeter():
     rUser.set("tweet." + nom, json.dumps(liste_tweet))
     rTweet.set("tweet." + str(time_stamp), tweet)
 
-    return "True"
+    return jsonify({"message": "Le tweet a bien été posté."}), 200
 
 
 @app.route("/getAllTweets", methods=['GET'])
@@ -76,7 +80,7 @@ def get_all_tweets():
                 dict(tweet=rTweet.get("tweet." + str(liste_tweet[j])), nom=liste_users[i],
                      id=liste_tweet[j]))
 
-    return liste_tweet_final
+    return liste_tweet_final, 200
 
 
 @app.route("/getAllTweetsByUser", methods=['POST'])
@@ -86,13 +90,17 @@ def get_all_tweets_by_user():
     data = request.get_json()
     nom = data.get('nom')
 
+    nom_user = rUser.get("nom." + nom)
+    if nom_user is None:
+        return jsonify({"message": "Le nom d'utilisateur " + nom + " n'existe pas."}), 400
+
     liste_tweet = json.loads(rUser.get(("tweet." + nom)))
     liste_tweet_final = []
 
     for i in range(len(liste_tweet)):
-        liste_tweet_final.append(rTweet.get("tweet." + str(liste_tweet[i])))
+        liste_tweet_final.append(dict(tweet=rTweet.get("tweet." + str(liste_tweet[i])), nom=nom, id=liste_tweet[i]))
 
-    return liste_tweet_final
+    return liste_tweet_final, 200
 
 
 @app.route("/getAllSujet", methods=['GET'])
@@ -149,7 +157,7 @@ def charger_donnees():
     rTweet.set("sujet.THREEJS", "Clement.5")
     rTweet.set("sujet.Bezier", "Clement.5")
 
-    return "True"
+    return jsonify({"message": "Le chargement des données à réussi."}), 200
 
 
 if __name__ == '__main__':
