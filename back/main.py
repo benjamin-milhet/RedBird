@@ -30,12 +30,13 @@ def inscription():
 
     tmp = rUser.get("nom." + nom)
     if tmp is not None:
-        return jsonify({"message": "Le nom d'utilisateur " + nom + " n'est pas disponible."})
+        return jsonify({"message": "Le nom d'utilisateur " + nom + " n'est pas disponible."}), 400
+        
     else:
         rUser.set("nom." + nom, nom)
         rUser.set("password." + nom, password)
         rUser.set("tweet." + nom, json.dumps([]))
-        return jsonify({"message": "Bienvenue " + nom + "!"})
+        return jsonify({"message": "Bienvenue " + nom + "!"}), 200
 
 
 @app.route("/tweeter", methods=['POST'])
