@@ -16,6 +16,7 @@ export class Connexion extends React.Component {
 
 
     valideConnexion = () => {
+        
         if (this.state.username === '' || this.state.password === '') {
             alert('Veuillez remplir tous les champs');
         } else {
@@ -62,7 +63,8 @@ export class Connexion extends React.Component {
              
                 <Title content="Connexion"/>    
                 <div className="connexion_div">
-                    <form className="connexion_form">
+                <form className="connexion_form" >
+
                        
                     <Input label="Username" name="username" onChange={this.handleInputChange} />
                        

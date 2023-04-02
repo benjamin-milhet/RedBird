@@ -7,14 +7,9 @@ import reportWebVitals from './reportWebVitals';
 import { Connexion } from './pages/connexion';
 import { Inscription } from './pages/inscription';
 import { Accueil } from './pages/accueil';
+import App  from './pages/App';
 
-async function fetchData() {
-  const response = await fetch("http://localhost:5000/chargerDonnees");
-  
-  // insérez ici votre code pour remplir la base de données avec les données récupérées
-}
 
-fetchData();
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
@@ -22,7 +17,8 @@ root.render(
 
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<Connexion />} />
+      <Route path="/" element={< App/>} />
+      <Route path="/connexion" element={<Connexion />} />
       <Route path="/accueil" element={<Accueil />} />
       <Route path="/inscription" element={<Inscription />} />
     </Routes>

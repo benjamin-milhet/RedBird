@@ -8,9 +8,12 @@ type InputProps = {
     placeholder?: string,
     onChange?: (event: any) => void,
     name?: string,
+    onSubmit?: () => void,
 };
 
+
 export class Input extends React.Component<InputProps> {
+    
     render(): React.ReactNode {
         return (
             <div className="input_div">
@@ -20,7 +23,10 @@ export class Input extends React.Component<InputProps> {
                 onChange={this.props.onChange}
                 type={this.props.type}
                 value={this.props.value} 
-                placeholder={this.props.placeholder}/>
+                placeholder={this.props.placeholder}
+               
+                />
+
             </div>
         );
     }
