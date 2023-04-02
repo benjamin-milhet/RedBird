@@ -119,17 +119,17 @@ const filteredTopics = this.state.listOfTopics.filter((topic) =>
                     <div className="topics">
                         
                     <text className="title_topics">Topics</text>
-                    <form className="search-bar" >
-                        <input
+                    <form className="searchBar" >
+                        <input className="searchBar_input"
                             type="text"
                             
                             onChange={(event) => this.setState({searchTopic :event.target.value})}
                             placeholder="Search..."
                             value={this.state.searchTopic}
                         />
-                     <button className="reset_search" onClick={ ()=> this.setState({ searchTopic: "" })} >
-              X
-            </button>
+                     <button type="reset" className="reset_search" onClick={ ()=> this.setState({ searchTopic: "" })} >
+                     X
+                    </button>
                     </form>
       
                     <div className="liste_topics">
