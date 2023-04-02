@@ -1,6 +1,13 @@
 version: "3"
 
 services:
+  twitter_front_react:
+    build: ./front
+    ports:
+      - "3000:3000"
+    depends_on:
+      - twitter_flask_app
+
   twitter_flask_app:
     build: ./back
     ports:

@@ -136,7 +136,7 @@ def charger_donnees():
     rTweet.set("tweet.2", "Tu vas repartir mal mon copain #gitan")
     rTweet.set("tweet.3",
                "Союз нерушимый республик свободных Сплотила навеки Великая Русь. Да здравствует созданный волей народов Единый, могучий Советский Союз! #USSR")
-    rTweet.set("tweet.4", "Franche-Comté > Bourgogne #Franc-Comtois")
+    rTweet.set("tweet.4", "Franche-Comté > Bourgogne #FrancComtois")
     rTweet.set("tweet.5", "Le Granier m'a écrasé avec ses courbes de baiser #THREEJS # Bezier")
     rTweet.set("tweet.6", "ILC > SE > SQR")
 
@@ -145,7 +145,7 @@ def charger_donnees():
     rTweet.set("sujet.pizza7Fromage", "Benjamin.1")
     rTweet.set("sujet.gitan", "Benjamin.2")
     rTweet.set("sujet.USSR", "Benjamin.3")
-    rTweet.set("sujet.Franc-Comtois", "Clement.4")
+    rTweet.set("sujet.FrancComtois", "Clement.4")
     rTweet.set("sujet.THREEJS", "Clement.5")
     rTweet.set("sujet.Bezier", "Clement.5")
 
