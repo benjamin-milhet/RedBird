@@ -1,5 +1,21 @@
 # BACKEND
 
+## Commandes docker
+
+### REDIS
+```
+docker run --name myredis -p 6379:6379 redis
+```
+
+### BACKEND
+```
+docker build . --tag imagebackend
+```
+
+```
+docker run --name imagebackend -p 5000:5000 imagebackend
+```
+
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 
 ![alt text](https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/blob/main/images/meme2.jpeg?raw=true)

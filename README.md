@@ -16,9 +16,14 @@
 
 ## Lancement des conteneurs
 
-### DOCKER BUILD & REBUILD
+### DOCKER BUILD & REBUILD BACKEND
 ```
 docker-compose up -d --force-recreate --build twitter_flask_app
+```
+
+### DOCKER BUILD & REBUILD FRONTEND
+```
+docker-compose up -d --force-recreate --build twitter_front_react
 ```
 
 ### DOCKER RUN
