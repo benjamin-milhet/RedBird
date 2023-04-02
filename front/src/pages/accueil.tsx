@@ -17,6 +17,7 @@ interface props {
     listOfTopics: string[];
     searchTopic: string;
     
+    
 }
 
 
@@ -29,6 +30,7 @@ export class Accueil extends React.Component< any,props>{
             isOpen: false,
           listOfTopics: [],
             searchTopic: "",
+            
 
            
         };
@@ -49,8 +51,41 @@ export class Accueil extends React.Component< any,props>{
     }
 
 
-     async componentDidMount(){
-      
+ confirm = () => {
+   var confirm =window.confirm("Voulez-vous vous déconnecter?");
+    if (confirm === true) {
+        localStorage.removeItem('username');
+        window.location.href = 'http://localhost:3000/'; 
+    }
+    else {
+    }
+}
+
+
+    async componentDidMount(){
+        this.getAllTweet();
+        this.getAllSujet();   
+    }
+
+    
+    
+       
+
+    closeModal = () => {
+        this.setState({ isOpen: false });
+        this.componentDidMount();
+        };
+    openModal = () => {
+        this.setState({ isOpen: true });
+    };
+
+    getAllSujet = async () => {
+        const response2 = await fetch("http://localhost:5000/getAllSujet");
+        const topics = await response2.json();
+        this.setState({listOfTopics:topics})
+    };
+
+    getAllTweet  = async () => {
         const response = await fetch("http://localhost:5000/getAllTweets");
         const tweets = await response.json();
         console.log(tweets);
@@ -63,28 +98,31 @@ export class Accueil extends React.Component< any,props>{
             };
         });
         this.setState({ listOfTweets: this.sortTweetByMoreRecentId(listOfTweets) });
-
-
-        const response2 = await fetch("http://localhost:5000/getAllSujet");
-        const topics = await response2.json();
-this.setState({listOfTopics:topics});
-        }
-
-    
-    
-       
-
-  closeModal = () => {
-    this.setState({ isOpen: false });
-    this.componentDidMount();
+        this.setState({ searchTopic: "" })
     };
-    openModal = () => {
-        this.setState({ isOpen: true });
+
         
-        };
-
-
-
+    getAllTweetByTopic = async (topic: string) => {
+        const response = await fetch("http://localhost:5000/getAllTweetsBySujet", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                sujet: topic,
+            }),
+        });
+        const tweets = await response.json();
+        const listOfTweets = tweets.map((tweet: any) => {
+            return {
+                id: tweet.id,
+                username: tweet.nom,
+                text: tweet.tweet,
+            };
+        });
+        this.setState({ listOfTweets: this.sortTweetByMoreRecentId(listOfTweets) });
+        this.setState({ searchTopic: topic })
+    };
 
 
     
@@ -93,13 +131,16 @@ console.log(localStorage.getItem('username'));
 const filteredTopics = this.state.listOfTopics.filter((topic) =>
             topic.toLowerCase().includes(this.state.searchTopic.toLowerCase())
         );
+       
+
         return (
             <main>
                
                 <div className="accueil">
                 <div className="top">
                     <Title content="Tweeterrr" />
-                    <Button className = "newTweetBtn" content="+" style={{   width: 50,height: 50}} onClick={this.openModal} /> 
+                    <Button className = "deconnexionBtn" content="Déconnexion" onClick={this.confirm} />
+                    <Button className = "newTweetBtn" content="+" style={{   width: 40,height: 40}} onClick={this.openModal} /> 
                   
                     <SearchBar  onSearch={(query: string) => console.log(query)} />   
                 </div>
@@ -127,33 +168,26 @@ const filteredTopics = this.state.listOfTopics.filter((topic) =>
                             placeholder="Search..."
                             value={this.state.searchTopic}
                         />
-                     <button type="reset" className="reset_search" onClick={ ()=> this.setState({ searchTopic: "" })} >
-                     X
-                    </button>
+                        <button type="reset" className="reset_search" 
+                            onClick={ ()=> this.getAllTweet()} //fonction pour reset 
+                             >
+                            X
+                        </button>
                     </form>
       
                     <div className="liste_topics">
                     {filteredTopics.map((topic) => (
                         <div className="topic">
                         <text >{topic }</text>
-                        <button className="topic_btn"  onClick={()=> this.setState({ searchTopic: topic })}>Voir</button>
+                        <button className="topic_btn"  onClick={()=> this.getAllTweetByTopic(topic)}>Voir</button>
                         </div>
 
                     ))}
                     </div>
-                   
-                       
                     </div>
-                    
-
-
-                           
                 </div>
-
-
                 </div>
-                   <Modal isOpen={this.state.isOpen} close={this.closeModal} ></Modal>
-                
+                <Modal isOpen={this.state.isOpen} close={this.closeModal} ></Modal>
             </main>
         );
     }
