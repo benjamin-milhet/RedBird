@@ -1,18 +1,39 @@
 .inscription_div {
-
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     margin-bottom: 30px;
-}
-
-.form_signup {
+  }
+  
+  .form_signup {
     padding-top: 10px;
-    width: 25%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
+  }
+  
+
+/* Pour les écrans plus petits que 768px */
+@media (max-width: 767px) {
+    .form_signup {
+      width: 80%;
+    }
+  }
+  
+  /* Pour les écrans plus grands que 768px */
+  @media (min-width: 768px) {
+    .form_signup {
+      width: 50%;
+    }
+  }
+  
+  /* Pour les écrans plus grands que 1024px */
+  @media (min-width: 1024px) {
+    .form_signup {
+      width: 40%;
+    }
+  }
+  
