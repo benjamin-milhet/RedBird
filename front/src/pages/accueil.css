@@ -1,19 +1,9 @@
 
-  .title,
-  .searchBar,
-  .newTweetBtn {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-  }
+.tweets {
+  height: 600px;
   
-  .searchBar {
-    z-index: 1;
-  }
-  
-  .tweets {
-    max-height: calc(100vh - 100px);
-    overflow-y: auto;
-  }
-  
+  overflow-y: auto;
+}
+.top {
+
+}

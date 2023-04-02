@@ -14,7 +14,7 @@ interface props {
     //liste de tweets
     listOfTweets: tweet[];
     isOpen: boolean;
-    isConnected: boolean;
+    
 }
 
 
@@ -25,7 +25,7 @@ export class Accueil extends React.Component< any,props>{
            //tableau de tweets
             listOfTweets: [],
             isOpen: false,
-            isConnected: false
+          
 
            
         };
@@ -64,7 +64,7 @@ export class Accueil extends React.Component< any,props>{
 
     
     
- 
+       
 
   closeModal = () => {
     this.setState({ isOpen: false });
@@ -79,7 +79,7 @@ export class Accueil extends React.Component< any,props>{
 
     
  render(){   
-
+console.log(localStorage.getItem('username'));
         return (
             <main>
                
@@ -103,7 +103,7 @@ export class Accueil extends React.Component< any,props>{
                     </div>
                            
                    </div>
-                   <Modal isOpen={this.state.isOpen} close={this.closeModal}  ></Modal>
+                   <Modal isOpen={this.state.isOpen} close={this.closeModal} ></Modal>
                 
             </main>
         );
