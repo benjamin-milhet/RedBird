@@ -10,8 +10,8 @@
         - name: Checkout
           uses: actions/checkout@v3
   
-        - name: Tests
-          uses: cloudposse/github-action-docker-compose-test-run@main
+        - name: run docker-compose
+          uses: sudo-bot/action-docker-compose@latest
           with:
-            file: docker-compose.yml
-            service: app
+              # https://docs.docker.com/compose/reference/overview/
+              cli-args: "up"
