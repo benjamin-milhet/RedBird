@@ -1,25 +1,41 @@
 // Modal.tsx
 
-import React, { ReactNode } from "react";
+import React, { ReactNode, useState, useEffect } from "react";
 import "./modal.css";
 import { tweet } from "../component/tweet";
 import { Input } from '../component/form/input';
 import { Button } from '../component/button';
+
 interface ModalType {
   children?: ReactNode;
   isOpen: boolean;
   close: () => void;
   
+  
 }
 
   
 export default function Modal(props: ModalType) {
-  const [username, setUsername] = React.useState("");
-  const [text, setText] = React.useState("");
 
 
+  const [tweet, setTweet] = useState("");
+  const [isConnected, setIsConnected] = useState(false);
 
-  async function postNewTweet(name: string, tweet: string): Promise<boolean> {
+  //verifier si l'utilisateur est connecté avec le localStorage
+  
+  
+
+ 
+
+
+  async function postNewTweet(): Promise<boolean> {
+    
+    
+    if (tweet === "") {
+      return false;
+    }
+  
+
 
     try {
       const response = await fetch("http://localhost:5000/tweeter", {
@@ -29,7 +45,7 @@ export default function Modal(props: ModalType) {
         },
         mode: "cors",
         body: JSON.stringify({
-          nom: name,
+          nom: localStorage.getItem('username'),
           tweet: tweet,
         }),
         
@@ -44,17 +60,43 @@ export default function Modal(props: ModalType) {
       return false;
     }
   }
-      
+  const disconnect = () => {
+    localStorage.removeItem('username');
+    setIsConnected(false);
+  }
+  
+  
+
+
+
+  
   return (
     <>
       {props.isOpen && (
         <div className="modal-overlay" onClick={props.close}>
           <div onClick={(e) => e.stopPropagation()} className="modal-box">
             {props.children}
-            <Button content="Fermer" onClick={props.close} />
+            <div className="modal">
+            <button className="close" onClick={props.close} >
+              X
+            </button>
+           <text className="title">Tweet</text>
+         
+            
+           
+            <textarea className="input"
+              name="tweet"
+              onChange={(e) => setTweet(e.target.value)}
+              placeholder="Votre tweet"
+            />
 
-            <Button content="Envoyer" onClick={() => postNewTweet("Clement", "test de tweet")} />
+          
+          Vous écrivez sous le nom de : {localStorage.getItem('username')}
+            
 
+            <Button content="Envoyer" onClick={ postNewTweet} />
+            
+          </div>
           </div>
         </div>
       )}
