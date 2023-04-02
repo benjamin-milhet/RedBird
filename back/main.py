@@ -20,6 +20,11 @@ def accueil():
     return "Bienvenue sur notre réseau social de la mère-patrie!"
 
 
+@app.route('/healthz', methods=['GET'])
+def healthcheck():
+    return '', 200
+
+
 @app.route("/inscription", methods=['POST'])
 def inscription():
     # curl -X POST -H "Content-Type: application/json; charset=utf-8" --data "{\"nom\":\"Lucas\",\"password\":\"pechakuchaDeMerde\"}" http://localhost:5000/inscription
@@ -120,7 +125,8 @@ def get_all_tweets():
             for j in range(len(liste_retweet)):
                 tweet = json.loads(rTweet.get("retweet." + str(liste_retweet[j])))
                 liste_tweet_final.append(
-                    dict(tweet=rTweet.get("tweet." + tweet["id"]), nom=tweet["nom"], id=liste_retweet[j], retweet_user=liste_users[i]))
+                    dict(tweet=rTweet.get("tweet." + tweet["id"]), nom=tweet["nom"], id=liste_retweet[j],
+                         retweet_user=liste_users[i]))
 
     return liste_tweet_final, 200
 
