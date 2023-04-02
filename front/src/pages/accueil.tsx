@@ -138,7 +138,7 @@ const filteredTopics = this.state.listOfTopics.filter((topic) =>
                
                 <div className="accueil">
                 <div className="top">
-                    <Title content="Tweeterrr" />
+                    <Title content="RedBird" />
                     <Button className = "deconnexionBtn" content="Déconnexion" onClick={this.confirm} />
                     <Button className = "newTweetBtn" content="+" style={{   width: 40,height: 40}} onClick={this.openModal} /> 
                   
