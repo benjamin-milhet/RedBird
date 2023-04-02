@@ -49,7 +49,7 @@ export const Tweet = (props: tweet)  => {
         )}
     </div>
       <div className="tweet-footer">
-        <button className="tweet-reply-button">Reply</button>
+        <button className="tweet-reply-button" >Reply</button>
       </div>
       
     </div>

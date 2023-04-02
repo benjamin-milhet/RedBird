@@ -14,6 +14,8 @@ interface props {
     //liste de tweets
     listOfTweets: tweet[];
     isOpen: boolean;
+    listOfTopics: string[];
+    searchTopic: string;
     
 }
 
@@ -25,7 +27,8 @@ export class Accueil extends React.Component< any,props>{
            //tableau de tweets
             listOfTweets: [],
             isOpen: false,
-          
+          listOfTopics: [],
+            searchTopic: "",
 
            
         };
@@ -60,6 +63,11 @@ export class Accueil extends React.Component< any,props>{
             };
         });
         this.setState({ listOfTweets: this.sortTweetByMoreRecentId(listOfTweets) });
+
+
+        const response2 = await fetch("http://localhost:5000/getAllSujet");
+        const topics = await response2.json();
+this.setState({listOfTopics:topics});
         }
 
     
@@ -77,9 +85,14 @@ export class Accueil extends React.Component< any,props>{
 
 
 
+
+
     
  render(){   
 console.log(localStorage.getItem('username'));
+const filteredTopics = this.state.listOfTopics.filter((topic) =>
+            topic.toLowerCase().includes(this.state.searchTopic.toLowerCase())
+        );
         return (
             <main>
                
@@ -88,8 +101,10 @@ console.log(localStorage.getItem('username'));
                     <Title content="Tweeterrr" />
                     <Button className = "newTweetBtn" content="+" style={{   width: 50,height: 50}} onClick={this.openModal} /> 
                   
-                    <SearchBar onSearch={(query: string) => console.log(query)} />   
+                    <SearchBar  onSearch={(query: string) => console.log(query)} />   
                 </div>
+                <div className = "body">
+
                    <div className="tweets">
                         {this.state.listOfTweets.map((tweet) => (
                             <Tweet
@@ -101,8 +116,42 @@ console.log(localStorage.getItem('username'));
                             />
                         ))}
                     </div>
+                    <div className="topics">
+                        
+                    <text className="title_topics">Topics</text>
+                    <form className="search-bar" >
+                        <input
+                            type="text"
+                            
+                            onChange={(event) => this.setState({searchTopic :event.target.value})}
+                            placeholder="Search..."
+                            value={this.state.searchTopic}
+                        />
+                     <button className="reset_search" onClick={ ()=> this.setState({ searchTopic: "" })} >
+              X
+            </button>
+                    </form>
+      
+                    <div className="liste_topics">
+                    {filteredTopics.map((topic) => (
+                        <div className="topic">
+                        <text >{topic }</text>
+                        <button className="topic_btn"  onClick={()=> this.setState({ searchTopic: topic })}>Voir</button>
+                        </div>
+
+                    ))}
+                    </div>
+                   
+                       
+                    </div>
+                    
+
+
                            
-                   </div>
+                </div>
+
+
+                </div>
                    <Modal isOpen={this.state.isOpen} close={this.closeModal} ></Modal>
                 
             </main>

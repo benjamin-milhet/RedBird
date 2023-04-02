@@ -1,9 +1,89 @@
 
+.body {
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+ 
+  justify-content: space-between;
+  height: 550px;
+}
 .tweets {
-  height: 600px;
-  
+  height: 100%;
+  padding:  5px;
+  border: 1px solid black;
+  flex : 4;
   overflow-y: auto;
 }
-.top {
 
+
+.topics {
+  flex : 1;
+  margin-left: 5px;
+ padding:  5px;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  
+ height: 100%;
+ overflow-y: auto;
+
+
+}
+.title_topics {
+  text-align: center;
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+.topic {
+  display: flex;
+    flex-direction: row;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+    justify-content: space-between;
+    
+}
+.liste_topics{
+  margin-top: 5px;
+  overflow-y: auto;
+}
+
+
+
+input[type="text"] {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  border-radius: 4px;
+}
+
+.topic_btn{
+  align-self: flex-end;
+  background-color: #b40000;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  min-width: fit-content;
+  margin-right: 5px;
+}
+
+.topic_btn:hover {
+  background-color: rgb(122, 11, 11);
+}
+.reset_search {
+  background-color: #7d7979;
+  font-weight: bold;
+  border: none;
+
+  align-self: flex-end;
+  margin-top: -10px;
+
+  margin-left: 5px;
+   
+  height: 30px;
+  width: 30px;
 }
