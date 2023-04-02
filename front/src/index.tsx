@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import './index.css';
@@ -8,13 +8,22 @@ import { Connexion } from './pages/connexion';
 import { Inscription } from './pages/inscription';
 import { Accueil } from './pages/accueil';
 
+async function fetchData() {
+  const response = await fetch("http://localhost:5000/chargerDonnees");
+  
+  // insérez ici votre code pour remplir la base de données avec les données récupérées
+}
+
+fetchData();
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
+
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<Accueil />} />
+      <Route path="/" element={<Connexion />} />
+      <Route path="/accueil" element={<Accueil />} />
       <Route path="/inscription" element={<Inscription />} />
     </Routes>
   </BrowserRouter>
