@@ -22,6 +22,8 @@ def accueil():
 
 @app.route('/healthz', methods=['GET'])
 def healthcheck():
+    # curl -X GET http://localhost:5000/healthz
+
     return '', 200
 
 
