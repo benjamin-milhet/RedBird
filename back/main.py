@@ -36,6 +36,7 @@ def inscription():
         rUser.set("nom." + nom, nom)
         rUser.set("password." + nom, password)
         rUser.set("tweet." + nom, json.dumps([]))
+        rUser.set("retweet." + nom, json.dumps([]))
         return jsonify({"message": "Bienvenue " + nom + "!"}), 200
 
 
@@ -69,6 +70,37 @@ def tweeter():
     return jsonify({"message": "Le tweet a bien été posté."}), 200
 
 
+@app.route("/retweet", methods=['POST'])
+def retweet():
+    # curl -X POST -H "Content-Type: application/json; charset=utf-8" --data "{\"nom\":\"Lucas\", \"nom_user_tweet\":\"Benjamin\", \"id\":\"1\"}" http://localhost:5000/retweet
+
+    data = request.get_json()
+    nom = data.get('nom')
+    nom_user_tweet = data.get('nom_user_tweet')
+    id_tweet = data.get('id')
+
+    nom_user = rUser.get("nom." + nom)
+    if nom_user is None:
+        return jsonify({"message": "Le nom d'utilisateur " + nom + " n'existe pas."}), 400
+
+    nom_user_tweet = rUser.get("nom." + nom_user_tweet)
+    if nom_user_tweet is None:
+        return jsonify({"message": "Le nom d'utilisateur " + nom_user_tweet + " n'existe pas."}), 400
+
+    tweet = rTweet.get("tweet." + id_tweet)
+    if tweet is None:
+        return jsonify({"message": "Le tweet avec l'id " + id_tweet + " n'existe pas."}), 400
+
+    liste_tweet = json.loads(rUser.get("retweet." + nom))
+    time_stamp = calendar.timegm(time.gmtime())
+    liste_tweet.append(time_stamp)
+
+    rUser.set("retweet." + nom, json.dumps(liste_tweet))
+    rTweet.set("retweet." + str(time_stamp), json.dumps(dict(nom=nom_user_tweet, id=id_tweet)))
+
+    return jsonify({"message": "Le tweet " + str(id_tweet) + " a bien été retweeté."}), 200
+
+
 @app.route("/getAllTweets", methods=['GET'])
 def get_all_tweets():
     # curl -X GET http://localhost:5000/getAllTweets
@@ -77,11 +109,18 @@ def get_all_tweets():
     liste_users = get_all_users()
 
     for i in range(len(liste_users)):
-        liste_tweet = json.loads(rUser.get(("tweet." + liste_users[i])))
-        for j in range(len(liste_tweet)):
-            liste_tweet_final.append(
-                dict(tweet=rTweet.get("tweet." + str(liste_tweet[j])), nom=liste_users[i],
-                     id=liste_tweet[j]))
+        if rUser.get(("tweet." + liste_users[i])) is not None:
+            liste_tweet = json.loads(rUser.get(("tweet." + liste_users[i])))
+            for j in range(len(liste_tweet)):
+                liste_tweet_final.append(
+                    dict(tweet=rTweet.get("tweet." + str(liste_tweet[j])), nom=liste_users[i],
+                         id=liste_tweet[j], retweet_user=None))
+        if rUser.get(("retweet." + liste_users[i])) is not None:
+            liste_retweet = json.loads(rUser.get(("retweet." + liste_users[i])))
+            for j in range(len(liste_retweet)):
+                tweet = json.loads(rTweet.get("retweet." + str(liste_retweet[j])))
+                liste_tweet_final.append(
+                    dict(tweet=rTweet.get("tweet." + tweet["id"]), nom=tweet["nom"], id=liste_retweet[j], retweet_user=liste_users[i]))
 
     return liste_tweet_final, 200
 
