@@ -14,6 +14,7 @@ interface props {
     //liste de tweets
     listOfTweets: tweet[];
     isOpen: boolean;
+    isConnected: boolean;
 }
 
 
@@ -23,14 +24,29 @@ export class Accueil extends React.Component< any,props>{
         this.state = {    
            //tableau de tweets
             listOfTweets: [],
-            isOpen: false
+            isOpen: false,
+            isConnected: false
 
            
         };
     }
-   
 
-    async componentDidMount(){
+    
+   
+ sortTweetByMoreRecentId =(liste:tweet[]) => {
+    return liste.sort((a, b) => {
+        if (a.id > b.id) {
+            return -1;
+        }
+        if (a.id < b.id) {
+            return 1;
+        }
+        return 0;
+    });
+    }
+
+
+     async componentDidMount(){
       
         const response = await fetch("http://localhost:5000/getAllTweets");
         const tweets = await response.json();
@@ -43,7 +59,7 @@ export class Accueil extends React.Component< any,props>{
                 
             };
         });
-        this.setState({ listOfTweets });
+        this.setState({ listOfTweets: this.sortTweetByMoreRecentId(listOfTweets) });
         }
 
     
@@ -66,12 +82,14 @@ export class Accueil extends React.Component< any,props>{
 
         return (
             <main>
-                <div className="wrapper">
+               
                 <div className="accueil">
+                <div className="top">
                     <Title content="Tweeterrr" />
                     <Button className = "newTweetBtn" content="+" style={{   width: 50,height: 50}} onClick={this.openModal} /> 
                   
                     <SearchBar onSearch={(query: string) => console.log(query)} />   
+                </div>
                    <div className="tweets">
                         {this.state.listOfTweets.map((tweet) => (
                             <Tweet
@@ -86,7 +104,7 @@ export class Accueil extends React.Component< any,props>{
                            
                    </div>
                    <Modal isOpen={this.state.isOpen} close={this.closeModal}  ></Modal>
-                </div>
+                
             </main>
         );
     }
