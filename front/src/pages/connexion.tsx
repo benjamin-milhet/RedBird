@@ -4,8 +4,14 @@ import { Title } from '../component/title';
 import { Input } from '../component/form/input';
 import { Button } from '../component/button';
 import './connexion.css';
+import { hover } from '@testing-library/user-event/dist/hover';
+
+
 
 export class Connexion extends React.Component {
+
+
+
     render(): React.ReactNode {
         return (
             <main>
@@ -17,15 +23,16 @@ export class Connexion extends React.Component {
                        
                         <Input label="Nom"/>
                         <Input label="Mot de passe" type="password"/>
-                        <Button content="Se connecter"/>
+                        <Button content="Se connecter" />
                   
                         <div className="goToInscription">
                 
                         <a href="./inscription">Pas encore inscrit ? </a>
                         </div>
                     </form>
-                    
+                    <Button content="Utiliser sans connexion"   className="button_connexion" onClick={()=>alert("test")}/>
                 </div>
+                
 
             
             </div>

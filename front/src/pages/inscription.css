@@ -12,7 +12,9 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background: #f0eaea;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    
   }
   
 

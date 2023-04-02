@@ -1,35 +1,50 @@
 .connexion_div {
- 
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     margin-bottom: 30px;
+    width: 100%;
 }
 
 .connexion_form {
     padding-top: 10px;
-    width: 25%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     background: #f0eaea;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    max-width: 500px;
+    padding-bottom: 10px;
 }
 
+/* For screens smaller than 768px */
+@media (max-width: 767px) {
+    .connexion_form {
+        width: 80%; /* use the same width as the registration form */
+    }
+}
 
-.goToInscription {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    color: var(--main-color);
-    font-weight: 600;
-   
-    line-height: 26px;
-    text-align: center;
-    text-decoration: none;
+/* For screens larger than 768px */
+@media (min-width: 768px) {
+    .connexion_form {
+        width: 50%; /* use the same width as the registration form */
+    }
 }
-.connexion_button {
-    align-self: center;
-    
+
+/* For screens larger than 1024px */
+@media (min-width: 1024px) {
+    .connexion_form {
+        width: 40%; /* use the same width as the registration form */
+    }
 }
+
+.button_connexion{
+    min-width: fit-content;
+    background-color: green
+}
+.button_connexion:hover {
+    background-color: rgb(6, 85, 6);
+  }
+  
