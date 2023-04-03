@@ -18,7 +18,8 @@ rTweet = redis.Redis(host='twitter_redis', port=6379, db=1, decode_responses=Tru
 
 @app.route("/", methods=['GET'])
 def accueil():
-    return "Bienvenue sur notre réseau social de la mère-patrie!"
+    return  jsonify({"message": "Bienvenue sur notre réseau social de la mère-patrie!"})
+
 
 
 @app.route('/healthz', methods=['GET'])
