@@ -5,7 +5,6 @@ import { Input } from '../component/form/input';
 import { Button } from '../component/button';
 import SearchBar from '../component/searchBar';
 import  { Tweet , tweet ,sortTweetByMoreRecentId} from '../component/tweet';
-import { Retweet, retweet } from '../component/retweet';
 import  Modal  from '../component/modal';
 import './accueil.css';
 import { MyForm, options} from '../component/form/forms';
@@ -40,22 +39,11 @@ export class Accueil extends React.Component< any,props>{
         };
     }
 
-    
-   
-
-
-
-
-
 
     async componentDidMount(){
         this.getAllTweet();
         this.getAllSujet();   
     }
-
-    
-    
-       
 
     closeModal = () => {
         this.setState({ isOpen: false });
@@ -106,6 +94,7 @@ export class Accueil extends React.Component< any,props>{
             return {
                 id: tweet.id,
                 username: tweet.nom,
+                retweeter: tweet.retweet_user,
                 text: tweet.tweet,
             };
         });
@@ -119,16 +108,12 @@ export class Accueil extends React.Component< any,props>{
     };
 
     search = (event: React.ChangeEvent<HTMLInputElement>) =>{
-        this.setState({ searchValue: event.target.value});
-
-             
+        this.setState({ searchValue: event.target.value});    
         switch (this.state.selectedOption) {
             case "user":
                 //this.getAllTweetByUser(event.target.value);
                 break;
             case "topic":
-            
-                
               const filteredTopics = this.state.listOfTopics.filter((topic) =>
             topic.toLowerCase().includes(this.state.searchValue.toLowerCase())
         );
@@ -136,14 +121,10 @@ export class Accueil extends React.Component< any,props>{
                
                 break;
             case "text":
-
-            
-            
-            const filteredTweets = this.state.listOfTweets.filter((tweet) =>
-                tweet.text.toLowerCase().includes(this.state.searchValue.toLowerCase())
-            );
-            this.setState({ listOfTweets: filteredTweets });
-            
+                const filteredTweets = this.state.listOfTweets.filter((tweet) =>
+                    tweet.text.toLowerCase().includes(this.state.searchValue.toLowerCase())
+                );
+                this.setState({ listOfTweets: filteredTweets });
 
                 break;
             default:
@@ -151,15 +132,11 @@ export class Accueil extends React.Component< any,props>{
 
         }
         if (event.target.value === "") {
-        this.getAllTweet();
-        this.getAllSujet();
+        this.reset();
     }
 
         
     }
-
-
-
 
     
     reset = () => {
@@ -169,14 +146,7 @@ export class Accueil extends React.Component< any,props>{
 
     };
 
-     
-
-
-    
  render(){   
-//console.log(localStorage.getItem('username'));
-
-
 
         return (
             <main>
@@ -184,7 +154,7 @@ export class Accueil extends React.Component< any,props>{
                
                 
                 <div className="top">
-
+                    <div className='left'></div>
                     <div className="center">
                     <Title content="RedBird" />
                     </div>
