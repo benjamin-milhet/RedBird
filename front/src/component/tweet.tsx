@@ -6,7 +6,7 @@ export type tweet = {
     username: string;
     retweeter: string;
     text: string;
-   
+  onclick: () => void;
   
 }
 
@@ -16,7 +16,8 @@ export type tweet = {
 
  export class Tweet extends React.Component<tweet> {
   
-
+  
+  
  // recherche des tags dans le texte du tweet et stockage dans un tableau de string
    findTags = (text: string) => {
     const regex = /#[a-zA-Z0-9]+/g;
@@ -34,52 +35,59 @@ isARetweet=()=> {
     return true;
   }
 }
-
+ 
 
   render(): React.ReactNode {
-   console.log(this.isARetweet());
-  return (
     
-    <div className="tweet">
-    
-      {this.isARetweet() && (
-        <div className="retweet-header">
-        <span className="retweet-username">{this.props.retweeter}</span>
-        <span className="retweet-retweet"> retweet</span>
+    return (
+      
+      <div className="tweet">
+      
+        {this.isARetweet() && (
+          <div className="retweet-header">
+          <span className="retweet-username">{this.props.retweeter}</span>
+          <span className="retweet-retweet"> retweet</span>
+          </div>
+          
+        )}
+      
+      <div
+            className={`tweet-border${this.isARetweet() ? " retweeted" : ""}`}
+          >
+            <div className="tweet-header">
+            <span className="tweet-username">{this.props.username}</span>
+            </div>
+
+        <div className="tweet-body">
+          <p className="tweet-text">{this.removeTags(this.props.text)}</p>
+          
+          
+        
+      
+        {this.findTags(this.props.text)  && ( //props.tags && pour verifier si props.tags est défini idem pour reply
+            <div className="tweet-tags">
+              {this.findTags(this.props.text)?.map((tag, index) => (
+                <span key={index} className="tweet-tag">{tag}</span>
+              ))}
+            </div>
+          )}
+      </div>
+        <div className="tweet-footer">
+        {!this.isARetweet() && (
+          <button className="tweet-reply-button" onClick={this.props.onclick}>Retweet</button>
+        )}
         </div>
         
-      )}
-     
-    <div
-          className={`tweet-border${this.isARetweet() ? " retweeted" : ""}`}
-        >
-          <div className="tweet-header">
-          <span className="tweet-username">{this.props.username}</span>
-          </div>
-
-      <div className="tweet-body">
-        <p className="tweet-text">{this.removeTags(this.props.text)}</p>
-        
-        
-      
-     
-      {this.findTags(this.props.text)  && ( //props.tags && pour verifier si props.tags est défini idem pour reply
-          <div className="tweet-tags">
-            {this.findTags(this.props.text)?.map((tag, index) => (
-              <span key={index} className="tweet-tag">{tag}</span>
-            ))}
-          </div>
-        )}
-    </div>
-      <div className="tweet-footer">
-        <button className="tweet-reply-button" >Reply</button>
       </div>
-      
     </div>
-  </div>
-  );
-            }
+    );
+  }
 };
+
+
+
+
+
 
 export function sortTweetByMoreRecentId (liste: tweet[]): tweet[]  {
   return liste.sort((a, b) => {
