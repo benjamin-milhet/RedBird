@@ -15,11 +15,12 @@ import { Title } from '../component/title';
 function App() {
 const [slogan, setSlogan] = React.useState("");
 useEffect(() => {
- const slogan =  fetch("http://localhost:5000/");
-  slogan.then(response => response.json())
+ const s=  fetch("http://localhost:5000/");
+  s.then(response => response.json())
   .then(data => {
-    
-    setSlogan(data);
+
+    setSlogan(data.message);
+
   })
 } ,[]);
  
@@ -41,9 +42,8 @@ useEffect(() => {
     <header className="App-header">
     <Title  content="Redbird"  />
     
-      <p>
-   {slogan}yolo
-      </p>
+      {slogan}
+
       <Button content='Continuer' onClick={()=>window.location.href = "http://localhost:3000/connexion"} />
     </header>
    

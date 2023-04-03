@@ -20,7 +20,32 @@ interface props {
   
 }
 
+async function retweeter (idTweet: number, usernameTweet: string): Promise<boolean> {
+    try {
+        const response = await fetch("http://localhost:5000/retweet", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            mode: "cors",
+            body: JSON.stringify({
+                
+                nom: localStorage.getItem('username'),
+                nom_user_tweet: usernameTweet,
 
+                id_tweet: idTweet,
+            }),
+            
+        });
+        console.log(response);
+        return response.ok;
+        
+      
+      } catch (error) {
+        console.error(error);
+        return false;
+      }
+}
 
 export class Accueil extends React.Component< any,props>{
     constructor(props: any) {
@@ -39,7 +64,8 @@ export class Accueil extends React.Component< any,props>{
         };
     }
 
-
+    
+      
     async componentDidMount(){
         this.getAllTweet();
         this.getAllSujet();   
@@ -137,7 +163,9 @@ export class Accueil extends React.Component< any,props>{
 
         
     }
+  
 
+    
     
     reset = () => {
         this.setState({ searchValue: "" });
@@ -152,7 +180,6 @@ export class Accueil extends React.Component< any,props>{
             <main>
                 <div className="accueil">
                
-                
                 <div className="top">
                     <div className='left'></div>
                     <div className="center">
@@ -178,19 +205,22 @@ export class Accueil extends React.Component< any,props>{
 
                    <div className="tweets">
                         {this.state.listOfTweets.map((tweet) => (
+                            <div>
                             <Tweet
                             id={tweet.id}
                             username={tweet.username}
                             retweeter={tweet.retweeter}
                             text={tweet.text}
-
+                            onclick={()=> retweeter(tweet.id, tweet.username)}
                             
                             />
+                        
+                        </div>
                         ))}
                     </div>
 
                     <div className="topics">
-                    <text className="title_topics">Topics</text>
+                    <text className="title_topics">Sujets</text>
                     <div className="liste_topics">
                     {this.state.listOfTopics.map((topic) => (
                         <div className="topic">

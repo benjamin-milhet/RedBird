@@ -11,7 +11,7 @@ height: 500px;
 }
 .tweets {
   height: 100%;
-  padding:  5px;
+  padding:  10px;
   border: 1px solid black;
   flex : 4;
   overflow-y: auto;
@@ -21,7 +21,7 @@ height: 500px;
 .topics {
   flex : 1;
   margin-left: 5px;
- padding:  5px;
+ padding:  10px;
   border: 1px solid black;
   display: flex;
   flex-direction: column;
