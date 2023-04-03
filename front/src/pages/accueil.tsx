@@ -180,10 +180,7 @@ export class Accueil extends React.Component< any,props>{
                
                 
                 <div className="top">
-<<<<<<< Updated upstream
-                    <Title content="RedBird" />
-                    <Button className = "deconnexionBtn" content="Déconnexion" onClick={deconnexion} />
-=======
+
                     <div className="center">
                     <Title content="Tweeterrr" />
                     </div>
@@ -192,7 +189,7 @@ export class Accueil extends React.Component< any,props>{
                     <Button className = "deconnexion_btn" content="Déconnexion" onClick={deconnexion} />
                     
                 </div>    
->>>>>>> Stashed changes
+
                     <Button className = "newTweetBtn" content="+" style={{   width: 40,height: 40}} onClick={this.openModal} /> 
                     <div className="magic_bar">
                         <SearchBar    
