@@ -119,7 +119,7 @@ def retweet():
     if nom_user_tweet is None:
         return jsonify({"message": "Le nom d'utilisateur " + nom_user_tweet + " n'existe pas."}), 400
 
-    tweet = rTweet.get("tweet." + id_tweet)
+    tweet = rTweet.get("tweet." + str(id_tweet))
     if tweet is None:
         return jsonify({"message": "Le tweet avec l'id " + id_tweet + " n'existe pas."}), 400
 
