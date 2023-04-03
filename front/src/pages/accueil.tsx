@@ -8,7 +8,7 @@ import  { Tweet , tweet ,sortTweetByMoreRecentId} from '../component/tweet';
 import { Retweet, retweet } from '../component/retweet';
 import  Modal  from '../component/modal';
 import './accueil.css';
-import { MyForm} from '../component/form/forms';
+import { MyForm, options} from '../component/form/forms';
 import { deconnexion } from './connexion';
 
 interface props {
@@ -16,10 +16,9 @@ interface props {
     listOfTweets: tweet[];
     isOpen: boolean;
     listOfTopics: string[];
-    searchTopic: string;
+    searchValue: string;
     selectedOption: string;
-    
-    
+  
 }
 
 
@@ -31,8 +30,9 @@ export class Accueil extends React.Component< any,props>{
             listOfTweets: [],
             isOpen: false,
           listOfTopics: [],
-            searchTopic: "",
-            selectedOption: "option1",
+            searchValue: "",
+            selectedOption: "user",
+           
             
 
            
@@ -68,6 +68,7 @@ export class Accueil extends React.Component< any,props>{
         const response2 = await fetch("http://localhost:5000/getAllSujet");
         const topics = await response2.json();
         this.setState({listOfTopics:topics})
+        
     };
 
     getAllTweet  = async () => {
@@ -83,7 +84,7 @@ export class Accueil extends React.Component< any,props>{
             };
         });
         this.setState({ listOfTweets: sortTweetByMoreRecentId(listOfTweets) });
-        this.setState({ searchTopic: "" })
+        this.setState({ searchValue: "" })
     };
 
         
@@ -106,40 +107,102 @@ export class Accueil extends React.Component< any,props>{
             };
         });
         this.setState({ listOfTweets: sortTweetByMoreRecentId(listOfTweets) });
-        this.setState({ searchTopic: topic })
+        this.setState({ searchValue: topic })
     };
-    handleValueChange = (value: string) => {
+    handleValueChange  = (value: string)  => {
+       
         this.setState({selectedOption: value});
+        
     };
+
+    search = (event: React.ChangeEvent<HTMLInputElement>) =>{
+        this.setState({ searchValue: event.currentTarget.value });
+
+             
+        switch (this.state.selectedOption) {
+            case "user":
+                //this.getAllTweetByUser(event.target.value);
+                break;
+            case "topic":
+            
+                
+              const filteredTopics = this.state.listOfTopics.filter((topic) =>
+            topic.toLowerCase().includes(this.state.searchValue.toLowerCase())
+        );
+        this.setState({ listOfTopics: filteredTopics });
+               
+                break;
+            case "text":
+
+            
+            
+            const filteredTweets = this.state.listOfTweets.filter((tweet) =>
+                tweet.text.toLowerCase().includes(this.state.searchValue.toLowerCase())
+            );
+            this.setState({ listOfTweets: filteredTweets });
+            
+
+                break;
+            default:
+                break;
+
+        }
+        if (event.target.value === "") {
+        this.getAllTweet();
+    }
+
+        
+    }
+
+
 
 
     
-      options = [
-        { label: "Option 1", value: "option1" },
-        { label: "Option 2", value: "option2" },
-        { label: "Option 3", value: "option3" },
-      ];
+    reset = () => {
+        this.setState({ searchValue: "" });
+        this.getAllTweet();
+        this.getAllSujet();
+
+    };
+
+     
 
 
     
  render(){   
-console.log(localStorage.getItem('username'));
-const filteredTopics = this.state.listOfTopics.filter((topic) =>
-            topic.toLowerCase().includes(this.state.searchTopic.toLowerCase())
-        );
-       
+//console.log(localStorage.getItem('username'));
+
+
 
         return (
             <main>
                 <div className="accueil">
-                <MyForm getValue={this.handleValueChange} options={this.options} />
+               
+                
                 <div className="top">
+<<<<<<< Updated upstream
                     <Title content="RedBird" />
                     <Button className = "deconnexionBtn" content="Déconnexion" onClick={deconnexion} />
+=======
+                    <div className="center">
+                    <Title content="Tweeterrr" />
+                    </div>
+                   
+                    
+                    <Button className = "deconnexion_btn" content="Déconnexion" onClick={deconnexion} />
+                    
+                </div>    
+>>>>>>> Stashed changes
                     <Button className = "newTweetBtn" content="+" style={{   width: 40,height: 40}} onClick={this.openModal} /> 
-                  
-                    <SearchBar  onSearch={(query: string) => console.log(query)} />   
-                </div>
+                    <div className="magic_bar">
+                        <SearchBar    
+                             onChange={( this.search)}
+                            onReset={ ()=> this.reset()} //fonction de reset
+                            value={this.state.searchValue}
+                        />
+                         <MyForm getValue={this.handleValueChange} options={options} />
+                    </div>
+                
                 <div className = "body">
 
                    <div className="tweets">
@@ -148,34 +211,20 @@ const filteredTopics = this.state.listOfTopics.filter((topic) =>
                             id={tweet.id}
                             username={tweet.username}
                             text={tweet.text}
-                            
+
                             
                             />
                         ))}
                     </div>
+
                     <div className="topics">
-                        
                     <text className="title_topics">Topics</text>
-                    <form className="searchBar" >
-                        <input className="searchBar_input"
-                            type="text"
-                            
-                            onChange={(event) => this.setState({searchTopic :event.target.value})}
-                            placeholder="Search..."
-                            value={this.state.searchTopic}
-                        />
-                        <button type="reset" className="reset_search" 
-                            onClick={ ()=> this.getAllTweet()} //fonction pour reset 
-                             >
-                            X
-                        </button>
-                    </form>
-      
                     <div className="liste_topics">
-                    {filteredTopics.map((topic) => (
+                    {this.state.listOfTopics.map((topic) => (
                         <div className="topic">
                         <text >{topic }</text>
-                        <button className="topic_btn"  onClick={()=> this.getAllTweetByTopic(topic)}>Voir</button>
+                        <img className="topic_btn" src='../images/icon-eil.png' onClick={()=> this.getAllTweetByTopic(topic)}/>
+
                         </div>
 
                     ))}
