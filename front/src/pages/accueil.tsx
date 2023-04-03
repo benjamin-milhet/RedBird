@@ -22,6 +22,7 @@ interface props {
 }
 
 
+
 export class Accueil extends React.Component< any,props>{
     constructor(props: any) {
         super(props);
@@ -79,10 +80,12 @@ export class Accueil extends React.Component< any,props>{
             return {
                 id: tweet.id,
                 username: tweet.nom,
+                retweeter: tweet.retweet_user,
                 text: tweet.tweet,
                 
             };
         });
+        console.log(listOfTweets);
         this.setState({ listOfTweets: sortTweetByMoreRecentId(listOfTweets) });
         this.setState({ searchValue: "" })
     };
@@ -116,7 +119,7 @@ export class Accueil extends React.Component< any,props>{
     };
 
     search = (event: React.ChangeEvent<HTMLInputElement>) =>{
-        this.setState({ searchValue: event.currentTarget.value });
+        this.setState({ searchValue: event.target.value});
 
              
         switch (this.state.selectedOption) {
@@ -149,6 +152,7 @@ export class Accueil extends React.Component< any,props>{
         }
         if (event.target.value === "") {
         this.getAllTweet();
+        this.getAllSujet();
     }
 
         
@@ -182,7 +186,7 @@ export class Accueil extends React.Component< any,props>{
                 <div className="top">
 
                     <div className="center">
-                    <Title content="Tweeterrr" />
+                    <Title content="RedBird" />
                     </div>
                    
                     
@@ -207,6 +211,7 @@ export class Accueil extends React.Component< any,props>{
                             <Tweet
                             id={tweet.id}
                             username={tweet.username}
+                            retweeter={tweet.retweeter}
                             text={tweet.text}
 
                             
@@ -220,7 +225,7 @@ export class Accueil extends React.Component< any,props>{
                     {this.state.listOfTopics.map((topic) => (
                         <div className="topic">
                         <text >{topic }</text>
-                        <img className="topic_btn" src='../images/icon-eil.png' onClick={()=> this.getAllTweetByTopic(topic)}/>
+                        <img className="topic_btn" src='./images/icon-eil.png' onClick={()=> this.getAllTweetByTopic(topic)}/>
 
                         </div>
 
