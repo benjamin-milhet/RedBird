@@ -60,10 +60,7 @@ export default function Modal(props: ModalType) {
       return false;
     }
   }
-  const disconnect = () => {
-    localStorage.removeItem('username');
-    setIsConnected(false);
-  }
+  
   
   
 
