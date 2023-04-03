@@ -14,16 +14,19 @@
     margin-bottom: 5px;
   }
   
+  
   .tweet-username {
     font-weight: bold;
   }
   
-  .tweet-date {
-    color: #888;
-  }
+  
   
   .tweet-text {
-    margin: 0;
+    margin:0;
+  }
+
+  .tweet-tags {
+    margin-bottom: 5px;
   }
   
   .tweet-reply-button {
@@ -38,4 +41,22 @@
   .tweet-reply-button:hover {
     background-color: #3e8e41;
   }
-  
+  .retweet-username{
+    font-weight: bold;
+}
+ .retweet-header {
+  margin-bottom: 5px;
+ }
+
+
+.tweet-border.retweeted {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
