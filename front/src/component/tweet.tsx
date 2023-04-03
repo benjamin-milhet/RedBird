@@ -55,3 +55,15 @@ export const Tweet = (props: tweet)  => {
     </div>
   );
 };
+
+export function sortTweetByMoreRecentId (liste: tweet[]): tweet[]  {
+  return liste.sort((a, b) => {
+      if (a.id > b.id) {
+          return -1;
+      }
+      if (a.id < b.id) {
+          return 1;
+      }
+      return 0;
+  });
+  }

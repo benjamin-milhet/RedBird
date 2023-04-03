@@ -1,14 +1,15 @@
 import React ,{useState} from 'react';
-//import ReactDOM from 'react-dom/client';
+
 import { Title } from '../component/title';
 import { Input } from '../component/form/input';
 import { Button } from '../component/button';
 import SearchBar from '../component/searchBar';
-import  { Tweet , tweet} from '../component/tweet';
+import  { Tweet , tweet ,sortTweetByMoreRecentId} from '../component/tweet';
 import { Retweet, retweet } from '../component/retweet';
 import  Modal  from '../component/modal';
 import './accueil.css';
-
+import { MyForm} from '../component/form/forms';
+import { deconnexion } from './connexion';
 
 interface props {
     //liste de tweets
@@ -16,6 +17,7 @@ interface props {
     isOpen: boolean;
     listOfTopics: string[];
     searchTopic: string;
+    selectedOption: string;
     
     
 }
@@ -30,6 +32,7 @@ export class Accueil extends React.Component< any,props>{
             isOpen: false,
           listOfTopics: [],
             searchTopic: "",
+            selectedOption: "option1",
             
 
            
@@ -38,28 +41,10 @@ export class Accueil extends React.Component< any,props>{
 
     
    
- sortTweetByMoreRecentId =(liste:tweet[]) => {
-    return liste.sort((a, b) => {
-        if (a.id > b.id) {
-            return -1;
-        }
-        if (a.id < b.id) {
-            return 1;
-        }
-        return 0;
-    });
-    }
 
 
- confirm = () => {
-   var confirm =window.confirm("Voulez-vous vous déconnecter?");
-    if (confirm === true) {
-        localStorage.removeItem('username');
-        window.location.href = 'http://localhost:3000/'; 
-    }
-    else {
-    }
-}
+
+
 
 
     async componentDidMount(){
@@ -97,7 +82,7 @@ export class Accueil extends React.Component< any,props>{
                 
             };
         });
-        this.setState({ listOfTweets: this.sortTweetByMoreRecentId(listOfTweets) });
+        this.setState({ listOfTweets: sortTweetByMoreRecentId(listOfTweets) });
         this.setState({ searchTopic: "" })
     };
 
@@ -120,9 +105,20 @@ export class Accueil extends React.Component< any,props>{
                 text: tweet.tweet,
             };
         });
-        this.setState({ listOfTweets: this.sortTweetByMoreRecentId(listOfTweets) });
+        this.setState({ listOfTweets: sortTweetByMoreRecentId(listOfTweets) });
         this.setState({ searchTopic: topic })
     };
+    handleValueChange = (value: string) => {
+        this.setState({selectedOption: value});
+    };
+
+
+    
+      options = [
+        { label: "Option 1", value: "option1" },
+        { label: "Option 2", value: "option2" },
+        { label: "Option 3", value: "option3" },
+      ];
 
 
     
@@ -135,11 +131,11 @@ const filteredTopics = this.state.listOfTopics.filter((topic) =>
 
         return (
             <main>
-               
                 <div className="accueil">
+                <MyForm getValue={this.handleValueChange} options={this.options} />
                 <div className="top">
                     <Title content="Tweeterrr" />
-                    <Button className = "deconnexionBtn" content="Déconnexion" onClick={this.confirm} />
+                    <Button className = "deconnexionBtn" content="Déconnexion" onClick={deconnexion} />
                     <Button className = "newTweetBtn" content="+" style={{   width: 40,height: 40}} onClick={this.openModal} /> 
                   
                     <SearchBar  onSearch={(query: string) => console.log(query)} />   
