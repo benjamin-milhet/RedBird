@@ -4,7 +4,6 @@ import { Title } from '../component/title';
 import { Input } from '../component/form/input';
 import { Button } from '../component/button';
 import './connexion.css';
-import { hover } from '@testing-library/user-event/dist/hover';
 
 
 

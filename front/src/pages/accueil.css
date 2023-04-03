@@ -5,7 +5,9 @@
   flex-direction: row;
  
   justify-content: space-between;
-  height: 550px;
+height: 500px;
+ 
+
 }
 .tweets {
   height: 100%;
@@ -53,53 +55,48 @@
 
 
 
-.searchBar_input[type="text"] {
-  flex: 1;
-  padding: 8px;
-  border: none;
-  border-radius: 4px;
-  width: 100%;
-  max-width: 300px;
-}
+
 
 .topic_btn{
   align-self: flex-end;
-  background-color: #b40000;
+  background-color: #ffffff;
   color: white;
   border: none;
   border-radius: 4px;
-  padding: 5px 10px;
+ 
   cursor: pointer;
-  min-width: fit-content;
+ width: 25px;
+ height: 25px;
   margin-right: 5px;
 }
 
 .topic_btn:hover {
-  background-color: rgb(122, 11, 11);
+  background-color: rgb(212, 204, 204);
 }
-.reset_search {
-  background-color: #7d7979;
-  font-weight: bold;
-  border: none;
 
-  align-self: flex-end;
-  margin-top: -10px;
 
-  margin-left: 5px;
-   
-  height: 30px;
-  width: 30px;
-  
-  border: none;
-  margin-left: 10px;
-  cursor: pointer;
-}
-.reset_search:hover {
-  background-color: #5b5757;
-}
-.searchBar {
+.top {
   display: flex;
+  flex-direction: row;
   align-items: center;
-  background-color: #f1f1f1;
-  padding: 10px;
+  
+}
+
+
+.center {
+  
+  text-align: center;
+  
+  margin: auto;
+ 
+}
+
+.deconnexion_btn {
+ margin-right: 10px;
+  
+}
+.left {
+  width: 158px;
+    height: 40px;
+    margin-left: 10px;
 }

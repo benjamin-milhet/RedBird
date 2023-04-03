@@ -4,6 +4,7 @@ import { useState } from "react";
 export type tweet = {
   id: number;
     username: string;
+    retweeter: string;
     text: string;
    
   
@@ -13,36 +14,58 @@ export type tweet = {
 
 
 
-export const Tweet = (props: tweet)  => {
+ export class Tweet extends React.Component<tweet> {
+  
+
  // recherche des tags dans le texte du tweet et stockage dans un tableau de string
-  const findTags = (text: string) => {
+   findTags = (text: string) => {
     const regex = /#[a-zA-Z0-9]+/g;
     return text.match(regex);
   };
   // enlever les tags du texte du tweet
-  const removeTags = (text: string) => {
+   removeTags = (text: string) => {
     const regex = /#[a-zA-Z0-9]+/g;
     return text.replace(regex, "");
   };
+isARetweet=()=> {
+  if (this.props.retweeter === null) {
+    return false;
+  } else {
+    return true;
+  }
+}
 
 
-
-
+  render(): React.ReactNode {
+   console.log(this.isARetweet());
   return (
+    
     <div className="tweet">
-      <div className="tweet-header">
-        <span className="tweet-username">{props.username}</span>
+    
+      {this.isARetweet() && (
+        <div className="retweet-header">
+        <span className="retweet-username">{this.props.retweeter}</span>
+        <span className="retweet-retweet"> retweet</span>
+        </div>
         
-      </div>
+      )}
+     
+    <div
+          className={`tweet-border${this.isARetweet() ? " retweeted" : ""}`}
+        >
+          <div className="tweet-header">
+          <span className="tweet-username">{this.props.username}</span>
+          </div>
+
       <div className="tweet-body">
-        <p className="tweet-text">{removeTags(props.text)}</p>
+        <p className="tweet-text">{this.removeTags(this.props.text)}</p>
         
         
       
      
-      {findTags(props.text)  && ( //props.tags && pour verifier si props.tags est défini idem pour reply
+      {this.findTags(this.props.text)  && ( //props.tags && pour verifier si props.tags est défini idem pour reply
           <div className="tweet-tags">
-            {findTags(props.text)?.map((tag, index) => (
+            {this.findTags(this.props.text)?.map((tag, index) => (
               <span key={index} className="tweet-tag">{tag}</span>
             ))}
           </div>
@@ -53,7 +76,9 @@ export const Tweet = (props: tweet)  => {
       </div>
       
     </div>
+  </div>
   );
+            }
 };
 
 export function sortTweetByMoreRecentId (liste: tweet[]): tweet[]  {

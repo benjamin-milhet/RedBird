@@ -13,11 +13,15 @@
 }
 
 .my-form label:hover {
-  background: #b87e7e;
+  background: #ce3333;
 }
 
 
 .my-form .selected {
-    background-color: #b87e7e;
+    background-color: #ce3333;
     color: white;
+}
+
+.my-form{
+    margin-top: 5px;
 }
