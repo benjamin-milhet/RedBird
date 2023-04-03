@@ -74,7 +74,7 @@ isARetweet=()=> {
       </div>
         <div className="tweet-footer">
         {!this.isARetweet() && (
-          <button className="tweet-reply-button" onClick={this.props.onclick}>Retweet</button>
+          <button className="tweet-reply-button" onClick={this.props.onclick}>Retweeter</button>
         )}
         </div>
         

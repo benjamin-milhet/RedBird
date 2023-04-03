@@ -20,32 +20,6 @@ interface props {
   
 }
 
-async function retweeter (idTweet: number, usernameTweet: string): Promise<boolean> {
-    try {
-        const response = await fetch("http://localhost:5000/retweet", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            mode: "cors",
-            body: JSON.stringify({
-                
-                nom: localStorage.getItem('username'),
-                nom_user_tweet: usernameTweet,
-
-                id_tweet: idTweet,
-            }),
-            
-        });
-        console.log(response);
-        return response.ok;
-        
-      
-      } catch (error) {
-        console.error(error);
-        return false;
-      }
-}
 
 export class Accueil extends React.Component< any,props>{
     constructor(props: any) {
@@ -64,7 +38,33 @@ export class Accueil extends React.Component< any,props>{
         };
     }
 
+    retweeter = async (idTweet: number, usernameTweet: string): Promise<boolean> => {
+        try {
+            const response = await fetch("http://localhost:5000/retweet", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                mode: "cors",
+                body: JSON.stringify({
+                    
+                    nom: localStorage.getItem('username'),
+                    nom_user_tweet: usernameTweet,
     
+                    id: idTweet,
+                }),
+                
+            });
+            console.log(response);
+                this.getAllTweet();
+            return response.ok;
+            
+          
+          } catch (error) {
+            console.error(error);
+            return false;
+          }
+    }
       
     async componentDidMount(){
         this.getAllTweet();
@@ -211,7 +211,7 @@ export class Accueil extends React.Component< any,props>{
                             username={tweet.username}
                             retweeter={tweet.retweeter}
                             text={tweet.text}
-                            onclick={()=> retweeter(tweet.id, tweet.username)}
+                            onclick={()=> this.retweeter(tweet.id, tweet.username)}
                             
                             />
                         
