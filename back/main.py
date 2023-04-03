@@ -220,6 +220,9 @@ def charger_donnees():
     rTweet.set("tweet.5", "Le Granier m'a écrasé avec ses courbes de baiser #THREEJS # Bezier")
     rTweet.set("tweet.6", "ILC > SE > SQR")
 
+    # charger retweet
+
+
     # charger sujet
     rTweet.set("sujet.gange", json.dumps([json.dumps(dict(nom="Benjamin", id=1))]))
     rTweet.set("sujet.pizza7Fromage", json.dumps([json.dumps(dict(nom="Benjamin", id=1))]))
