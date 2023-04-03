@@ -127,7 +127,7 @@ def get_all_tweets():
             for j in range(len(liste_retweet)):
                 tweet = json.loads(rTweet.get("retweet." + str(liste_retweet[j])))
                 liste_tweet_final.append(
-                    dict(tweet=rTweet.get("tweet." + tweet["id"]), nom=tweet["nom"], id=liste_retweet[j],
+                    dict(tweet=rTweet.get("tweet." + str(tweet["id"])), nom=tweet["nom"], id=liste_retweet[j],
                          retweet_user=liste_users[i]))
 
     return liste_tweet_final, 200
@@ -206,10 +206,12 @@ def charger_donnees():
     rUser.set("nom.Benjamin", "Benjamin")
     rUser.set("password.Benjamin", "pechakuchaDeMerde")
     rUser.set("tweet.Benjamin", json.dumps([1, 2, 3]))
+    rUser.set("retweet.Benjamin", json.dumps([7, 8]))
 
     rUser.set("nom.Clement", "Clement")
     rUser.set("password.Clement", "pechakuchaDeMerde")
     rUser.set("tweet.Clement", json.dumps([4, 5, 6]))
+    rUser.set("retweet.Clement", json.dumps([9]))
 
     # charger tweets
     rTweet.set("tweet.1", "Salut l'elite, c'est El Pueblo, 18-25, 2 sucres #gange #pizza7Fromage")
@@ -221,7 +223,9 @@ def charger_donnees():
     rTweet.set("tweet.6", "ILC > SE > SQR")
 
     # charger retweet
-
+    rTweet.set("retweet.7", json.dumps(dict(id=1, nom="Benjamin")))
+    rTweet.set("retweet.8", json.dumps(dict(id=2, nom="Benjamin")))
+    rTweet.set("retweet.9", json.dumps(dict(id=4, nom="Clement")))
 
     # charger sujet
     rTweet.set("sujet.gange", json.dumps([json.dumps(dict(nom="Benjamin", id=1))]))
