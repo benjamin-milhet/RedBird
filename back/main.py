@@ -18,8 +18,7 @@ rTweet = redis.Redis(host='twitter_redis', port=6379, db=1, decode_responses=Tru
 
 @app.route("/", methods=['GET'])
 def accueil():
-    return  jsonify({"message": "Bienvenue sur notre réseau social de la mère-patrie!"})
-
+    return jsonify({"message": "Bienvenue sur notre réseau social de la mère-patrie!"})
 
 
 @app.route('/healthz', methods=['GET'])
@@ -119,9 +118,9 @@ def retweet():
     if nom_user_tweet is None:
         return jsonify({"message": "Le nom d'utilisateur " + nom_user_tweet + " n'existe pas."}), 400
 
-    tweet = rTweet.get("tweet." + id_tweet)
+    tweet = rTweet.get("tweet." + str(id_tweet))
     if tweet is None:
-        return jsonify({"message": "Le tweet avec l'id " + id_tweet + " n'existe pas."}), 400
+        return jsonify({"message": "Le tweet avec l'id " + str(id_tweet) + " n'existe pas."}), 400
 
     liste_tweet = json.loads(rUser.get("retweet." + nom))
     time_stamp = calendar.timegm(time.gmtime())
