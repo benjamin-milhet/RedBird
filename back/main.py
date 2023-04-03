@@ -5,6 +5,7 @@ import re
 import json
 import calendar
 import time
+import hashlib
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -33,7 +34,9 @@ def inscription():
 
     data = request.get_json()
     nom = data.get('nom')
-    password = data.get('password')
+    password = data.get('password').encode('utf-8')
+
+    hash_password = hashlib.sha256(password).hexdigest()
 
     tmp = rUser.get("nom." + nom)
     if tmp is not None:
@@ -41,10 +44,31 @@ def inscription():
 
     else:
         rUser.set("nom." + nom, nom)
-        rUser.set("password." + nom, password)
+        rUser.set("password." + nom, hash_password)
         rUser.set("tweet." + nom, json.dumps([]))
         rUser.set("retweet." + nom, json.dumps([]))
         return jsonify({"message": "Bienvenue " + nom + "!"}), 200
+
+
+@app.route("/connexion", methods=['POST'])
+def connexion():
+    # curl -X POST -H "Content-Type: application/json; charset=utf-8" --data "{\"nom\":\"Lucas\",\"password\":\"pechakuchaDeMerde\"}" http://localhost:5000/connexion
+
+    data = request.get_json()
+    nom = data.get('nom')
+    password = data.get('password').encode('utf-8')
+
+    hash_password = hashlib.sha256(password).hexdigest()
+
+    tmp = rUser.get("nom." + nom)
+    if tmp is None:
+        return jsonify({"message": "Le nom d'utilisateur " + nom + " n'existe pas."}), 400
+
+    else:
+        if rUser.get("password." + nom) == hash_password:
+            return jsonify({"message": "Bienvenue " + nom + "!"}), 200
+        else:
+            return jsonify({"message": "Le mot de passe est incorrect."}), 400
 
 
 @app.route("/tweeter", methods=['POST'])
@@ -127,7 +151,7 @@ def get_all_tweets():
             for j in range(len(liste_retweet)):
                 tweet = json.loads(rTweet.get("retweet." + str(liste_retweet[j])))
                 liste_tweet_final.append(
-                    dict(tweet=rTweet.get("tweet." + tweet["id"]), nom=tweet["nom"], id=liste_retweet[j],
+                    dict(tweet=rTweet.get("tweet." + str(tweet["id"])), nom=tweet["nom"], id=liste_retweet[j],
                          retweet_user=liste_users[i]))
 
     return liste_tweet_final, 200
@@ -204,12 +228,14 @@ def charger_donnees():
 
     # charger users
     rUser.set("nom.Benjamin", "Benjamin")
-    rUser.set("password.Benjamin", "pechakuchaDeMerde")
+    rUser.set("password.Benjamin", hashlib.sha256(b"pechakuchaDeMerde").hexdigest())
     rUser.set("tweet.Benjamin", json.dumps([1, 2, 3]))
+    rUser.set("retweet.Benjamin", json.dumps([7, 8]))
 
     rUser.set("nom.Clement", "Clement")
-    rUser.set("password.Clement", "pechakuchaDeMerde")
+    rUser.set("password.Clement", hashlib.sha256(b"pechakuchaDeMerde").hexdigest())
     rUser.set("tweet.Clement", json.dumps([4, 5, 6]))
+    rUser.set("retweet.Clement", json.dumps([9]))
 
     # charger tweets
     rTweet.set("tweet.1", "Salut l'elite, c'est El Pueblo, 18-25, 2 sucres #gange #pizza7Fromage")
@@ -219,6 +245,11 @@ def charger_donnees():
     rTweet.set("tweet.4", "Franche-Comté > Bourgogne #FrancComtois")
     rTweet.set("tweet.5", "Le Granier m'a écrasé avec ses courbes de baiser #THREEJS # Bezier")
     rTweet.set("tweet.6", "ILC > SE > SQR")
+
+    # charger retweet
+    rTweet.set("retweet.7", json.dumps(dict(id=1, nom="Benjamin")))
+    rTweet.set("retweet.8", json.dumps(dict(id=2, nom="Benjamin")))
+    rTweet.set("retweet.9", json.dumps(dict(id=4, nom="Clement")))
 
     # charger sujet
     rTweet.set("sujet.gange", json.dumps([json.dumps(dict(nom="Benjamin", id=1))]))

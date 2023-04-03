@@ -134,7 +134,7 @@ const filteredTopics = this.state.listOfTopics.filter((topic) =>
                 <div className="accueil">
                 <MyForm getValue={this.handleValueChange} options={this.options} />
                 <div className="top">
-                    <Title content="Tweeterrr" />
+                    <Title content="RedBird" />
                     <Button className = "deconnexionBtn" content="Déconnexion" onClick={deconnexion} />
                     <Button className = "newTweetBtn" content="+" style={{   width: 40,height: 40}} onClick={this.openModal} /> 
                   
