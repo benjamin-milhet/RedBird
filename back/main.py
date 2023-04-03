@@ -47,6 +47,25 @@ def inscription():
         return jsonify({"message": "Bienvenue " + nom + "!"}), 200
 
 
+@app.route("/connexion", methods=['POST'])
+def connexion():
+    # curl -X POST -H "Content-Type: application/json; charset=utf-8" --data "{\"nom\":\"Lucas\",\"password\":\"pechakuchaDeMerde\"}" http://localhost:5000/connexion
+
+    data = request.get_json()
+    nom = data.get('nom')
+    password = data.get('password')
+
+    tmp = rUser.get("nom." + nom)
+    if tmp is None:
+        return jsonify({"message": "Le nom d'utilisateur " + nom + " n'existe pas."}), 400
+
+    else:
+        if rUser.get("password." + nom) == password:
+            return jsonify({"message": "Bienvenue " + nom + "!"}), 200
+        else:
+            return jsonify({"message": "Le mot de passe est incorrect."}), 400
+
+
 @app.route("/tweeter", methods=['POST'])
 def tweeter():
     # curl -X POST -H "Content-Type: application/json; charset=utf-8" --data "{\"nom\":\"Lucas\",\"tweet\":\"Salut l'elite, c'est El Pueblo, 18-25, 2 sucres #gange #pizza7Fromage\"}" http://localhost:5000/tweeter
