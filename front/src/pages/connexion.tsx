@@ -16,6 +16,7 @@ export class Connexion extends React.Component {
 
 
     valideConnexion = () => {
+        
         if (this.state.username === '' || this.state.password === '') {
             alert('Veuillez remplir tous les champs');
         } else {
@@ -62,7 +63,8 @@ export class Connexion extends React.Component {
              
                 <Title content="Connexion"/>    
                 <div className="connexion_div">
-                    <form className="connexion_form">
+                <form className="connexion_form" >
+
                        
                     <Input label="Username" name="username" onChange={this.handleInputChange} />
                        
@@ -86,8 +88,12 @@ export class Connexion extends React.Component {
     }
 }
 
-// Stocker le nom d'utilisateur dans le localStorage lorsque l'utilisateur se connecte
-//localStorage.setItem('username', 'nom d\'utilisateur');
-
-// Récupérer le nom d'utilisateur à partir du localStorage lorsque l'application est chargée
-//const username = localStorage.getItem('username');
+export function deconnexion ()  {
+    var confirm =window.confirm("Voulez-vous vous déconnecter?");
+     if (confirm === true) {
+         localStorage.removeItem('username');
+         window.location.href = 'http://localhost:3000/'; 
+     }
+     else {
+     }
+ }

@@ -1,0 +1,23 @@
+.my-form input[type="radio"],
+.my-form input[type="checkbox"] {
+    display: none;
+}
+
+.my-form label {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 0 10px 10px 0;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.my-form label:hover {
+  background: #b87e7e;
+}
+
+
+.my-form .selected {
+    background-color: #b87e7e;
+    color: white;
+}
