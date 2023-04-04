@@ -24,10 +24,10 @@ export class Inscription extends React.Component{
     });
     
     const data = await response.json();
-    alert(data.message);
+    
    if (response.status === 200) {
         //redirection vers la page de connexion
-        window.location.href = "http://localhost:3000/";
+        window.location.href = "http://localhost:3000/connexion";
         localStorage.setItem('username', this.state.username);
 
     } else {
