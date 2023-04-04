@@ -4,25 +4,17 @@ import './App.css';
 import { Title } from '../component/title';
 
 
-
-   
-    
-
-
-  
-
-
 function App() {
-const [slogan, setSlogan] = React.useState("");
-useEffect(() => {
- const s=  fetch("http://localhost:5000/");
-  s.then(response => response.json())
-  .then(data => {
+  const [slogan, setSlogan] = React.useState("");
+  useEffect(() => {
+  const s=  fetch("http://localhost:5000/");
+    s.then(response => response.json())
+    .then(data => {
 
-    setSlogan(data.message);
+      setSlogan(data.message);
 
-  })
-} ,[]);
+    })
+  } ,[]);
  
 
   useEffect(() => {
@@ -37,16 +29,12 @@ useEffect(() => {
  
 
   return (
-    <div className="App">
-      
-    <header className="App-header">
-    <Title  content="Redbird"  />
-    
-      {slogan}
-
-      <Button content='Continuer' onClick={()=>window.location.href = "http://localhost:3000/connexion"} />
-    </header>
-   
+    <div className="App"> 
+      <header className="App-header">
+        <Title  content="Redbird"  />
+        {slogan}
+        <Button content='Continuer' onClick={()=>window.location.href = "http://localhost:3000/connexion"} />
+      </header>
     </div>
   );
 }

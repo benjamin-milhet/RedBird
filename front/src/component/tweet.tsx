@@ -1,6 +1,7 @@
 import React from "react";
 import "./tweet.css";
 import { useState } from "react";
+import { throws } from "assert";
 export type tweet = {
   id: number;
     username: string;
@@ -19,21 +20,27 @@ export type tweet = {
   
   
  // recherche des tags dans le texte du tweet et stockage dans un tableau de string
-   findTags = (text: string) => {
-    const regex = /#[a-zA-Z0-9]+/g;
-    return text.match(regex);
-  };
+ findTags = (text: string) => {
+  const regex = /#[a-zA-Z0-9]+/g;
+  return text?.match(regex);
+};
+
   // enlever les tags du texte du tweet
-   removeTags = (text: string) => {
+  removeTags = (text: string) => {
     const regex = /#[a-zA-Z0-9]+/g;
-    return text.replace(regex, "");
+    return text ?? "".replace(regex, "");
   };
+  
+  
 isARetweet=()=> {
   if (this.props.retweeter === null || this.props.retweeter === undefined || this.props.retweeter === "") {
     return false;
   } else {
     return true;
   }
+}
+clickOnName = (name:string) => {
+  window.location.href = "http://localhost:3000/user/" + name;
 }
  
 
@@ -45,8 +52,13 @@ isARetweet=()=> {
       
         {this.isARetweet() && (
           <div className="retweet-header">
-          <span className="retweet-username">{this.props.retweeter}</span>
-          <span className="retweet-retweet"> retweet</span>
+          <span className="retweet-username"onClick={()=>
+          {if (this.isARetweet()) {this.clickOnName(this.props.retweeter||"")}
+          }
+          }
+          
+          >{this.props.retweeter}</span>
+          <span className="retweet-retweet" > retweet</span>
           </div>
           
         )}
@@ -55,7 +67,7 @@ isARetweet=()=> {
             className={`tweet-border${this.isARetweet() ? " retweeted" : ""}`}
           >
             <div className="tweet-header">
-            <span className="tweet-username">{this.props.username}</span>
+            <span className="tweet-username" onClick={()=>this.clickOnName(this.props.username)}>{this.props.username}</span>
             </div>
 
         <div className="tweet-body">

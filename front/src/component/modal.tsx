@@ -45,7 +45,7 @@ export class Modal extends React.Component<ModalType> {
         }),
         
       });
-      console.log(response.ok);
+      
       this.props.close();
       return response.ok;
       

@@ -5,7 +5,7 @@
   flex-direction: row;
  
   justify-content: space-between;
-height: 500px;
+height: 70vh;
  
 
 }
@@ -45,8 +45,12 @@ height: 500px;
     padding: 10px;
     margin-bottom: 10px;
     justify-content: space-between;
-    margin-right: 5px;
+    cursor: pointer;
     
+}
+.topic:hover{
+  background-color: rgb(212, 204, 204);
+  
 }
 .liste_topics{
   margin-top: 10px;
@@ -58,21 +62,12 @@ height: 500px;
 
 
 .topic_btn{
-  align-self: flex-end;
-  background-color: #ffffff;
-  color: white;
-  border: none;
-  border-radius: 4px;
- 
-  cursor: pointer;
+  
  width: 25px;
  height: 25px;
   margin-right: 5px;
 }
 
-.topic_btn:hover {
-  background-color: rgb(212, 204, 204);
-}
 
 
 .top {
@@ -100,3 +95,9 @@ height: 500px;
     height: 40px;
     margin-left: 10px;
 }
+
+.find-user-btn{
+  min-width: fit-content;
+}
+
+.big-searchBar{ padding-left: 10px; padding-right: 10px; }
