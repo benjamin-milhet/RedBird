@@ -1,0 +1,22 @@
+.box {
+    
+    background: white;
+    width: 35%;
+   
+    height: 70%;
+    padding: 1rem;
+    border-radius: 1rem;
+  }
+
+ .users {
+ height: 100%;
+ width: 100%;
+  margin-left: 5px;
+
+  
+  display: flex;
+  flex-direction: column;
+  
+ height: 100%;
+ overflow-y: auto;
+ }

@@ -5,11 +5,12 @@ import { Input } from '../component/form/input';
 import { Button } from '../component/button';
 import SearchBar from '../component/searchBar';
 import  { Tweet , tweet ,sortTweetByMoreRecentId} from '../component/tweet';
-import  Modal  from '../component/modal';
+import { Modal}  from '../component/modal';
 import './accueil.css';
 import { MyForm, options} from '../component/form/forms';
 import { deconnexion } from './connexion';
 import { topic } from '../component/topic';
+import { UserFinder } from '../component/userFinder';
 
 interface props {
     //liste de tweets
@@ -19,7 +20,7 @@ interface props {
     listOfUserTweets: tweet[];
     filterTweets: tweet[];
     filterTopics: string[];
-    
+    userFinderisopen: boolean;
   
    
   
@@ -34,6 +35,7 @@ export class Accueil extends React.Component< any,props>{
            //tableau de tweets
             listOfTweets: [],
             tweetFormIsOpen: false,
+            userFinderisopen: false,
           listOfTopics: [],
             
             listOfUserTweets: [],
@@ -196,7 +198,7 @@ export class Accueil extends React.Component< any,props>{
         searchTopic = value;
       
         const filteredTopics = this.state.listOfTopics.filter((topic:string) =>
-            topic.toLowerCase().includes(searchTopic.toLowerCase())
+            topic.toLowerCase().startsWith(searchTopic.toLowerCase())
         );
         this.setState({ filterTopics: filteredTopics });
         if (value === "") {this.reset();}
@@ -230,7 +232,8 @@ export class Accueil extends React.Component< any,props>{
                     
                 </div>    
 
-                    <Button className = "newTweetBtn" content="+"  onClick={()=> this.setState({ tweetFormIsOpen: !this.state.tweetFormIsOpen} )} /> 
+                    <Button className = "newTweetBtn" content="Poster"  onClick={()=> this.setState({ tweetFormIsOpen: !this.state.tweetFormIsOpen} )} /> 
+                    <Button className = "find-user-btn" content="find user"  onClick={()=> this.setState({ userFinderisopen: !this.state.userFinderisopen} )} /> 
               
                     <SearchBar    
                              onChange={(e)=> this.searchContent(e.target.value)}
@@ -284,6 +287,11 @@ export class Accueil extends React.Component< any,props>{
                 this.componentDidMount()}} >
                 </Modal>
                 }
+                {this.state.userFinderisopen && <UserFinder
+                close={()=> {this.setState({ userFinderisopen: false })}} >
+                </UserFinder>
+                }
+
             </main>
         );
     }
