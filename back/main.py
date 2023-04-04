@@ -255,7 +255,7 @@ def charger_donnees():
     rTweet.set("tweet.3",
                "Союз нерушимый республик свободных Сплотила навеки Великая Русь. Да здравствует созданный волей народов Единый, могучий Советский Союз! #USSR")
     rTweet.set("tweet.4", "Franche-Comté > Bourgogne #FrancComtois")
-    rTweet.set("tweet.5", "Le Granier m'a écrasé avec ses courbes de baiser #THREEJS # Bezier")
+    rTweet.set("tweet.5", "Le Granier m'a écrasé avec ses courbes de baiser #THREEJS #Bezier")
     rTweet.set("tweet.6", "ILC > SE > SQR")
 
     # charger retweet
