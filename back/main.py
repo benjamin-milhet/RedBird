@@ -123,11 +123,14 @@ def retweet():
         return jsonify({"message": "Le tweet avec l'id " + str(id_tweet) + " n'existe pas."}), 400
 
     liste_tweet = json.loads(rUser.get("retweet." + nom))
-    if str(id_tweet) in liste_tweet:
-        return jsonify({"message": "Le tweet a déjà été retweeté."}), 400
-
     time_stamp = calendar.timegm(time.gmtime())
     liste_tweet.append(time_stamp)
+
+    for j in range(len(liste_tweet)):
+        if rTweet.get("retweet." + str(liste_tweet[j])) is not None:
+            tweet = json.loads(rTweet.get("retweet." + str(liste_tweet[j])))
+            if str(tweet["id"]) == str(id_tweet):
+                return jsonify({"message": "Vous avez déjà retweeté ce tweet."}), 400
 
     rUser.set("retweet." + nom, json.dumps(liste_tweet))
     rTweet.set("retweet." + str(time_stamp), json.dumps(dict(nom=nom_user_tweet, id=id_tweet)))
