@@ -170,9 +170,9 @@ def get_all_tweets_by_user():
 
     liste_tweet = json.loads(rUser.get(("tweet." + nom)))
     liste_tweet_final = []
-
+   
     for i in range(len(liste_tweet)):
-        liste_tweet_final.append(dict(tweet=rTweet.get("tweet." + str(liste_tweet[i])), nom=nom, id=liste_tweet[i]))
+        liste_tweet_final.append(dict(tweet=rTweet.get("tweet." + str(liste_tweet[i])), nom=nom,reweeter=None ,id=liste_tweet[i]))
 
     return liste_tweet_final, 200
 

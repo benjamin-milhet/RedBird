@@ -8,6 +8,7 @@ import { Connexion } from './pages/connexion';
 import { Inscription } from './pages/inscription';
 import { Accueil } from './pages/accueil';
 import App  from './pages/App';
+import {User } from './pages/user';
 
 
 const root = ReactDOM.createRoot(
@@ -21,6 +22,7 @@ root.render(
       <Route path="/connexion" element={<Connexion />} />
       <Route path="/accueil" element={<Accueil />} />
       <Route path="/inscription" element={<Inscription />} />
+      <Route path="/user/jean" element={<User />} />
     </Routes>
   </BrowserRouter>
 );

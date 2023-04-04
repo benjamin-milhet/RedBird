@@ -12,10 +12,11 @@
   }
   
   .modal-box {
-    display: block;
+    
     background: white;
-    width: 70%;
-    /*height: 70%;*/
+    width: 50%;
+    min-height: fit-content;
+    height: 40%;
     padding: 1rem;
     border-radius: 1rem;
   }
@@ -40,6 +41,7 @@ resize: none;
 }
 
 .modal {
+  
   display: flex;
   flex-direction: column;
   align-items: center;
