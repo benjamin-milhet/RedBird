@@ -17,6 +17,10 @@
   
   .tweet-username {
     font-weight: bold;
+    cursor: pointer;
+  }
+  .tweet-username:hover{
+    text-decoration: underline;
   }
   
   
@@ -43,7 +47,13 @@
   }
   .retweet-username{
     font-weight: bold;
+    cursor: pointer;
 }
+.retweet-username:hover{
+    text-decoration: underline;
+   
+}
+
  .retweet-header {
   margin-bottom: 5px;
  }

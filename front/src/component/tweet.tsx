@@ -1,6 +1,7 @@
 import React from "react";
 import "./tweet.css";
 import { useState } from "react";
+import { throws } from "assert";
 export type tweet = {
   id: number;
     username: string;
@@ -35,6 +36,9 @@ isARetweet=()=> {
     return true;
   }
 }
+clickOnName = (name:string) => {
+  window.location.href = "http://localhost:3000/user/" + name;
+}
  
 
   render(): React.ReactNode {
@@ -45,8 +49,13 @@ isARetweet=()=> {
       
         {this.isARetweet() && (
           <div className="retweet-header">
-          <span className="retweet-username">{this.props.retweeter}</span>
-          <span className="retweet-retweet"> retweet</span>
+          <span className="retweet-username"onClick={()=>
+          {if (this.isARetweet()) {this.clickOnName(this.props.retweeter||"")}
+          }
+          }
+          
+          >{this.props.retweeter}</span>
+          <span className="retweet-retweet" > retweet</span>
           </div>
           
         )}
@@ -55,7 +64,7 @@ isARetweet=()=> {
             className={`tweet-border${this.isARetweet() ? " retweeted" : ""}`}
           >
             <div className="tweet-header">
-            <span className="tweet-username">{this.props.username}</span>
+            <span className="tweet-username" onClick={()=>this.clickOnName(this.props.username)}>{this.props.username}</span>
             </div>
 
         <div className="tweet-body">
