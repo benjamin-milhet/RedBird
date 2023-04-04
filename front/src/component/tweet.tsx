@@ -6,7 +6,7 @@ export type tweet = {
     username: string;
     retweeter?: string;
     text: string;
-  onclick: () => void;
+  onclick?: () => void;
   
 }
 
@@ -38,7 +38,6 @@ isARetweet=()=> {
  
 
   render(): React.ReactNode {
-    console.log(this.isARetweet());
     
     return (
       

@@ -8,7 +8,7 @@ import { Button } from '../component/button';
 
 interface ModalType {
   children?: ReactNode;
-  isOpen: boolean;
+ 
   close: () => void;
   
   
@@ -19,10 +19,6 @@ export default function Modal(props: ModalType) {
 
 
   const [tweet, setTweet] = useState("");
-  const [isConnected, setIsConnected] = useState(false);
-
-  //verifier si l'utilisateur est connecté avec le localStorage
-  
   
 
  
@@ -69,7 +65,7 @@ export default function Modal(props: ModalType) {
   
   return (
     <>
-      {props.isOpen && (
+     
         <div className="modal-overlay" onClick={props.close}>
           <div onClick={(e) => e.stopPropagation()} className="modal-box">
             {props.children}
@@ -96,7 +92,7 @@ export default function Modal(props: ModalType) {
           </div>
           </div>
         </div>
-      )}
+      
     </>
   );
 }
