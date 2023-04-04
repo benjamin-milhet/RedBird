@@ -1,8 +1,9 @@
 .u-top {
-    display: block;
+    display: flex;
     flex-direction: row;
     align-items: center;
-    
+    margin-top: 20px;
+    margin-bottom: 30px;
     
   }
 .u-body{
@@ -27,3 +28,6 @@ height: 80vh
     height: 40px;
     margin-right: 10px;
   }
+
+ 
+  

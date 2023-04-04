@@ -1,17 +1,21 @@
 import React from "react";
 import "./tweet.css";
 import { useState } from "react";
-import { throws } from "assert";
+
 export type tweet = {
   id: number;
     username: string;
     retweeter?: string;
     text: string;
   onclick?: () => void;
+  clickOnTag?: (tag:string) => void;
   
 }
 
-
+export type TweetTag = {
+  id: number;
+  text: string;
+};
 
 
 
@@ -20,9 +24,20 @@ export type tweet = {
   
   
  // recherche des tags dans le texte du tweet et stockage dans un tableau de string
+ //ajouter un espace pour separer les tags du texte du tweet
+
  findTags = (text: string) => {
   const regex = /#[a-zA-Z0-9]+/g;
-  return text.match(regex);
+  const matches = text.match(regex);
+
+  if (!matches) {
+    return [];
+  }
+
+  return matches.map((match, index) => ({
+    id: index,
+    text: match,
+  }));
 };
 
   // enlever les tags du texte du tweet
@@ -45,8 +60,10 @@ clickOnName = (name:string) => {
  
 
   render(): React.ReactNode {
+    console.log(this.findTags(this.props.text));
     
     return (
+      
       
       <div className="tweet">
       
@@ -76,13 +93,19 @@ clickOnName = (name:string) => {
           
         
       
-        {this.findTags(this.props.text)  && ( //props.tags && pour verifier si props.tags est défini idem pour reply
-            <div className="tweet-tags">
-              {this.findTags(this.props.text)?.map((tag, index) => (
-                <span key={index} className="tweet-tag">{tag}</span>
-              ))}
-            </div>
-          )}
+          {this.findTags(this.props.text).length > 0 && (
+              <div className="tags">
+                {this.findTags(this.props.text).map((tag) => (
+                  <span
+                    key={tag.id}
+                    className="tweet-tags"
+                    onClick={() => this.props.clickOnTag?.(removeHashtag(tag.text))}
+                  > {tag.text}
+                  </span>
+                ))}
+              </div>
+            )}
+          
       </div>
         <div className="tweet-footer">
         {!this.isARetweet() && (
@@ -111,4 +134,9 @@ export function sortTweetByMoreRecentId (liste: tweet[]): tweet[]  {
       }
       return 0;
   });
+  }
+
+  //fonction pour enlever le hashtag d'un tag
+   function removeHashtag (tag: string): string {
+    return tag.substring(1);
   }

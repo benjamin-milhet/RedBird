@@ -5,7 +5,7 @@
   flex-direction: row;
  
   justify-content: space-between;
-height: 70vh;
+height: 65vh;
  
 
 }
@@ -70,20 +70,32 @@ height: 70vh;
 
 
 
-.top {
+.head {
   display: flex;
   flex-direction: row;
   align-items: center;
   
+  margin-top: 20px;
+  margin-bottom: 45px;
 }
 
 
 .center {
   
   text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  
   
   margin: auto;
  
+}
+.logo {
+  align-self: baseline;
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
 }
 
 .deconnexion_btn {
@@ -101,3 +113,10 @@ height: 70vh;
 }
 
 .big-searchBar{ padding-left: 10px; padding-right: 10px; }
+
+.special .tweet-tags:hover{
+  font-weight: bold;
+}
+.special .tweet-tags{
+  cursor: pointer;
+}

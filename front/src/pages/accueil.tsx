@@ -11,6 +11,8 @@ import { MyForm, options} from '../component/form/forms';
 import { deconnexion } from './connexion';
 import { topic } from '../component/topic';
 import { UserFinder } from '../component/userFinder';
+import { hover } from '@testing-library/user-event/dist/hover';
+import { createAbstractBuilder } from 'typescript';
 
 interface props {
     //liste de tweets
@@ -56,12 +58,18 @@ export class Accueil extends React.Component< any,props>{
                 
             });
             const data = await response.json();
-            console.log(data.message);
+            if (response.status === 200) {
+                alert("Retweet effectué");
+            }
+            else {
+                alert(data.message);
+            }
+            
                 this.getAllTweet();
             return response.ok;
 
           } catch (error) {
-            console.error(error);
+            console.error(error, "error");
             return false;
           }
     }
@@ -167,13 +175,16 @@ export class Accueil extends React.Component< any,props>{
 
     };
 
+
  render(){   
         return (
             <main>
                 <div className="accueil">
-                    <div className="top">
+                    <div className='top'>
+                    <div className="head">
                         <div className='left'></div>
                         <div className="center">
+                        <img className="logo" src='./images/logo-redbird.png'  />
                             <Title content="RedBird" />
                         </div>
                         <Button className = "deconnexion_btn" content="Déconnexion" onClick={deconnexion} />
@@ -188,16 +199,18 @@ export class Accueil extends React.Component< any,props>{
                             holder='Rechercher un tweet'
                         />
                     </div>
+                    </div>
                     <div className = "body">
                         <div className="tweets">
                             {this.state.filterTweets.map((tweet) => (
-                                <div>
+                                <div className='special'>
                                 <Tweet
                                 id={tweet.id}
                                 username={tweet.username}
                                 retweeter={tweet.retweeter}
                                 text={tweet.text}
                                 onclick={()=> this.retweeter(tweet.id, tweet.username)}
+                                clickOnTag={(tag)=> this.searchTopic(tag)}
                                 
                                 />
                             
@@ -236,3 +249,5 @@ export class Accueil extends React.Component< any,props>{
         );
     }
 }
+
+ 

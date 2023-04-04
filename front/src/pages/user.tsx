@@ -52,7 +52,7 @@ export class User extends React.Component<any,props> {
     render(): React.ReactNode {
         return (
             <main>
-                <div className="top">
+                <div className="u-top">
                     <Button className = "retour-btn" content="Retour" onClick={()=> window.location.href = "http://localhost:3000/accueil"} />
                     <div className="center">
                         <Title content={"Tweets de "+ name} />
@@ -67,6 +67,8 @@ export class User extends React.Component<any,props> {
                                 username={tweet.username}
                                 retweeter={tweet.retweeter}
                                 text={tweet.text}
+                                
+                                
                             />
                         ))}
                     </div>
