@@ -1,7 +1,7 @@
 .box {
     
     background: white;
-    width: 35%;
+    width: 30%;
    
     height: 70%;
     padding: 1rem;
@@ -19,4 +19,20 @@
   
  height: 100%;
  overflow-y: auto;
+ }
+ .user{
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+    justify-content: space-between;
+    cursor: pointer;
+   
+ }
+
+ .user:hover{
+    background-color: rgb(212, 204, 204);
+    
  }

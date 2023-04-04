@@ -22,7 +22,7 @@ root.render(
       <Route path="/connexion" element={<Connexion />} />
       <Route path="/accueil" element={<Accueil />} />
       <Route path="/inscription" element={<Inscription />} />
-      <Route path="/user/jean" element={<User />} />
+      <Route path="/user/:user" element={<User />} />
     </Routes>
   </BrowserRouter>
 );
