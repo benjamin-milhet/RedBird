@@ -21,10 +21,8 @@ interface props {
     filterTweets: tweet[];
     filterTopics: string[];
     userFinderisopen: boolean;
-  
-   
-  
 }
+
 let searchContent:string = "";
 let searchTopic: string = "";
 
@@ -32,18 +30,13 @@ export class Accueil extends React.Component< any,props>{
     constructor(props: any) {
         super(props);
         this.state = {    
-           //tableau de tweets
             listOfTweets: [],
             tweetFormIsOpen: false,
             userFinderisopen: false,
-          listOfTopics: [],
-            
+            listOfTopics: [],
             listOfUserTweets: [],
-           filterTopics: [],
+            filterTopics: [],
             filterTweets: [],
-           
-
-           
         };
     }
    
@@ -56,10 +49,8 @@ export class Accueil extends React.Component< any,props>{
                 },
                 mode: "cors",
                 body: JSON.stringify({
-                    
                     nom: localStorage.getItem('username'),
                     nom_user_tweet: usernameTweet,
-    
                     id: idTweet,
                 }),
                 
@@ -68,8 +59,7 @@ export class Accueil extends React.Component< any,props>{
             console.log(data.message);
                 this.getAllTweet();
             return response.ok;
-            
-          
+
           } catch (error) {
             console.error(error);
             return false;
@@ -81,20 +71,16 @@ export class Accueil extends React.Component< any,props>{
         this.getAllSujet();   
     }
 
-   
-
     getAllSujet = async () => {
-        const response2 = await fetch("http://localhost:5000/getAllSujet");
-        const topics = await response2.json();
+        const response = await fetch("http://localhost:5000/getAllSujet");
+        const topics = await response.json();
         this.setState({listOfTopics:topics})
         this.setState({filterTopics:topics})
-        
     };
 
     getAllTweet  = async () => {
         const response = await fetch("http://localhost:5000/getAllTweets");
         const tweets = await response.json();
-       
         const listOfTweets = tweets.map((tweet: any) => {
             return {
                 id: tweet.id,
@@ -109,8 +95,7 @@ export class Accueil extends React.Component< any,props>{
        searchContent = "";
        this.setState({filterTweets: sortTweetByMoreRecentId(listOfTweets)});
     };
-
-        
+     
     getAllTweetByTopic = async (topic: string) => {
         const response = await fetch("http://localhost:5000/getAllTweetsBySujet", {
             method: "POST",
@@ -133,15 +118,6 @@ export class Accueil extends React.Component< any,props>{
         this.setState({ filterTweets: sortTweetByMoreRecentId(listOfTweets) });
       
     };
-   
-
-    
-
-
-  
-    
-   
-    
 
     searchContent =  (value:string) =>{
         const filteredTweets = this.state.listOfTweets.filter((tweet:tweet) =>
@@ -158,15 +134,15 @@ export class Accueil extends React.Component< any,props>{
 
     handleKeyDown = (key:string,type:string) => {
         if (key === "Backspace") {
-          if (type === "topic") {
-            searchTopic = searchTopic.slice(0, -1);
-            this.searchTopic(searchTopic);
-          } else if (type === "content") {  
-            searchContent = searchContent.slice(0, -1);
-            this.searchContent(searchContent);
+            if (type === "topic") {
+                searchTopic = searchTopic.slice(0, -1);
+                this.searchTopic(searchTopic);
+            } else if (type === "content") {  
+                searchContent = searchContent.slice(0, -1);
+                this.searchContent(searchContent);
             }
         }
-      };
+    };
     
     searchTopic = (value:string) =>{
        
@@ -192,82 +168,70 @@ export class Accueil extends React.Component< any,props>{
     };
 
  render(){   
-
         return (
             <main>
                 <div className="accueil">
-    
-                <div className="top">
-                    <div className='left'></div>
-                    <div className="center">
-                    <Title content="RedBird" />
-                    </div>
-                   
-                    <Button className = "deconnexion_btn" content="Déconnexion" onClick={deconnexion} />
-                    
-                </div>    
-
+                    <div className="top">
+                        <div className='left'></div>
+                        <div className="center">
+                            <Title content="RedBird" />
+                        </div>
+                        <Button className = "deconnexion_btn" content="Déconnexion" onClick={deconnexion} />
+                    </div>    
                     <Button className = "newTweetBtn" content="Poster"  onClick={()=> this.setState({ tweetFormIsOpen: !this.state.tweetFormIsOpen} )} /> 
                     <Button className = "find-user-btn" content="Trouver un utilisateur"   onClick={()=> this.setState({ userFinderisopen: !this.state.userFinderisopen} )} /> 
                     <div className="big-searchBar">
                         <SearchBar    
-                                onChange={(e)=> this.searchContent(e.target.value)}
-                                onReset={ ()=> this.reset()}
-                                onKeyDown={(e)=> this.handleKeyDown(e.key, "content")} 
-                                
-                                holder='Rechercher un tweet'
-                            />
-                    </div>
-                <div className = "body">
-
-                   <div className="tweets">
-                        {this.state.filterTweets.map((tweet) => (
-                            <div>
-                            <Tweet
-                            id={tweet.id}
-                            username={tweet.username}
-                            retweeter={tweet.retweeter}
-                            text={tweet.text}
-                            onclick={()=> this.retweeter(tweet.id, tweet.username)}
-                            
-                            />
-                        
-                        </div>
-                        ))}
-                    </div>
-
-                    <div className="topics">
-                    <text className="title_topics">Sujets</text>
-                    <SearchBar    
-                             onChange={(e)=> this.searchTopic(e.target.value)}
-                            onReset={ ()=> this.reset()} 
-                            onKeyDown={(e)=> this.handleKeyDown(e.key, "topic")}
-                            value={searchTopic}
-                            holder='Rechercher un sujet'
+                            onChange={(e)=> this.searchContent(e.target.value)}
+                            onReset={ ()=> this.reset()}
+                            onKeyDown={(e)=> this.handleKeyDown(e.key, "content")} 
+                            holder='Rechercher un tweet'
                         />
-                    <div className="liste_topics">
-                    {this.state.filterTopics.map((topic) => (
-                        <div className="topic" onClick={()=> {this.getAllTweetByTopic(topic); this.searchTopic(topic)}}>
-                        <text >{topic }</text>
-                        <img className="topic_btn" src='./images/icon-eil.png' />
-
+                    </div>
+                    <div className = "body">
+                        <div className="tweets">
+                            {this.state.filterTweets.map((tweet) => (
+                                <div>
+                                <Tweet
+                                id={tweet.id}
+                                username={tweet.username}
+                                retweeter={tweet.retweeter}
+                                text={tweet.text}
+                                onclick={()=> this.retweeter(tweet.id, tweet.username)}
+                                
+                                />
+                            
+                            </div>
+                            ))}
                         </div>
-
-                    ))}
+                        <div className="topics">
+                            <text className="title_topics">Sujets</text>
+                            <SearchBar    
+                                    onChange={(e)=> this.searchTopic(e.target.value)}
+                                    onReset={ ()=> this.reset()} 
+                                    onKeyDown={(e)=> this.handleKeyDown(e.key, "topic")}
+                                    value={searchTopic}
+                                    holder='Rechercher un sujet'
+                                />
+                            <div className="liste_topics">
+                                {this.state.filterTopics.map((topic) => (
+                                    <div className="topic" 
+                                    onClick={()=> {this.getAllTweetByTopic(topic); this.searchTopic(topic)}}>
+                                        <text >{topic }</text>
+                                        <img className="topic_btn" src='./images/icon-eil.png' />
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
                     </div>
-                    </div>
-                </div>
                 </div>
                 {this.state.tweetFormIsOpen && <Modal  
                 close={()=> {this.setState({ tweetFormIsOpen: false } ) ;
-                this.componentDidMount()}} >
-                </Modal>
+                this.componentDidMount()}} ></Modal>
                 }
                 {this.state.userFinderisopen && <UserFinder
-                close={()=> {this.setState({ userFinderisopen: false })}} >
-                </UserFinder>
+                close={()=> {this.setState({ userFinderisopen: false })}} ></UserFinder>
                 }
-
             </main>
         );
     }

@@ -71,43 +71,29 @@ export class UserFinder extends React.Component<userFinder> {
     return (
     
           <div className="modal-overlay" onClick={this.props.close}>
-            <div onClick={(e) => e.stopPropagation()} className="box">
-              {this.props.children}
-              <div className="modal">
-              <button className="close" onClick={this.props.close} >
-                X
-              </button>
-            <div className="users">
-             <text className="title">Users</text>
-             <SearchBar    
-                             onChange={(e)=> this.searchUser(e.target.value)}
+            <div onClick={(e) => e.stopPropagation()} className="box"> {this.props.children}
+                <div className="modal">
+                    <button className="close" onClick={this.props.close} >
+                        X
+                    </button>
+                    <div className="users">
+                        <text className="title">Users</text>
+                        <SearchBar    
+                            onChange={(e)=> this.searchUser(e.target.value)}
                             onReset={ ()=> this.reset()} 
                             onKeyDown={(e)=> this.handleKeyDown(e.key)}
                             holder='Rechercher un sujet'
                         />
-             <div className="liste_topics">
-             
-             {this.state.listUserSearch.map((user) => (
-                        <div className="user" onClick={()=>this.seeUserTweets(user)}>
-                        <text >{user }</text>
-                        <img className="eye" src='./images/icon-eil.png'  />
-
-                        
+                        <div className="liste_topics">
+                        {this.state.listUserSearch.map((user) => (
+                            <div className="user" onClick={()=>this.seeUserTweets(user)}>
+                                <text >{user }</text>
+                                <img className="eye" src='./images/icon-eil.png'  />
+                            </div>
+                        ))}
                         </div>
-
-                    ))}
-           
-              
-             </div>
-             </div>
-             
-              
-  
-            
-        
-  
-              
-            </div>
+                    </div>
+                </div>
             </div>
           </div>
         

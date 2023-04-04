@@ -11,13 +11,12 @@ interface props {
   
 }
 
-let name=window.location.pathname.split("/")[2];
+let name=window.location.pathname.split("/")[2]; //get the username from the url
 export class User extends React.Component<any,props> {
     constructor(props: any) {
         super(props);
         this.state = {
-            listOfUserTweets: [],
-           
+        listOfUserTweets: [],  
         };
     }
     async componentDidMount() {
@@ -47,38 +46,31 @@ export class User extends React.Component<any,props> {
             };
             
         });
-       
         this.setState({ listOfUserTweets: sortTweetByMoreRecentId(listOfUserTweets) });
-
     };
   
     render(): React.ReactNode {
         return (
             <main>
-            <div className="top">
-            
-                <Button className = "retour-btn" content="Retour" onClick={()=> window.location.href = "http://localhost:3000/accueil"} />
-            
-                <div className="center">
-                <Title content={"Tweets de "+ name} />
+                <div className="top">
+                    <Button className = "retour-btn" content="Retour" onClick={()=> window.location.href = "http://localhost:3000/accueil"} />
+                    <div className="center">
+                        <Title content={"Tweets de "+ name} />
+                    </div>
+                    <div className='right'></div>
                 </div>
-
-                <div className='right'></div>
-            </div>
-            <div className="u-body">
-            <div className="u-tweets">
-            {this.state.listOfUserTweets.map((tweet: tweet) => (
-            <Tweet
-                id={tweet.id}
-                username={tweet.username}
-                retweeter={tweet.retweeter}
-                text={tweet.text}
-               
-            
-            />
-            ))}
-            </div>
-            </div>
+                <div className="u-body">
+                    <div className="u-tweets">
+                        {this.state.listOfUserTweets.map((tweet: tweet) => (
+                            <Tweet
+                                id={tweet.id}
+                                username={tweet.username}
+                                retweeter={tweet.retweeter}
+                                text={tweet.text}
+                            />
+                        ))}
+                    </div>
+                </div>
             </main>
         );
     }

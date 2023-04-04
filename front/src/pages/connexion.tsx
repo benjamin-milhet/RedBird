@@ -41,12 +41,15 @@ export class Connexion extends React.Component {
         if (response.status === 200) {
             //redirection vers la page de accueil
             window.location.href = 'http://localhost:3000/accueil';
+            //stockage du username dans le localStorage
             localStorage.setItem('username', this.state.username);
 
         } else {
             console.log('connexion échouée');
         }
     };
+
+
     handleInputChange = (event:any) => {
         const { name, value } = event.target;
         this.setState({ [name]: value });
@@ -59,29 +62,18 @@ export class Connexion extends React.Component {
         return (
             <main>
             <div className="connexion"> 
-             
                 <Title content="Connexion"/>    
                 <div className="connexion_div">
-                <form className="connexion_form" >
-
-                       
-                    <Input label="Username" name="username" onChange={this.handleInputChange} />
-                       
-                       <Input label="Password" name="password" onChange={this.handleInputChange} type="password"/>
+                    <form className="connexion_form" >  
+                        <Input label="Username" name="username" onChange={this.handleInputChange} />
+                        <Input label="Password" name="password" onChange={this.handleInputChange} type="password"/>
                         <Button content="Se connecter"  onClick={this.valideConnexion}/>
-                  
                         <div className="goToInscription">
-                
-                        <a href="./inscription">Pas encore inscrit ? </a>
+                            <a href="./inscription">Pas encore inscrit ? </a>
                         </div>
                     </form>
-                    
                 </div>
-                
-
-            
             </div>
-            
         </main>
         );
     }
