@@ -90,6 +90,8 @@ export class UserFinder extends React.Component<userFinder> {
              {this.state.listUserSearch.map((user) => (
                         <div className="user" onClick={()=>this.seeUserTweets(user)}>
                         <text >{user }</text>
+                        <img className="eye" src='./images/icon-eil.png'  />
+
                         
                         </div>
 

@@ -209,15 +209,15 @@ export class Accueil extends React.Component< any,props>{
 
                     <Button className = "newTweetBtn" content="Poster"  onClick={()=> this.setState({ tweetFormIsOpen: !this.state.tweetFormIsOpen} )} /> 
                     <Button className = "find-user-btn" content="Trouver un utilisateur"   onClick={()=> this.setState({ userFinderisopen: !this.state.userFinderisopen} )} /> 
-              
-                    <SearchBar    
-                             onChange={(e)=> this.searchContent(e.target.value)}
-                            onReset={ ()=> this.reset()}
-                            onKeyDown={(e)=> this.handleKeyDown(e.key, "content")} 
-                             
-                            holder='Rechercher un tweet'
-                        />
-                       
+                    <div className="big-searchBar">
+                        <SearchBar    
+                                onChange={(e)=> this.searchContent(e.target.value)}
+                                onReset={ ()=> this.reset()}
+                                onKeyDown={(e)=> this.handleKeyDown(e.key, "content")} 
+                                
+                                holder='Rechercher un tweet'
+                            />
+                    </div>
                 <div className = "body">
 
                    <div className="tweets">
@@ -247,9 +247,9 @@ export class Accueil extends React.Component< any,props>{
                         />
                     <div className="liste_topics">
                     {this.state.filterTopics.map((topic) => (
-                        <div className="topic">
+                        <div className="topic" onClick={()=> {this.getAllTweetByTopic(topic); this.searchTopic(topic)}}>
                         <text >{topic }</text>
-                        <img className="topic_btn" src='./images/icon-eil.png' onClick={()=> {this.getAllTweetByTopic(topic); this.searchTopic(topic)}}/>
+                        <img className="topic_btn" src='./images/icon-eil.png' />
 
                         </div>
 

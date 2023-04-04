@@ -22,4 +22,8 @@ height: 80vh
    overflow-y: auto;
     
   }
-  
+  .right{
+    width: 158px;
+    height: 40px;
+    margin-right: 10px;
+  }

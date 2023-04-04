@@ -36,3 +36,9 @@
     background-color: rgb(212, 204, 204);
     
  }
+
+ .eye{
+    width: 25px;
+ height: 25px;
+  margin-right: 5px;
+ }
