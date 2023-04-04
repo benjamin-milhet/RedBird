@@ -15,19 +15,18 @@ interface ModalType {
 }
 
   
-export default function Modal(props: ModalType) {
+export class Modal extends React.Component<ModalType> {
 
 
-  const [tweet, setTweet] = useState("");
-  
+  state = {  
+    tweet: "",
+  };
 
- 
 
-
-  async function postNewTweet(): Promise<boolean> {
+   postNewTweet = async  (): Promise<boolean> => {
     
     
-    if (tweet === "") {
+    if (this.state.tweet === "") {
       return false;
     }
   
@@ -42,12 +41,12 @@ export default function Modal(props: ModalType) {
         mode: "cors",
         body: JSON.stringify({
           nom: localStorage.getItem('username'),
-          tweet: tweet,
+          tweet: this.state.tweet,
         }),
         
       });
       console.log(response.ok);
-      props.close();
+      this.props.close();
       return response.ok;
       
     
@@ -62,24 +61,25 @@ export default function Modal(props: ModalType) {
 
 
 
+  render(): React.ReactNode {
+      
   
   return (
-    <>
-     
-        <div className="modal-overlay" onClick={props.close}>
+  
+        <div className="modal-overlay" onClick={this.props.close}>
           <div onClick={(e) => e.stopPropagation()} className="modal-box">
-            {props.children}
+            {this.props.children}
             <div className="modal">
-            <button className="close" onClick={props.close} >
+            <button className="close" onClick={this.props.close} >
               X
             </button>
-           <text className="title">Tweet</text>
+           <text className="title">Tweeter</text>
          
             
            
             <textarea className="input"
               name="tweet"
-              onChange={(e) => setTweet(e.target.value)}
+              onChange={(e) => this.setState({ tweet: e.target.value })}
               placeholder="Votre tweet"
             />
 
@@ -87,12 +87,13 @@ export default function Modal(props: ModalType) {
           Vous écrivez sous le nom de : {localStorage.getItem('username')}
             
 
-            <Button content="Envoyer" onClick={ postNewTweet} />
+            <Button content="Envoyer" onClick={ this.postNewTweet} />
             
           </div>
           </div>
         </div>
       
-    </>
+    
   );
+}
 }
