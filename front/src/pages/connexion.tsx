@@ -91,7 +91,7 @@ export function deconnexion ()  {
     var confirm =window.confirm("Voulez-vous vous déconnecter?");
      if (confirm === true) {
          localStorage.removeItem('username');
-         window.location.href = 'http://localhost:3000/'; 
+         window.location.href = 'http://localhost:3000/connexion'; 
      }
      else {
      }

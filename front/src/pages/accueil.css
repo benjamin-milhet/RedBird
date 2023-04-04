@@ -100,3 +100,7 @@ height: 70vh;
     height: 40px;
     margin-left: 10px;
 }
+
+.find-user-btn{
+  min-width: fit-content;
+}
