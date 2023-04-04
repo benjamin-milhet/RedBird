@@ -19,9 +19,11 @@ export class Connexion extends React.Component {
         if (this.state.username === '' || this.state.password === '') {
             alert('Veuillez remplir tous les champs');
         } else {
-            window.location.href = 'http://localhost:3000/accueil';
-            localStorage.setItem('username', this.state.username);
-           // this.handleConnexion();
+           // window.location.href = 'http://localhost:3000/accueil';
+           
+           //localStorage.setItem('username', this.state.username);
+           this.handleConnexion();
+          
         }
     }
     handleConnexion = async () => {
@@ -37,15 +39,16 @@ export class Connexion extends React.Component {
         });
 
         const data = await response.json();
-        alert(data.message);
+        
         if (response.status === 200) {
             //redirection vers la page de accueil
-            window.location.href = 'http://localhost:3000/accueil';
+           
             //stockage du username dans le localStorage
             localStorage.setItem('username', this.state.username);
+            window.location.href = 'http://localhost:3000/accueil';
 
         } else {
-            console.log('connexion échouée');
+            alert(data.message);
         }
     };
 
