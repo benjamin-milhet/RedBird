@@ -15,6 +15,7 @@ interface props {
     listOfTweets: tweet[];
     isOpen: boolean;
     listOfTopics: string[];
+    listOfUserTweets: tweet[];
     searchValue: string;
     selectedOption: string;
   
@@ -31,6 +32,7 @@ export class Accueil extends React.Component< any,props>{
           listOfTopics: [],
             searchValue: "",
             selectedOption: "user",
+            listOfUserTweets: [],
            
             
 
@@ -133,11 +135,40 @@ export class Accueil extends React.Component< any,props>{
         
     };
 
+    getAllTweetByUser = async (username: string) => {
+        const response = await fetch("http://localhost:5000/getAllTweetsByUser", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                nom: username,
+            }),
+        });
+        const tweets = await response.json();
+        console.log(tweets);
+
+        const listOfUserTweets = tweets.map((tweet: any) => {
+            return {
+                id: tweet.id,
+                username: tweet.nom,
+               
+                text: tweet.tweet,
+            };
+            
+        });
+       
+        this.setState({ listOfTweets: sortTweetByMoreRecentId(listOfUserTweets) });
+        
+
+    };
+
+
     search = (event: React.ChangeEvent<HTMLInputElement>) =>{
         this.setState({ searchValue: event.target.value});    
         switch (this.state.selectedOption) {
             case "user":
-                //this.getAllTweetByUser(event.target.value);
+               
                 break;
             case "topic":
               const filteredTopics = this.state.listOfTopics.filter((topic) =>
@@ -179,14 +210,14 @@ export class Accueil extends React.Component< any,props>{
         return (
             <main>
                 <div className="accueil">
-               
+    
                 <div className="top">
                     <div className='left'></div>
                     <div className="center">
                     <Title content="RedBird" />
                     </div>
                    
-                    
+                    <Button className = "deconnexion_btn" content="test" onClick={()=> this.getAllTweetByUser("Clement")} />
                     <Button className = "deconnexion_btn" content="Déconnexion" onClick={deconnexion} />
                     
                 </div>    

@@ -4,7 +4,7 @@ import { useState } from "react";
 export type tweet = {
   id: number;
     username: string;
-    retweeter: string;
+    retweeter?: string;
     text: string;
   onclick: () => void;
   
@@ -29,7 +29,7 @@ export type tweet = {
     return text.replace(regex, "");
   };
 isARetweet=()=> {
-  if (this.props.retweeter === null) {
+  if (this.props.retweeter === null || this.props.retweeter === undefined || this.props.retweeter === "") {
     return false;
   } else {
     return true;
@@ -38,6 +38,7 @@ isARetweet=()=> {
  
 
   render(): React.ReactNode {
+    console.log(this.isARetweet());
     
     return (
       
