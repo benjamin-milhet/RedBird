@@ -1,0 +1,25 @@
+.u-top {
+    display: block;
+    flex-direction: row;
+    align-items: center;
+    
+    
+  }
+.u-body{
+    display: flex;
+    align-items: center;
+   min-width: fit-content;
+   padding: 10px;
+
+height: 80vh
+
+}
+.u-tweets {
+    height: 100%;
+    padding:  10px;
+    border: 1px solid black;
+   width: 100%;
+   overflow-y: auto;
+    
+  }
+  

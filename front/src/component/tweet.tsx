@@ -20,15 +20,18 @@ export type tweet = {
   
   
  // recherche des tags dans le texte du tweet et stockage dans un tableau de string
-   findTags = (text: string) => {
-    const regex = /#[a-zA-Z0-9]+/g;
-    return text.match(regex);
-  };
+ findTags = (text: string) => {
+  const regex = /#[a-zA-Z0-9]+/g;
+  return text?.match(regex);
+};
+
   // enlever les tags du texte du tweet
-   removeTags = (text: string) => {
+  removeTags = (text: string) => {
     const regex = /#[a-zA-Z0-9]+/g;
-    return text.replace(regex, "");
+    return text ?? "".replace(regex, "");
   };
+  
+  
 isARetweet=()=> {
   if (this.props.retweeter === null || this.props.retweeter === undefined || this.props.retweeter === "") {
     return false;

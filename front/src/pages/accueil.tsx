@@ -135,32 +135,7 @@ export class Accueil extends React.Component< any,props>{
     };
    
 
-    getAllTweetByUser = async (username: string) => {
-        const response = await fetch("http://localhost:5000/getAllTweetsByUser", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                nom: username,
-            }),
-        });
-        const tweets = await response.json();
-        console.log(tweets);
-
-        const listOfUserTweets = tweets.map((tweet: any) => {
-            return {
-                id: tweet.id,
-                username: tweet.nom,
-               
-                text: tweet.tweet,
-            };
-            
-        });
-       
-        this.setState({ filterTweets: sortTweetByMoreRecentId(listOfUserTweets) });
-
-    };
+    
 
 
   
