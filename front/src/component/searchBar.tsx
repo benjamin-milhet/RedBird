@@ -4,7 +4,9 @@ import "./searchBar.css";
 interface SearchBarProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onReset: () => void;
-  value: string;
+  
+  holder?: string;
+  onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 
 }
 
@@ -19,8 +21,9 @@ export class SearchBar extends React.Component<SearchBarProps> {
                             type="text"
                             
                             onChange={this.props.onChange}
-                            placeholder="Search..."
-                            value={this.props.value}
+                            placeholder={this.props.holder}
+                        
+                            onKeyDown={this.props.onKeyDown}
                         />
                         <button type="reset" className="reset_search" 
                             onClick={ this.props.onReset} //fonction pour reset 

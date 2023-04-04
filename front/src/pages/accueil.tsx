@@ -9,18 +9,23 @@ import  Modal  from '../component/modal';
 import './accueil.css';
 import { MyForm, options} from '../component/form/forms';
 import { deconnexion } from './connexion';
+import { topic } from '../component/topic';
 
 interface props {
     //liste de tweets
     listOfTweets: tweet[];
-    isOpen: boolean;
+    tweetFormIsOpen: boolean;
     listOfTopics: string[];
     listOfUserTweets: tweet[];
-    searchValue: string;
-    selectedOption: string;
+    filterTweets: tweet[];
+    filterTopics: string[];
+    
+  
+   
   
 }
-
+let searchContent:string = "";
+let searchTopic: string = "";
 
 export class Accueil extends React.Component< any,props>{
     constructor(props: any) {
@@ -28,18 +33,18 @@ export class Accueil extends React.Component< any,props>{
         this.state = {    
            //tableau de tweets
             listOfTweets: [],
-            isOpen: false,
+            tweetFormIsOpen: false,
           listOfTopics: [],
-            searchValue: "",
-            selectedOption: "user",
-            listOfUserTweets: [],
-           
             
+            listOfUserTweets: [],
+           filterTopics: [],
+            filterTweets: [],
+           
 
            
         };
     }
-
+   
     retweeter = async (idTweet: number, usernameTweet: string): Promise<boolean> => {
         try {
             const response = await fetch("http://localhost:5000/retweet", {
@@ -73,18 +78,13 @@ export class Accueil extends React.Component< any,props>{
         this.getAllSujet();   
     }
 
-    closeModal = () => {
-        this.setState({ isOpen: false });
-        this.componentDidMount();
-        };
-    openModal = () => {
-        this.setState({ isOpen: true });
-    };
+   
 
     getAllSujet = async () => {
         const response2 = await fetch("http://localhost:5000/getAllSujet");
         const topics = await response2.json();
         this.setState({listOfTopics:topics})
+        this.setState({filterTopics:topics})
         
     };
 
@@ -103,7 +103,8 @@ export class Accueil extends React.Component< any,props>{
         });
         console.log(listOfTweets);
         this.setState({ listOfTweets: sortTweetByMoreRecentId(listOfTweets) });
-        this.setState({ searchValue: "" })
+       searchContent = "";
+       this.setState({filterTweets: sortTweetByMoreRecentId(listOfTweets)});
     };
 
         
@@ -126,14 +127,11 @@ export class Accueil extends React.Component< any,props>{
                 text: tweet.tweet,
             };
         });
-        this.setState({ listOfTweets: sortTweetByMoreRecentId(listOfTweets) });
-        this.setState({ searchValue: topic })
-    };
-    handleValueChange  = (value: string)  => {
+        this.setState({ filterTweets: sortTweetByMoreRecentId(listOfTweets) });
+        searchTopic = "";
        
-        this.setState({selectedOption: value});
-        
     };
+   
 
     getAllTweetByUser = async (username: string) => {
         const response = await fetch("http://localhost:5000/getAllTweetsByUser", {
@@ -158,50 +156,61 @@ export class Accueil extends React.Component< any,props>{
             
         });
        
-        this.setState({ listOfTweets: sortTweetByMoreRecentId(listOfUserTweets) });
-        
+        this.setState({ filterTweets: sortTweetByMoreRecentId(listOfUserTweets) });
 
     };
 
 
-    search = (event: React.ChangeEvent<HTMLInputElement>) =>{
-        this.setState({ searchValue: event.target.value});    
-        switch (this.state.selectedOption) {
-            case "user":
-               
-                break;
-            case "topic":
-              const filteredTopics = this.state.listOfTopics.filter((topic) =>
-            topic.toLowerCase().includes(this.state.searchValue.toLowerCase())
+  
+    
+   
+    
+
+    searchContent =  (value:string) =>{
+        const filteredTweets = this.state.listOfTweets.filter((tweet:tweet) =>
+            tweet.text.toLowerCase().includes(value.toLowerCase())
         );
-        this.setState({ listOfTopics: filteredTopics });
-               
-                break;
-            case "text":
-                const filteredTweets = this.state.listOfTweets.filter((tweet) =>
-                    tweet.text.toLowerCase().includes(this.state.searchValue.toLowerCase())
-                );
-                this.setState({ listOfTweets: filteredTweets });
-
-                break;
-            default:
-                break;
-
-        }
-        if (event.target.value === "") {
-        this.reset();
-    }
-
+        this.setState({ filterTweets: filteredTweets });
+        const filteredTopics = this.state.listOfTopics.filter((topic: string) =>
+            filteredTweets.some((tweet) => tweet.text.toLowerCase().includes(topic.toLowerCase()))
+        );
+        this.setState({ filterTopics: filteredTopics });
+        if (value === "") { this.reset(); }
         
     }
-  
+
+    handleKeyDown = (key:string,type:string) => {
+        if (key === "Backspace") {
+          if (type === "topic") {
+            searchTopic = searchTopic.slice(0, -1);
+            this.searchTopic(searchTopic);
+          } else if (type === "content") {  
+            searchContent = searchContent.slice(0, -1);
+            this.searchContent(searchContent);
+            }
+        }
+      };
+    
+    searchTopic = (value:string) =>{
+       
+        searchTopic = value;
+      
+        const filteredTopics = this.state.listOfTopics.filter((topic:string) =>
+            topic.toLowerCase().includes(searchTopic.toLowerCase())
+        );
+        this.setState({ filterTopics: filteredTopics });
+        if (value === "") {this.reset();}
+    }
+
 
     
-    
     reset = () => {
-        this.setState({ searchValue: "" });
-        this.getAllTweet();
-        this.getAllSujet();
+        searchContent = "";
+        searchTopic = "";
+        //reset les tweetfiltrés avec les tweets de base
+        this.setState({ filterTweets: this.state.listOfTweets });
+        //reset les topics filtrés avec les topics de base
+        this.setState({ filterTopics: this.state.listOfTopics });
 
     };
 
@@ -217,25 +226,24 @@ export class Accueil extends React.Component< any,props>{
                     <Title content="RedBird" />
                     </div>
                    
-                    <Button className = "deconnexion_btn" content="test" onClick={()=> this.getAllTweetByUser("Clement")} />
                     <Button className = "deconnexion_btn" content="Déconnexion" onClick={deconnexion} />
                     
                 </div>    
 
-                    <Button className = "newTweetBtn" content="+" style={{   width: 40,height: 40}} onClick={this.openModal} /> 
-                    <div className="magic_bar">
-                        <SearchBar    
-                             onChange={( this.search)}
-                            onReset={ ()=> this.reset()} //fonction de reset
-                            value={this.state.searchValue}
+                    <Button className = "newTweetBtn" content="+"  onClick={()=> this.setState({ tweetFormIsOpen: !this.state.tweetFormIsOpen} )} /> 
+              
+                    <SearchBar    
+                             onChange={(e)=> this.searchContent(e.target.value)}
+                            onReset={ ()=> this.reset()}
+                            onKeyDown={(e)=> this.handleKeyDown(e.key, "content")} 
+                             
+                            holder='Rechercher un tweet'
                         />
-                         <MyForm getValue={this.handleValueChange} options={options} />
-                    </div>
-                
+                       
                 <div className = "body">
 
                    <div className="tweets">
-                        {this.state.listOfTweets.map((tweet) => (
+                        {this.state.filterTweets.map((tweet) => (
                             <div>
                             <Tweet
                             id={tweet.id}
@@ -252,8 +260,14 @@ export class Accueil extends React.Component< any,props>{
 
                     <div className="topics">
                     <text className="title_topics">Sujets</text>
+                    <SearchBar    
+                             onChange={(e)=> this.searchTopic(e.target.value)}
+                            onReset={ ()=> this.reset()} 
+                            onKeyDown={(e)=> this.handleKeyDown(e.key, "topic")}
+                            holder='Rechercher un sujet'
+                        />
                     <div className="liste_topics">
-                    {this.state.listOfTopics.map((topic) => (
+                    {this.state.filterTopics.map((topic) => (
                         <div className="topic">
                         <text >{topic }</text>
                         <img className="topic_btn" src='./images/icon-eil.png' onClick={()=> this.getAllTweetByTopic(topic)}/>
@@ -265,7 +279,11 @@ export class Accueil extends React.Component< any,props>{
                     </div>
                 </div>
                 </div>
-                <Modal isOpen={this.state.isOpen} close={this.closeModal} ></Modal>
+                {this.state.tweetFormIsOpen && <Modal  
+                close={()=> {this.setState({ tweetFormIsOpen: false } ) ;
+                this.componentDidMount()}} >
+                </Modal>
+                }
             </main>
         );
     }
