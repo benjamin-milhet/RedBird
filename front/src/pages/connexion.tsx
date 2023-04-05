@@ -13,17 +13,18 @@ export class Connexion extends React.Component {
         password: '',
     };
 
-
+    //fonction pour valider la connexion
     valideConnexion = () => {
-        
         if (this.state.username === '' || this.state.password === '') {
+            //affichage d'un message d'erreur si les champs sont vides
             alert('Veuillez remplir tous les champs');
         } else {
-            window.location.href = 'http://localhost:3000/accueil';
-            localStorage.setItem('username', this.state.username);
-           // this.handleConnexion();
+           this.handleConnexion();
+          
         }
     }
+
+    //fonction pour envoyer les données de connexion au serveur
     handleConnexion = async () => {
         const response = await fetch('http://localhost:5000/connexion', {
             method: 'POST',
@@ -37,26 +38,23 @@ export class Connexion extends React.Component {
         });
 
         const data = await response.json();
-        alert(data.message);
+        
         if (response.status === 200) {
-            //redirection vers la page de accueil
-            window.location.href = 'http://localhost:3000/accueil';
             //stockage du username dans le localStorage
             localStorage.setItem('username', this.state.username);
-
+            //redirection vers la page d'accueil
+            window.location.href = 'http://localhost:3000/accueil';
         } else {
-            console.log('connexion échouée');
+            alert(data.message);
         }
     };
 
-
+    //fonction pour recuperer les données des inputs
     handleInputChange = (event:any) => {
         const { name, value } = event.target;
         this.setState({ [name]: value });
         
     };
-   
-
 
     render(): React.ReactNode {
         return (
@@ -79,6 +77,8 @@ export class Connexion extends React.Component {
     }
 }
 
+// function  de deconnexion qui supprime le username du localStorage et redirige vers la page de connexion
+//utilisé dans la page accueil
 export function deconnexion ()  {
     var confirm =window.confirm("Voulez-vous vous déconnecter?");
      if (confirm === true) {

@@ -14,7 +14,8 @@
     flex-direction: column;
     background: #f0eaea;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
-    
+    margin-top: 10px;
+    padding-bottom: 10px;
   }
   
 

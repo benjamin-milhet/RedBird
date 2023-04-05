@@ -8,7 +8,7 @@ type TitleProps = {
 export class Title extends React.Component<TitleProps, {}> {
     render(): React.ReactNode {
         return (
-            <h1 className="title_h1">{this.props.content}</h1>
+            <div className="title_h1">{this.props.content}</div>
         );
     }
 }

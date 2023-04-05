@@ -1,4 +1,3 @@
-import { type } from "os";
 import React from "react";
 
 export type topic = {
@@ -6,6 +5,7 @@ export type topic = {
   onClick?: () => void;
 }
 
+//composant pour afficher un topic
 export class Topic extends React.Component< topic> {
     render(): React.ReactNode {
         return (

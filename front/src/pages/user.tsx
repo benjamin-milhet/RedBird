@@ -11,7 +11,10 @@ interface props {
   
 }
 
-let name=window.location.pathname.split("/")[2]; //get the username from the url
+//recuperation du nom x de l'utilisateur dans l'url
+let name=window.location.pathname.split("/")[2]; 
+
+//composant pour afficher la page de l'utilisateur x
 export class User extends React.Component<any,props> {
     constructor(props: any) {
         super(props);
@@ -19,11 +22,13 @@ export class User extends React.Component<any,props> {
         listOfUserTweets: [],  
         };
     }
+
+    //recuperation les tweets de l'utilisateur au chargement de la page
     async componentDidMount() {
-        
     this.getAllTweetByUser(name);
-        
     }
+
+    //fonction pour recuperer les tweets de l'utilisateur
     getAllTweetByUser = async (username: string) => {
         const response = await fetch("http://localhost:5000/getAllTweetsByUser", {
             method: "POST",
@@ -34,9 +39,10 @@ export class User extends React.Component<any,props> {
                 nom: username,
             }),
         });
+        
         const tweets = await response.json();
-        console.log(tweets);
-
+        
+       //mapping des tweets pour les afficher
         const listOfUserTweets = tweets.map((tweet: any) => {
             return {
                 id: tweet.id,
@@ -52,7 +58,7 @@ export class User extends React.Component<any,props> {
     render(): React.ReactNode {
         return (
             <main>
-                <div className="top">
+                <div className="u-top">
                     <Button className = "retour-btn" content="Retour" onClick={()=> window.location.href = "http://localhost:3000/accueil"} />
                     <div className="center">
                         <Title content={"Tweets de "+ name} />
@@ -67,6 +73,8 @@ export class User extends React.Component<any,props> {
                                 username={tweet.username}
                                 retweeter={tweet.retweeter}
                                 text={tweet.text}
+                                
+                                
                             />
                         ))}
                     </div>

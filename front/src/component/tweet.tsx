@@ -1,62 +1,77 @@
 import React from "react";
 import "./tweet.css";
-import { useState } from "react";
-import { throws } from "assert";
+
+//type tweet
 export type tweet = {
   id: number;
     username: string;
     retweeter?: string;
     text: string;
   onclick?: () => void;
+  clickOnTag?: (tag:string) => void;
   
 }
 
-
-
-
-
- export class Tweet extends React.Component<tweet> {
-  
-  
-  
- // recherche des tags dans le texte du tweet et stockage dans un tableau de string
- findTags = (text: string) => {
-  const regex = /#[a-zA-Z0-9]+/g;
-  return text?.match(regex);
+//type tag pour pouvoir cliquer sur un tag
+export type TweetTag = {
+  id: number;
+  text: string;
 };
 
-  // enlever les tags du texte du tweet
+
+//composant pour afficher un tweet
+ export class Tweet extends React.Component<tweet> {
+  
+
+//fonction pour trouver les tags dans le texte du tweet
+ findTags = (text: string) => {
+  const regex = /#[a-zA-Z0-9]+/g;
+  const matches = text.match(regex);
+  if (!matches) {
+    return [];
+  }
+  return matches.map((match, index) => ({
+    id: index,
+    text: match,
+  }));
+};
+
+  //enlever les tags du texte du tweet
   removeTags = (text: string) => {
     const regex = /#[a-zA-Z0-9]+/g;
-    return text ?? "".replace(regex, "");
+    return text.replace(regex, "");
   };
   
-  
-isARetweet=()=> {
-  if (this.props.retweeter === null || this.props.retweeter === undefined || this.props.retweeter === "") {
-    return false;
-  } else {
-    return true;
+  //fonction pour savoir si le tweet est un retweet
+  isARetweet=()=> {
+    if (this.props.retweeter === null || this.props.retweeter === undefined || this.props.retweeter === "") {
+      return false;
+    } else {
+      return true;
+    }
   }
-}
-clickOnName = (name:string) => {
-  window.location.href = "http://localhost:3000/user/" + name;
-}
- 
 
+  //fonction pour cliquer sur le nom d'un utilisateur qui renvoie sur la page de l'utilisateur
+  clickOnName = (name:string) => {
+    window.location.href = "http://localhost:3000/user/" + name;
+  }
+ 
   render(): React.ReactNode {
+    console.log(this.findTags(this.props.text));
     
     return (
       
-      <div className="tweet">
+      <div className="tweet"// verifie si le tweet est un retweet
+        >
       
         {this.isARetweet() && (
-          <div className="retweet-header">
+          <div className="retweet-header" 
+          //si le tweet est un retweet, affiche le nom de l'utilisateur qui a retweeté
+          >
           <span className="retweet-username"onClick={()=>
-          {if (this.isARetweet()) {this.clickOnName(this.props.retweeter||"")}
-          }
-          }
-          
+          {if (this.isARetweet()) {this.clickOnName(this.props.retweeter||"")}}}
+          //si le tweet est un retweet, affiche le nom de l'utilisateur qui a retweeté
+
           >{this.props.retweeter}</span>
           <span className="retweet-retweet" > retweet</span>
           </div>
@@ -65,27 +80,40 @@ clickOnName = (name:string) => {
       
       <div
             className={`tweet-border${this.isARetweet() ? " retweeted" : ""}`}
+            //si le tweet est un retweet on lui donne un style différent
           >
             <div className="tweet-header">
-            <span className="tweet-username" onClick={()=>this.clickOnName(this.props.username)}>{this.props.username}</span>
+            <span className="tweet-username" onClick={()=>this.clickOnName(this.props.username)}
+            // si on clique sur le nom de l'utilisateur, on est redirigé vers sa page
+            >{this.props.username}</span>
             </div>
 
         <div className="tweet-body">
-          <p className="tweet-text">{this.removeTags(this.props.text)}</p>
+          <p className="tweet-text"
+          /* on affiche le texte du tweet sans les tags pour pouvoir 
+          leur donner un style différent */
+          >{this.removeTags(this.props.text)}</p>
+
+          {this.findTags(this.props.text).length > 0 && (
+              <div className="tags"
+              ///on map les tags trouvés dans le texte du tweet
+                >
+                {this.findTags(this.props.text).map((tag) => (
+                  <span
+                    key={tag.id}
+                    className="tweet-tags"
+                    onClick={() => this.props.clickOnTag?.(removeHashtag(tag.text))} 
+                    //si on clique sur un tag, on enlève le hashtag et on appelle la fonction clickOnTag
+                  > {tag.text}
+                  </span>
+                ))}
+              </div>
+            )}
           
-          
-        
-      
-        {this.findTags(this.props.text)  && ( //props.tags && pour verifier si props.tags est défini idem pour reply
-            <div className="tweet-tags">
-              {this.findTags(this.props.text)?.map((tag, index) => (
-                <span key={index} className="tweet-tag">{tag}</span>
-              ))}
-            </div>
-          )}
       </div>
         <div className="tweet-footer">
         {!this.isARetweet() && (
+          //si le tweet n'est pas un retweet, on affiche le bouton retweeter
           <button className="tweet-reply-button" onClick={this.props.onclick}>Retweeter</button>
         )}
         </div>
@@ -111,4 +139,9 @@ export function sortTweetByMoreRecentId (liste: tweet[]): tweet[]  {
       }
       return 0;
   });
+  }
+
+  //fonction pour enlever le hashtag d'un tag
+   function removeHashtag (tag: string): string {
+    return tag.substring(1);
   }
