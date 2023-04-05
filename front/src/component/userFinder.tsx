@@ -19,24 +19,21 @@ interface userFinder {
 let searchUser: string = "";
 
 export class UserFinder extends React.Component<userFinder> {
-
-
-    state = {  
-      
-      listUser: [],
-     listUserSearch: [],
-     
-    };
+  state = {  
+    listUser: [],
+    listUserSearch: [],
+  };
   
-    
-    
-    async componentDidMount() {
-        const response = await fetch("http://localhost:5000/getAllUsers");
-        const data = await response.json();
-        this.setState({ listUser: data });
-        console.log(data);
-        this.setState({ listUserSearch: data });
-    }
+  //fonction pour récupérer la liste des users appelée au chargement de la page
+  async componentDidMount() {
+      const response = await fetch("http://localhost:5000/getAllUsers");
+      const data = await response.json();
+      this.setState({ listUser: data });
+      console.log(data);
+      this.setState({ listUserSearch: data });
+  }
+
+  //fonction pour rechercher un user
   searchUser = (value: string) => {
     searchUser= value;
       
@@ -48,26 +45,27 @@ export class UserFinder extends React.Component<userFinder> {
         this.setState({ listUserSearch: filteredUsers});
         if (value === "") {this.reset();}
   }
+
+  //fonction pour supprimer le dernier caractère de la recherche
   handleKeyDown = (key:string) => {
-        if (key === "Backspace") {
-            searchUser = searchUser.slice(0, -1);
-                this.searchUser(searchUser);
-        }
+    if (key === "Backspace") {
+        searchUser = searchUser.slice(0, -1);
+            this.searchUser(searchUser);
     }
-
-         
+  }
+ 
+  //fonction pour réinitialiser la recherche
   reset = () => {
-    this.setState({ listUserSearch: this.state.listUser });
-    searchUser = "";
-    }
+  this.setState({ listUserSearch: this.state.listUser });
+  searchUser = "";
+  }
   
-    seeUserTweets = (user: string) => {
-        window.location.href = "/user/" + user;
-    }
+  //fonction pour afficher la page de l'utilisateur sélectionné
+  seeUserTweets = (user: string) => {
+      window.location.href = "/user/" + user;
+  }
 
-    render(): React.ReactNode {
-        
-    
+  render(): React.ReactNode {
     return (
     
           <div className="modal-overlay" onClick={this.props.close}>

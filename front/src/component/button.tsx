@@ -8,6 +8,7 @@ type ButtonProps = {
     style?: React.CSSProperties 
 }
 
+//composant pour afficher un bouton personnalisé
 export class Button extends React.Component<ButtonProps> {
 
     render(): React.ReactNode {

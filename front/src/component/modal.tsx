@@ -7,31 +7,23 @@ import { Input } from '../component/form/input';
 import { Button } from '../component/button';
 
 interface ModalType {
+  //childern de type ReactNode pour pouvoir afficher n'importe quel composant
   children?: ReactNode;
- 
   close: () => void;
-  
-  
+
 }
 
-  
+  //composant pour afficher la modal
 export class Modal extends React.Component<ModalType> {
-
-
   state = {  
     tweet: "",
   };
 
-
-   postNewTweet = async  (): Promise<boolean> => {
-    
-    
+  //fonction pour envoyer un nouveau tweet
+  postNewTweet = async  (): Promise<boolean> => {
     if (this.state.tweet === "") {
       return false;
     }
-  
-
-
     try {
       const response = await fetch("http://localhost:5000/tweeter", {
         method: "POST",
@@ -48,24 +40,15 @@ export class Modal extends React.Component<ModalType> {
       
       this.props.close();
       return response.ok;
-      
-    
     } catch (error) {
       console.error(error);
       return false;
     }
   }
   
-  
-  
-
-
 
   render(): React.ReactNode {
-      
-  
   return (
-  
         <div className="modal-overlay" onClick={this.props.close}>
           <div onClick={(e) => e.stopPropagation()} className="modal-box">
             {this.props.children}
@@ -74,9 +57,7 @@ export class Modal extends React.Component<ModalType> {
               X
             </button>
            <text className="title">Tweeter</text>
-         
-            
-           
+
             <textarea className="input"
               name="tweet"
               onChange={(e) => this.setState({ tweet: e.target.value })}
@@ -92,7 +73,7 @@ export class Modal extends React.Component<ModalType> {
           </div>
           </div>
         </div>
-      
+    
     
   );
 }
