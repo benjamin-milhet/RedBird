@@ -31,6 +31,13 @@ docker-compose up -d --force-recreate --build twitter_front_react
 docker-compose up
 ```
 
+## Documentation
+
+ - [Readme du backend](https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/blob/main/back/README.md)
+ - [Documentation du dockerfile du back](https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/blob/main/back/Readme-Dockerfile.md)
+ - [Readme du front](https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/blob/main/front/README.md)
+
+
 
 
 ![alt text](https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/blob/main/images/meme.jpg?raw=true)
