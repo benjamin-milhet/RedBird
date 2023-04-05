@@ -23,6 +23,11 @@ def accueil():
 
 @app.route('/healthz', methods=['GET'])
 def healthcheck():
+    """
+        Permet de vérifier si le serveur est en vie
+
+        :return: 200 si le serveur est en vie
+    """
     # curl -X GET http://localhost:5000/healthz
 
     return '', 200
@@ -30,6 +35,14 @@ def healthcheck():
 
 @app.route("/inscription", methods=['POST'])
 def inscription():
+    """
+        Permet à un utilisateur de s'inscrire
+
+        nom: nom de la personne
+        password: mot de passe de la personne
+
+        :return: Si l'inscription s'est bien passée, retourne un message de succès et un code 200. Si l'inscription n'a pas pu se faire, retourne un message d'erreur et un code 400
+    """
     # curl -X POST -H "Content-Type: application/json; charset=utf-8" --data "{\"nom\":\"Lucas\",\"password\":\"pechakuchaDeMerde\"}" http://localhost:5000/inscription
 
     data = request.get_json()
@@ -52,6 +65,14 @@ def inscription():
 
 @app.route("/connexion", methods=['POST'])
 def connexion():
+    """
+        Permet à un utilisateur de se connecter
+
+        nom: nom de la personne
+        password: mot de passe de la personne
+
+        :return: Si la connexion s'est bien passée, retourne un message de succès et un code 200. Si la connexion n'a pas pu se faire, retourne un message d'erreur et un code 400
+    """
     # curl -X POST -H "Content-Type: application/json; charset=utf-8" --data "{\"nom\":\"Lucas\",\"password\":\"pechakuchaDeMerde\"}" http://localhost:5000/connexion
 
     data = request.get_json()
@@ -73,6 +94,14 @@ def connexion():
 
 @app.route("/tweeter", methods=['POST'])
 def tweeter():
+    """
+        Permet à un utilisateur de tweeter
+
+        nom: nom de la personne
+        tweet: tweet de la personne
+
+        :return: Si le tweet s'est bien passé, retourne un message de succès et un code 200. Si le tweet n'a pas pu se faire, retourne un message d'erreur et un code 400
+    """
     # curl -X POST -H "Content-Type: application/json; charset=utf-8" --data "{\"nom\":\"Lucas\",\"tweet\":\"Salut l'elite, c'est El Pueblo, 18-25, 2 sucres #gange #pizza7Fromage\"}" http://localhost:5000/tweeter
 
     data = request.get_json()
@@ -103,6 +132,15 @@ def tweeter():
 
 @app.route("/retweet", methods=['POST'])
 def retweet():
+    """
+        Permet à un utilisateur de retweeter
+
+        nom: nom de la personne
+        id: id du tweet
+        nom_user_tweet: nom de l'utilisateur qui a tweeté
+
+        :return: Si le retweet s'est bien passé, retourne un message de succès et un code 200. Si le retweet n'a pas pu se faire, retourne un message d'erreur et un code 400
+    """
     # curl -X POST -H "Content-Type: application/json; charset=utf-8" --data "{\"nom\":\"Lucas\", \"nom_user_tweet\":\"Benjamin\", \"id\":\"1\"}" http://localhost:5000/retweet
 
     data = request.get_json()
@@ -135,11 +173,16 @@ def retweet():
     rUser.set("retweet." + nom, json.dumps(liste_tweet))
     rTweet.set("retweet." + str(time_stamp), json.dumps(dict(nom=nom_user_tweet, id=id_tweet)))
 
-    return jsonify({"message": "Le tweet " + str(id_tweet) + " a bien été retweeté."}), 200
+    return jsonify({"message": "Le tweet a bien été retweeté."}), 200
 
 
 @app.route("/getAllTweets", methods=['GET'])
 def get_all_tweets():
+    """
+        Permet de récupérer tous les tweets au format JSON
+
+        :return: Un JSON contenant tous les tweets
+    """
     # curl -X GET http://localhost:5000/getAllTweets
 
     liste_tweet_final = []
@@ -165,6 +208,13 @@ def get_all_tweets():
 
 @app.route("/getAllTweetsByUser", methods=['POST'])
 def get_all_tweets_by_user():
+    """
+        Permet de récupérer tous les tweets d'un utilisateur au format JSON
+
+        nom: nom de la personne
+
+        :return: Un JSON contenant tous les tweets de l'utilisateur
+    """
     # curl -X POST -H "Content-Type: application/json; charset=utf-8" --data "{\"nom\":\"Lucas\"}" http://localhost:5000/getAllTweetsByUser
 
     data = request.get_json()
@@ -191,6 +241,11 @@ def get_all_tweets_by_user():
 
 @app.route("/getAllSujet", methods=['GET'])
 def get_all_sujet():
+    """
+        Permet de récupérer tous les sujets au format JSON
+
+        :return: Un JSON contenant tous les sujets
+    """
     # curl -X GET http://localhost:5000/getAllSujet
 
     liste_res = []
@@ -202,6 +257,13 @@ def get_all_sujet():
 
 @app.route("/getAllTweetsBySujet", methods=['POST'])
 def get_all_tweets_by_sujet():
+    """
+        Permet de récupérer tous les tweets d'un sujet au format JSON
+
+        sujet: sujet du tweet
+
+        :return: Un JSON contenant tous les tweets du sujet
+    """
     # curl -X POST -H "Content-Type: application/json; charset=utf-8" --data "{\"sujet\":\"gange\"}" http://localhost:5000/getAllTweetsBySujet
 
     data = request.get_json()
@@ -222,11 +284,23 @@ def get_all_tweets_by_sujet():
 
 
 def chercher_hashtag(tweet):
+    """
+        Permet de chercher les hashtags dans un tweet
+
+        :param tweet: tweet ou il faut chercher les hashtags
+
+        :return: liste des hashtags
+    """
     return re.findall(r"#(\w+)", tweet)
 
 
 @app.route("/getAllUsers", methods=['GET'])
 def get_all_users():
+    """
+        Permet de récupérer tous les utilisateurs au format JSON
+
+        :return: Un JSON contenant tous les utilisateurs
+    """
     liste_res = []
     tmp = rUser.keys("nom.*")
     for i in range(len(tmp)):
@@ -236,6 +310,11 @@ def get_all_users():
 
 @app.route("/chargerDonnees", methods=['GET'])
 def charger_donnees():
+    """
+        Permet de charger les données dans la base de données
+
+        :return: Un JSON contenant le message de confirmation
+    """
     # curl -X GET http://localhost:5000/chargerDonnees
 
     # charger users
