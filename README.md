@@ -1,4 +1,4 @@
-# 4A_ILC_GHYS_MILHET_CLOUD_COMPUTING
+#  <img src="https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/blob/main/images/logo-redbird.png" height="50" width="50" /> 4A_ILC_GHYS_MILHET_CLOUD_COMPUTING
 
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 
@@ -13,9 +13,6 @@
  - Benjamin MILHET
  
 ## ILC
-
-### <img src= "https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING//blob/main/front/public/images/logo-redbird.png?raw=true"  height ="50" width ="50"  /> < text content="Redbird"></text>
-
 
 ## Lancement des conteneurs
 
