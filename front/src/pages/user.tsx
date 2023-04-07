@@ -3,6 +3,7 @@ import { Tweet, tweet , sortTweetByMoreRecentId} from "../component/tweet";
 import { Title } from "../component/title";
 import { Button } from "../component/button";
 import "./user.css"
+import { retweeter } from "./accueil";
 
 
 interface props {
@@ -73,6 +74,7 @@ export class User extends React.Component<any,props> {
                                 username={tweet.username}
                                 retweeter={tweet.retweeter}
                                 text={tweet.text}
+                                onclick={() => {retweeter(tweet.id, tweet.username); this.getAllTweetByUser(name);}}
                                 
                                 
                             />

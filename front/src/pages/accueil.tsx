@@ -44,38 +44,7 @@ export class Accueil extends React.Component< any,props>{
         this.getAllSujet();   
     }
 
-    //fonction pour retweeter un tweet 
-    retweeter = async (idTweet: number, usernameTweet: string): Promise<boolean> => {
-        try {
-            const response = await fetch("http://localhost:5000/retweet", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                mode: "cors",
-                body: JSON.stringify({
-                    //on envoie le nom de l'utilisateur qui retweet et le nom de l'utilisateur qui a tweeté
-                    nom: localStorage.getItem('username'),
-                    nom_user_tweet: usernameTweet,
-                    id: idTweet,
-                }),
-                
-            });
-            const data = await response.json();
-            if (response.status === 200) {
-                alert("Retweet effectué");
-            }
-            else {
-                alert(data.message);
-            }
-            this.getAllTweet();
-            return response.ok;
-
-          } catch (error) {
-            console.error(error, "error");
-            return false;
-          }
-    }
+    
       
     //fonction pour récupérer tous les sujets
     getAllSujet = async () => {
@@ -234,7 +203,7 @@ export class Accueil extends React.Component< any,props>{
                                 username={tweet.username}
                                 retweeter={tweet.retweeter}
                                 text={tweet.text}
-                                onclick={()=> this.retweeter(tweet.id, tweet.username)}
+                                onclick={()=> {retweeter(tweet.id, tweet.username); this.getAllTweet()}}
                                 clickOnTag={(tag)=> {this.getAllTweetByTopic(tag); this.searchTopic(tag)} } //on passe la fonction qui permet de rechercher un topic
                                 />
                                 </div>
@@ -273,6 +242,40 @@ export class Accueil extends React.Component< any,props>{
             </main>
         );
     }
+}
+
+//fonction pour retweeter un tweet  
+//exporté pour l'utiliser dans la page user
+export async function retweeter (idTweet: number, usernameTweet: string): Promise<boolean> {
+    try {
+        const response = await fetch("http://localhost:5000/retweet", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            mode: "cors",
+            body: JSON.stringify({
+                //on envoie le nom de l'utilisateur qui retweet et le nom de l'utilisateur qui a tweeté
+                nom: localStorage.getItem('username'),
+                nom_user_tweet: usernameTweet,
+                id: idTweet,
+            }),
+            
+        });
+        const data = await response.json();
+        if (response.status === 200) {
+            alert("Retweet effectué");
+        }
+        else {
+            alert(data.message);
+        }
+        
+        return response.ok;
+
+      } catch (error) {
+        console.error(error, "error");
+        return false;
+      }
 }
 
  
