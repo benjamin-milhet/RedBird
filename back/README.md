@@ -108,7 +108,6 @@ ou
     "status": 400
 }
 ```
-```
 
 #### Exemple de requête
 
