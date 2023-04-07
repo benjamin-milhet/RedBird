@@ -80,7 +80,7 @@ export class UserFinder extends React.Component<userFinder> {
                             onChange={(e)=> this.searchUser(e.target.value)}
                             onReset={ ()=> this.reset()} 
                             onKeyDown={(e)=> this.handleKeyDown(e.key)}
-                            holder='Rechercher un sujet'
+                            holder='Rechercher un utilisateur'
                         />
                         <div className="liste_topics">
                         {this.state.listUserSearch.map((user) => (
