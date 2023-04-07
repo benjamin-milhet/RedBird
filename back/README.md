@@ -277,7 +277,7 @@ Méthode : GET
 curl -X GET http://localhost:5000/getAllUsers
 ```
 
-### Retourner l'ensemble des tweets d'un utilisateur
+### Retourner les tweets d'un utilisateur
 
 Permet de retourner l'ensemble des tweets d'un utilisateur
 
@@ -319,7 +319,7 @@ ou
 curl -X POST -H "Content-Type: application/json; charset=utf-8" --data "{\"nom\":\"Lucas\"}" http://localhost:5000/getAllTweetsByUser
 ```
 
-### Retourner l'ensemble des tweets d'un sujet
+### Retourner les tweets d'un sujet
 
 Permet de retourner l'ensemble des tweets d'un sujet
 
