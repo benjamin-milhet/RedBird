@@ -39,8 +39,8 @@ docker-compose up
  
 ### Identifiants
 
-- Username: JeromeMSD
-- Password: Esirem2023
+- Username: ```JeromeMSD```
+- Password: ```Esirem2023```
 
 </br>
 
