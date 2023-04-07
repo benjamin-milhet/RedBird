@@ -15,6 +15,8 @@
  
 ## ILC
 
+## Est-ce que vous pouvez héberger notre application ?
+
 ## Lancement des conteneurs
 
 ### DOCKER BUILD 
@@ -32,6 +34,8 @@ docker-compose up
 - Username: ```JeromeMSD```
 - Password: ```Esirem2023```
 
+## Déroulement du projet
+Benjamin s'est principalement occupé de la partie Backend avec Python et le Framework Flask et du lien avec la base de données REDIS. Clément s'est occupé de la partie Frontend avec la bibliothèque React et de la mise en place de l'interface utilisateur. Chacun d'entre nous s'est occupé du Dockerfile de leur partie. Nous avons aussi mis en place 4 Github actions pour vérifier la syntaxe de notre fichier main.py, le build de nos Dockerfile pour le back et le front, et le test de notre application React.
 
 ## Langages
 Pour réaliser notre API, nous avons utiliser le langage Python avec le framework Flask permettant le dévelopement web avec Python. Pour le stockage des données, nous utilisons le système de gestion de base de données clé-valeur Redis qui est de type NoSQL. Enfin, pour l'interface utilisateur, nous utilisons la bibliothèque React, très utile pour rendre nos pages web interactive.
