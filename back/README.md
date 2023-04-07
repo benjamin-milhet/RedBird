@@ -56,12 +56,153 @@ Méthode : POST
     "message": "Bienvenue " + nom + "!",
     "status": 200
 }
+
+ou
+
+{
+    "message": "Le nom d'utilisateur " + nom + " n'est pas disponible.",
+    "status": 400
+}
 ```
 
 #### Exemple de requête
 
 ```
 curl -X POST -H "Content-Type: application/json; charset=utf-8" --data "{\"nom\":\"Lucas\",\"password\":\"pechakuchaDeMerde\"}" http://localhost:5000/inscription
+```
+
+### Connexion d'un utilisateur
+
+Permet de vérifier si un utilisateur est dans la base de données REDIS
+
+#### Données envoyées
+
+Méthode : POST
+
+```
+{
+    "nom": "nom",
+    "password": "password"
+}
+```
+
+#### Données reçues
+
+```
+{
+    "message": "Bienvenue " + nom + "!",
+    "status": 200
+}
+
+ou
+
+{
+    "message": "Le nom d'utilisateur " + nom + " n'existe pas.",
+    "status": 400
+}
+
+ou
+
+{
+    "message": "Le mot de passe est incorrect.",
+    "status": 400
+}
+```
+```
+
+#### Exemple de requête
+
+```
+curl -X POST -H "Content-Type: application/json; charset=utf-8" --data "{\"nom\":\"Lucas\",\"password\":\"pechakuchaDeMerde\"}" http://localhost:5000/connexion
+```
+
+### Création d'un tweet
+
+Permet de créer un tweet
+
+#### Données envoyées
+
+Méthode : POST
+
+```
+{
+    "nom": "nom",
+    "tweet": "tweet",
+}
+```
+
+#### Données reçues
+
+```
+{
+    "message": "Le tweet a bien été posté.",
+    "status": 200
+}
+
+ou
+
+{
+    "message": "Le nom d'utilisateur " + nom + " n'existe pas.",
+    "status": 400
+}
+```
+
+#### Exemple de requête
+
+```
+curl -X POST -H "Content-Type: application/json; charset=utf-8" --data "{\"nom\":\"Lucas\",\"tweet\":\"Salut l'elite, c'est El Pueblo, 18-25, 2 sucres #gange #pizza7Fromage\"}" http://localhost:5000/tweeter
+```
+
+### Création d'un retweet
+
+Permet de retweeter un tweet
+
+#### Données envoyées
+
+Méthode : POST
+
+```
+{
+    "nom": "nom",
+    "id": "id",
+    "nom_user_tweet": "nom_user_tweet"
+}
+```
+
+#### Données reçues
+
+```
+{
+    "message": "Le tweet a bien été retweeté.",
+    "status": 200
+}
+
+ou
+
+{
+    "message": "Le nom d'utilisateur " + nom + " n'existe pas.",
+    "status": 400
+}
+
+ou
+
+{
+    "message": "Le nom d'utilisateur " + nom_user_tweet + " n'existe pas.",
+    "status": 400
+}
+
+ou
+
+{
+    "message": "Le tweet avec l'id " + str(id_tweet) + " n'existe pas.",
+    "status": 400
+}
+```
+
+#### Exemple de requête
+
+```
+curl -X POST -H "Content-Type: application/json; charset=utf-8" --data "{\"nom\":\"Lucas\", \"nom_user_tweet\":\"Benjamin\", \"id\":\"1\"}" http://localhost:5000/retweet
 ```
 
 
