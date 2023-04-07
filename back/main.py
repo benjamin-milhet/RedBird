@@ -331,7 +331,7 @@ def charger_donnees():
     rUser.set("nom.JeromeMSD", "JeromeMSD")
     rUser.set("password.JeromeMSD", hashlib.sha256(b"Esirem2023").hexdigest())
     rUser.set("tweet.JeromeMSD", json.dumps([6, 11, 13]))
-    rUser.set("retweet.JeromeMSD", json.dumps([12]))
+    rUser.set("retweet.JeromeMSD", json.dumps([10]))
 
     # charger tweets
     rTweet.set("tweet.1", "Salut l'elite, c'est El Pueblo, 18-25, 2 sucres #gange #pizza7Fromage")
@@ -368,7 +368,7 @@ def charger_donnees():
 
 
     rTweet.set("sujet.BDE", json.dumps([json.dumps(dict(nom="JeromeMSD", id=13))]))
-    rTweet.set("sujet.ESIREM", json.dumps([json.dumps(dict(nom="JeromeMSD", id=13))])) ###  sujet 
+    rTweet.set("sujet.ESIREM", json.dumps([json.dumps(dict(nom="JeromeMSD", id=13))])) 
     
     return jsonify({"message": "Le chargement des données à réussi."}), 200
 
