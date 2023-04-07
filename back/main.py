@@ -325,8 +325,12 @@ def charger_donnees():
 
     rUser.set("nom.Clement", "Clement")
     rUser.set("password.Clement", hashlib.sha256(b"pechakuchaDeMerde").hexdigest())
-    rUser.set("tweet.Clement", json.dumps([4, 5, 6]))
+    rUser.set("tweet.Clement", json.dumps([4, 5, 12]))
     rUser.set("retweet.Clement", json.dumps([9]))
+
+    rUser.set("nom.JeromeMSD", "JeromeMSD")
+    rUser.set("password.JeromeMSD", hashlib.sha256(b"Esirem2023").hexdigest())
+    rUser.set("tweet.JeromeMSD", json.dumps([6, 11, 13]))
 
     # charger tweets
     rTweet.set("tweet.1", "Salut l'elite, c'est El Pueblo, 18-25, 2 sucres #gange #pizza7Fromage")
@@ -335,7 +339,11 @@ def charger_donnees():
                "Союз нерушимый республик свободных Сплотила навеки Великая Русь. Да здравствует созданный волей народов Единый, могучий Советский Союз! #USSR")
     rTweet.set("tweet.4", "Franche-Comté > Bourgogne #FrancComtois")
     rTweet.set("tweet.5", "Le Granier m'a écrasé avec ses courbes de baiser #THREEJS #Bezier")
-    rTweet.set("tweet.6", "ILC > SE > SQR")
+    rTweet.set("tweet.12", "ILC > SE > SQR")
+    rTweet.set("tweet.6", "Je suis un tweet de JeromeMSD #firstTweet #ESIREM")
+    rTweet.set("tweet.11", "IT > MDD  #ESIREM #IT")
+    rTweet.set("tweet.13", "Votez TTL #BDE #ESIREM")
+
 
     # charger retweet
     rTweet.set("retweet.7", json.dumps(dict(id=1, nom="Benjamin")))
@@ -350,6 +358,12 @@ def charger_donnees():
     rTweet.set("sujet.FrancComtois", json.dumps([json.dumps(dict(nom="Clement", id=4))]))
     rTweet.set("sujet.THREEJS", json.dumps([json.dumps(dict(nom="Clement", id=5))]))
     rTweet.set("sujet.Bezier", json.dumps([json.dumps(dict(nom="Clement", id=5))]))
+    rTweet.set("sujet.ESIREM", json.dumps([json.dumps(dict(nom="JeromeMSD", id=6))]))
+    rTweet.set("sujet.firstTweet", json.dumps([json.dumps(dict(nom="JeromeMSD", id=6))]))
+    rTweet.set("sujet.IT", json.dumps([json.dumps(dict(nom="JeromeMSD", id=11))]))
+    rTweet.set("sujet.ESIREM", json.dumps([json.dumps(dict(nom="JeromeMSD", id=11))]))
+    rTweet.set("sujet.BDE", json.dumps([json.dumps(dict(nom="JeromeMSD", id=13))]))
+    rTweet.set("sujet.ESIREM", json.dumps([json.dumps(dict(nom="JeromeMSD", id=13))]))
 
     return jsonify({"message": "Le chargement des données à réussi."}), 200
 
