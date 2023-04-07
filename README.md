@@ -17,14 +17,9 @@
 
 ## Lancement des conteneurs
 
-### DOCKER BUILD & REBUILD BACKEND
+### DOCKER BUILD 
 ```
-docker-compose up -d --force-recreate --build twitter_flask_app
-```
-
-### DOCKER BUILD & REBUILD FRONTEND
-```
-docker-compose up -d --force-recreate --build twitter_front_react
+docker-compose build
 ```
 
 ### DOCKER RUN
@@ -32,16 +27,22 @@ docker-compose up -d --force-recreate --build twitter_front_react
 docker-compose up
 ```
 
-## Documentation
+## Identifiants
+
+- Username: ```JeromeMSD```
+- Password: ```Esirem2023```
+
+
+## Langages
+Pour réaliser notre API, nous avons utiliser le langage Python avec le framework Flask permettant le dévelopement web avec Python. Pour le stockage des données, nous utilisons le système de gestion de base de données clé-valeur Redis qui est de type NoSQL. Enfin, pour l'interface utilisateur, nous utilisons la bibliothèque React, très utile pour rendre nos pages web interactive.
+
+
+## Documentations
 
  - [Readme du backend](https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/blob/main/back/README.md)
  - [Documentation du dockerfile du back](https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/blob/main/back/Readme-Dockerfile.md)
  - [Readme du front](https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/blob/main/front/README.md)
  
-### Identifiants
-
-- Username: ```JeromeMSD```
-- Password: ```Esirem2023```
 
 </br>
 
