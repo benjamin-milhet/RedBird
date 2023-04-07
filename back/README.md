@@ -22,13 +22,57 @@ Redis
 │   └── sujet.sujet : Liste des id des tweets ayant ce sujet
 ```
 
+## Fonctionnalités
+
+ - [Inscription d'un utilisateur](#inscription-dun-utilisateur)
+ - [Connexion d'un utilisateur](#connexion-dun-utilisateur)
+ - [Création d'un tweet](#création-dun-tweet)
+ - [Création d'un retweet](#création-dun-retweet)
+ - [Retourner l'ensemble des tweets](#retourner-lensemble-des-tweets)
+ - [Retourner l'ensemble des sujets](#retourner-lensemble-des-sujets)
+ - [Retourner l'ensemble des utilisateurs](#retourner-lensemble-des-utilisateurs)
+ - [Retourner les tweets d'un utilisateur](#retourner-les-tweets-dun-utilisateur)
+ - [Retourner les tweets d'un sujet](#retourner-les-tweets-dun-sujet)
+
+### Inscription d'un utilisateur
+
+Permet d'inscrire un utilisateur dans la base de données REDIS
+
+#### Données envoyées
+
+Méthode : POST
+
+```
+{
+    "nom": "nom",
+    "password": "password"
+}
+```
+
+#### Données reçues
+
+```
+{
+    "message": "Bienvenue " + nom + "!",
+    "status": 200
+}
+```
+
+#### Exemple de requête
+
+```
+curl -X POST -H "Content-Type: application/json; charset=utf-8" --data "{\"nom\":\"Lucas\",\"password\":\"pechakuchaDeMerde\"}" http://localhost:5000/inscription
+```
+
+
 
 ## Documentation
 
  - [Documentation du dockerfile](https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/blob/main/back/Readme-Dockerfile.md)
 
 
-## Commandes docker
+## Commandes docker pour lancer le Backend sans utiliser le Docker compose
+
 
 ### REDIS
 ```
