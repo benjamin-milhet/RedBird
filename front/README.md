@@ -3,6 +3,7 @@
 # Documentation du front-end
 
 Le front end est réalisé avec [React](https://reactjs.org/) en TypeScript.
+
 ![alt text](https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/blob/main/images/meme5.jpg?raw=true)
 
 Il est composé de 4 pages principale et de différents composants :
@@ -18,21 +19,21 @@ Il est composé de 4 pages principale et de différents composants :
 
 
 ### Fonctionnalités attendues :
-- [Afficher tous les tweets](#affichage-de-tous-les-tweet)
+- [Afficher tous les tweets](#affichage-de-tous-les-tweets)
 - [Afficher les sujets](#affichage-de-tous-les-sujets)
-- [Afficher les tweets liés à un sujet]()
-- [Retweeter]()
-- [Tweeter]()
-- [Afficher les tweets liés à une personne]()
+- [Afficher les tweets liés à un sujet](#afficher-les-tweets-liés-à-un-sujet)
+- [Retweeter](#retweeter)
+- [Tweeter](#tweeter)
+- [Afficher les tweets liés à une personne](#afficher-les-tweets-liés-à-une-personne)
 
 ### Fonctionnalités supplémentaires :
-- [Rechercher un sujet]()
-- [Rechercher  du texte contenu dans un tweet]()
-- [Afficher la liste des utilisateurs]()
-- [Rechercher un utilisateur]()
-- [Se connecter]()
-- [S'inscrire]()
-- [Déconnexion]()
+- [Rechercher un sujet](#rechercher-un-sujet)
+- [Rechercher  du texte contenu dans un tweet](#rechercher-du-texte-contenu-dans-un-tweet)
+- [Afficher la liste des utilisateurs](#afficher-la-liste-des-utilisateurs)
+- [Rechercher un utilisateur](#rechercher-un-utilisateur)
+- [Se connecter](#se-connecter)
+- [S'inscrire](#sinscrire)
+- [Déconnexion](#déconnexion)
 
 ## Détail des Fonctionnalités
 
@@ -53,7 +54,7 @@ Chaque tweet possède un bouton "retweeter" ce qui permet à l'utilisateur de re
 Pour tweeter, il suffit d'appuyer sur le bouton tweeter situé en haut à gauche de la page Accueil. Cette action entraine l'ouverture d'un "modal" qui est une sorte de fenêtre qui s'ouvre par-dessus la page. Cette fenêtre permet de saisir un tweet et de le poster en son nom en appuyant sur le bouton "Envoyer". Le tweet est posté grâce à une requête envoyée au back-end.
 Il est possible de fermer le modal sans tweeter, soit en utilisant la croix en haut à droite du modal, soit en cliquant en dehors de celui-ci.
 
-###  Afficher les tweets liés à une personne
+### Afficher les tweets liés à une personne
 Pour afficher les tweets liés à une personne, nous avons créé la page [User](). Cette page prend en paramètre un nom d'utilisateur qui est récupéré pour permettre d'effectuer la requête permettant de récupérer tous les tweets d'un utilisateur. De cette façon, on peut afficher les tweets de n'importe quel utilisateur  avec une seule page.
 Cette page User est accessible de deux manières :
 - En cliquant sur un nom d'utilisateur dans un tweet 
