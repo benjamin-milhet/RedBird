@@ -1,6 +1,6 @@
 
 
-# Documentation du front-end
+# <img src="https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/blob/main/images/logo-redbird.png" height="40" width="50" /> Documentation du Front-end
 
 Le front end est réalisé avec [React](https://reactjs.org/) en TypeScript.
 
