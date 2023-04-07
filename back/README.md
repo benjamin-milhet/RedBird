@@ -44,8 +44,8 @@ Méthode : POST
 
 ```
 {
-    "nom": "nom",
-    "password": "password"
+    "nom": "Nom de l'utilisateur",
+    "password": "Mot de passe"
 }
 ```
 
@@ -81,8 +81,8 @@ Méthode : POST
 
 ```
 {
-    "nom": "nom",
-    "password": "password"
+    "nom": "Nom de l'utilisateur",
+    "password": "Mot de passe"
 }
 ```
 
@@ -125,8 +125,8 @@ Méthode : POST
 
 ```
 {
-    "nom": "nom",
-    "tweet": "tweet",
+    "nom": "Nom de l'utilisateur",
+    "tweet": "Tweet à poster",
 }
 ```
 
@@ -162,9 +162,9 @@ Méthode : POST
 
 ```
 {
-    "nom": "nom",
-    "id": "id",
-    "nom_user_tweet": "nom_user_tweet"
+    "nom": "Nom de l'utilisateur",
+    "id": "Id du tweet à retweeter",
+    "nom_user_tweet": "Nom de l'utilisateur qui a posté le tweet"
 }
 ```
 
@@ -204,7 +204,162 @@ ou
 curl -X POST -H "Content-Type: application/json; charset=utf-8" --data "{\"nom\":\"Lucas\", \"nom_user_tweet\":\"Benjamin\", \"id\":\"1\"}" http://localhost:5000/retweet
 ```
 
+### Retourner l'ensemble des tweets
 
+Permet de retourner l'ensemble des tweets
+
+#### Données reçues
+
+Méthode : GET
+
+```
+{
+    "liste_tweet_final": [
+        {
+            "id": "Id du tweet",
+            "nom": "Nom de l'utilisateur",
+            "tweet": "Tweet"
+        }
+    ],
+    "status": 200
+}
+```
+
+#### Exemple de requête
+
+```
+curl -X GET http://localhost:5000/getAllTweets
+```
+
+### Retourner l'ensemble des sujets
+
+Permet de retourner l'ensemble des sujets
+
+#### Données reçues
+
+Méthode : GET
+
+```
+{
+    "liste_sujets": [
+        "Sujet"
+    ],
+    "status": 200
+}
+```
+
+#### Exemple de requête
+
+```
+curl -X GET http://localhost:5000/getAllSujet
+```
+
+### Retourner l'ensemble des utilisateurs
+
+Permet de retourner l'ensemble des utilisateurs
+
+#### Données reçues
+
+Méthode : GET
+
+```
+{
+    "liste_utilisateurs": [
+        "Utilisateur"
+    ],
+    "status": 200
+}
+```
+
+#### Exemple de requête
+
+```
+curl -X GET http://localhost:5000/getAllUsers
+```
+
+### Retourner l'ensemble des tweets d'un utilisateur
+
+Permet de retourner l'ensemble des tweets d'un utilisateur
+
+#### Données envoyées
+
+Méthode : POST
+
+```
+{
+    "nom": "Nom de l'utilisateur"
+}
+```
+
+#### Données reçues
+
+```
+{
+    "liste_tweet": [
+        {
+            "id": "Id du tweet",
+            "nom": "Nom de l'utilisateur",
+            "tweet": "Tweet"
+        }
+    ],
+    "status": 200
+}
+
+ou
+
+{
+    "message": "Le nom d'utilisateur " + nom + " n'existe pas.",
+    "status": 400
+}
+```
+
+#### Exemple de requête
+
+```
+curl -X POST -H "Content-Type: application/json; charset=utf-8" --data "{\"nom\":\"Lucas\"}" http://localhost:5000/getAllTweetsByUser
+```
+
+### Retourner l'ensemble des tweets d'un sujet
+
+Permet de retourner l'ensemble des tweets d'un sujet
+
+#### Données envoyées
+
+Méthode : POST
+
+```
+{
+    "sujet": "Sujet"
+}
+```
+
+#### Données reçues
+
+```
+{
+    "liste_tweet": [
+        {
+            "id": "Id du tweet",
+            "nom": "Nom de l'utilisateur",
+            "tweet": "Tweet"
+        }
+    ],
+    "status": 200
+}
+
+ou
+
+{
+    "message": "Le sujet " + sujet + " n'existe pas.",
+    "status": 400
+}
+```
+
+#### Exemple de requête
+
+```
+curl -X POST -H "Content-Type: application/json; charset=utf-8" --data "{\"sujet\":\"gange\"}" http://localhost:5000/getAllTweetsBySujet
+```
 
 ## Documentation
 
