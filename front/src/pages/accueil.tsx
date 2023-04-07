@@ -40,8 +40,9 @@ export class Accueil extends React.Component< any,props>{
    
     //fonction pour récupérer la liste des tweets et des sujet au chargement de la page
     async componentDidMount(){
+        console.log("componentDidMount");
+        this.getAllSujet(); 
         this.getAllTweet();
-        this.getAllSujet();   
     }
 
     
@@ -205,7 +206,7 @@ export class Accueil extends React.Component< any,props>{
                                 username={tweet.username}
                                 retweeter={tweet.retweeter}
                                 text={tweet.text}
-                                onclick={()=> {retweeter(tweet.id, tweet.username); this.componentDidMount()}}
+                                onclick={()=> {retweeter(tweet.id, tweet.username); this.componentDidMount() }}
                                 clickOnTag={(tag)=> {this.getAllTweetByTopic(tag); this.searchTopic(tag)} } //on passe la fonction qui permet de rechercher un topic
                                 />
                                 </div>
@@ -264,6 +265,7 @@ export async function retweeter (idTweet: number, usernameTweet: string): Promis
             }),
             
         });
+        console.log("retweet");
         const data = await response.json();
         if (response.status === 200) {
             alert("Retweet effectué");
