@@ -51,7 +51,7 @@ Pour revenir à la liste de tweet d'origine, il suffit de cliquer sur la croix d
 Chaque tweet possède un bouton "retweeter" ce qui permet à l'utilisateur de retweeter le tweet en question en son nom. À noter que nous avons fait en sort qu'il soit impossible pour un même utilisateur de retweeter un même tweet. 
 
 ### Tweeter
-Pour tweeter, il suffit d'appuyer sur le bouton tweeter situé en haut à gauche de la page Accueil. Cette action entraine l'ouverture d'un ["modal"]() qui est une sorte de fenêtre qui s'ouvre par-dessus la page. Cette fenêtre permet de saisir un tweet et de le poster en son nom en appuyant sur le bouton "Envoyer". Le tweet est posté grâce à une requête envoyée au back-end.
+Pour tweeter, il suffit d'appuyer sur le bouton tweeter situé en haut à gauche de la page Accueil. Cette action entraine l'ouverture d'un ["modal"](https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/blob/main/front/captures/tweeter.jpg?raw=true) qui est une sorte de fenêtre qui s'ouvre par-dessus la page. Cette fenêtre permet de saisir un tweet et de le poster en son nom en appuyant sur le bouton "Envoyer". Le tweet est posté grâce à une requête envoyée au back-end.
 Il est possible de fermer le modal sans tweeter, soit en utilisant la croix en haut à droite du modal, soit en cliquant en dehors de celui-ci.
 
 ### Afficher les tweets liés à une personne
