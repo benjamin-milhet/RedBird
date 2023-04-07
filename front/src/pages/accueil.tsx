@@ -235,7 +235,7 @@ export class Accueil extends React.Component< any,props>{
                                 retweeter={tweet.retweeter}
                                 text={tweet.text}
                                 onclick={()=> this.retweeter(tweet.id, tweet.username)}
-                                clickOnTag={(tag)=> this.searchTopic(tag)} //on passe la fonction qui permet de rechercher un topic
+                                clickOnTag={(tag)=> {this.getAllTweetByTopic(tag); this.searchTopic(tag)} } //on passe la fonction qui permet de rechercher un topic
                                 />
                                 </div>
                             ))}
