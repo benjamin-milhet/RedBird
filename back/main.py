@@ -265,6 +265,7 @@ def get_all_tweets_by_sujet():
         :return: Un JSON contenant tous les tweets du sujet
     """
     # curl -X POST -H "Content-Type: application/json; charset=utf-8" --data "{\"sujet\":\"gange\"}" http://localhost:5000/getAllTweetsBySujet
+    # curl -X POST -H "Content-Type: application/json; charset=utf-8" --data "{\"sujet\":\"ESIREM\"}" http://localhost:5000/getAllTweetsBySujet
 
     data = request.get_json()
     sujet = data.get('sujet')
@@ -360,16 +361,11 @@ def charger_donnees():
     rTweet.set("sujet.FrancComtois", json.dumps([json.dumps(dict(nom="Clement", id=4))]))
     rTweet.set("sujet.THREEJS", json.dumps([json.dumps(dict(nom="Clement", id=5))]))
     rTweet.set("sujet.Bezier", json.dumps([json.dumps(dict(nom="Clement", id=5))]))
-    rTweet.set("sujet.ESIREM", json.dumps([json.dumps(dict(nom="JeromeMSD", id=6))]))
+    rTweet.set("sujet.ESIREM", json.dumps([json.dumps(dict(nom="JeromeMSD", id=6)), json.dumps(dict(nom="JeromeMSD", id=11)), json.dumps(dict(nom="JeromeMSD", id=13))]))
     rTweet.set("sujet.firstTweet", json.dumps([json.dumps(dict(nom="JeromeMSD", id=6))]))
-    rTweet.set("sujet.ESIREM", json.dumps([json.dumps(dict(nom="JeromeMSD", id=11))]))
     rTweet.set("sujet.IT", json.dumps([json.dumps(dict(nom="JeromeMSD", id=11))]))
-    
-
-
     rTweet.set("sujet.BDE", json.dumps([json.dumps(dict(nom="JeromeMSD", id=13))]))
-    rTweet.set("sujet.ESIREM", json.dumps([json.dumps(dict(nom="JeromeMSD", id=13))])) 
-    
+
     return jsonify({"message": "Le chargement des données à réussi."}), 200
 
 
