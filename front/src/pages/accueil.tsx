@@ -67,6 +67,7 @@ export class Accueil extends React.Component< any,props>{
                 text: tweet.tweet,
                 
             };
+            
         });
         console.log(listOfTweets);
         //on met à jour la liste des tweets
@@ -75,6 +76,7 @@ export class Accueil extends React.Component< any,props>{
         this.setState({filterTweets: sortTweetByMoreRecentId(listOfTweets)});
         //on remet à zéro la recherche
         searchContent = "";
+        console.log("tt")
     };
     
     //fonction pour récupérer tous les tweets par sujet
@@ -203,7 +205,7 @@ export class Accueil extends React.Component< any,props>{
                                 username={tweet.username}
                                 retweeter={tweet.retweeter}
                                 text={tweet.text}
-                                onclick={()=> {retweeter(tweet.id, tweet.username); this.getAllTweet()}}
+                                onclick={()=> {retweeter(tweet.id, tweet.username); this.componentDidMount()}}
                                 clickOnTag={(tag)=> {this.getAllTweetByTopic(tag); this.searchTopic(tag)} } //on passe la fonction qui permet de rechercher un topic
                                 />
                                 </div>

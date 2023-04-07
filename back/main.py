@@ -331,6 +331,7 @@ def charger_donnees():
     rUser.set("nom.JeromeMSD", "JeromeMSD")
     rUser.set("password.JeromeMSD", hashlib.sha256(b"Esirem2023").hexdigest())
     rUser.set("tweet.JeromeMSD", json.dumps([6, 11, 13]))
+    rUser.set("retweet.JeromeMSD", json.dumps([12]))
 
     # charger tweets
     rTweet.set("tweet.1", "Salut l'elite, c'est El Pueblo, 18-25, 2 sucres #gange #pizza7Fromage")
@@ -349,6 +350,7 @@ def charger_donnees():
     rTweet.set("retweet.7", json.dumps(dict(id=1, nom="Benjamin")))
     rTweet.set("retweet.8", json.dumps(dict(id=2, nom="Benjamin")))
     rTweet.set("retweet.9", json.dumps(dict(id=4, nom="Clement")))
+    rTweet.set("retweet.12", json.dumps(dict(id=6, nom="JeromeMSD")))
 
     # charger sujet
     rTweet.set("sujet.gange", json.dumps([json.dumps(dict(nom="Benjamin", id=1))]))
@@ -362,9 +364,11 @@ def charger_donnees():
     rTweet.set("sujet.firstTweet", json.dumps([json.dumps(dict(nom="JeromeMSD", id=6))]))
     rTweet.set("sujet.IT", json.dumps([json.dumps(dict(nom="JeromeMSD", id=11))]))
     rTweet.set("sujet.ESIREM", json.dumps([json.dumps(dict(nom="JeromeMSD", id=11))]))
-    rTweet.set("sujet.BDE", json.dumps([json.dumps(dict(nom="JeromeMSD", id=13))]))
-    rTweet.set("sujet.ESIREM", json.dumps([json.dumps(dict(nom="JeromeMSD", id=13))]))
 
+
+    rTweet.set("sujet.BDE", json.dumps([json.dumps(dict(nom="JeromeMSD", id=13))]))
+    rTweet.set("sujet.ESIREM", json.dumps([json.dumps(dict(nom="JeromeMSD", id=13))])) ###  sujet 
+    
     return jsonify({"message": "Le chargement des données à réussi."}), 200
 
 

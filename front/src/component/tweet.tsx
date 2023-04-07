@@ -57,7 +57,6 @@ export type TweetTag = {
   }
  
   render(): React.ReactNode {
-    console.log(this.findTags(this.props.text));
     
     return (
       
