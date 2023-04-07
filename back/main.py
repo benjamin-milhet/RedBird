@@ -350,7 +350,7 @@ def charger_donnees():
     rTweet.set("retweet.7", json.dumps(dict(id=1, nom="Benjamin")))
     rTweet.set("retweet.8", json.dumps(dict(id=2, nom="Benjamin")))
     rTweet.set("retweet.9", json.dumps(dict(id=4, nom="Clement")))
-    rTweet.set("retweet.12", json.dumps(dict(id=6, nom="JeromeMSD")))
+    rTweet.set("retweet.10", json.dumps(dict(id=12, nom="JeromeMSD")))
 
     # charger sujet
     rTweet.set("sujet.gange", json.dumps([json.dumps(dict(nom="Benjamin", id=1))]))
@@ -362,8 +362,9 @@ def charger_donnees():
     rTweet.set("sujet.Bezier", json.dumps([json.dumps(dict(nom="Clement", id=5))]))
     rTweet.set("sujet.ESIREM", json.dumps([json.dumps(dict(nom="JeromeMSD", id=6))]))
     rTweet.set("sujet.firstTweet", json.dumps([json.dumps(dict(nom="JeromeMSD", id=6))]))
-    rTweet.set("sujet.IT", json.dumps([json.dumps(dict(nom="JeromeMSD", id=11))]))
     rTweet.set("sujet.ESIREM", json.dumps([json.dumps(dict(nom="JeromeMSD", id=11))]))
+    rTweet.set("sujet.IT", json.dumps([json.dumps(dict(nom="JeromeMSD", id=11))]))
+    
 
 
     rTweet.set("sujet.BDE", json.dumps([json.dumps(dict(nom="JeromeMSD", id=13))]))
