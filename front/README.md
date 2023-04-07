@@ -44,21 +44,21 @@ Sur la page [Accueil]() sur la partie de gauche sont affichés les tweets et les
 La liste de tous les sujets est affichée sur la partie droite de la page Accueil et sont récupérés de manière analogue à la liste des tweets.
 
 ### Afficher les tweets liés à un sujet
-Dans la liste des [sujets]() chaque sujet est cliquable, lorsque l'on clique sur un sujet, une requête au back-end est effectuée. On récupère ainsi la liste des tweets liés au sujet sélectionné, ceux-ci sont ensuite [affichés]() dans la partie de gauche.
+Dans la liste des sujets chaque sujet est cliquable, lorsque l'on [clique sur un sujet](), une requête au back-end est effectuée. On récupère ainsi la liste des tweets liés au sujet sélectionné, ceux-ci sont ensuite affichés dans la partie de gauche.
 Pour revenir à la liste de tweet d'origine, il suffit de cliquer sur la croix de la barre de recherche au-dessus de la liste des sujets.
 
 ### Retweeter
 Chaque tweet possède un bouton "retweeter" ce qui permet à l'utilisateur de retweeter le tweet en question en son nom. À noter que nous avons fait en sort qu'il soit impossible pour un même utilisateur de retweeter un même tweet. 
 
 ### Tweeter
-Pour tweeter, il suffit d'appuyer sur le bouton tweeter situé en haut à gauche de la page Accueil. Cette action entraine l'ouverture d'un "modal" qui est une sorte de fenêtre qui s'ouvre par-dessus la page. Cette fenêtre permet de saisir un tweet et de le poster en son nom en appuyant sur le bouton "Envoyer". Le tweet est posté grâce à une requête envoyée au back-end.
+Pour tweeter, il suffit d'appuyer sur le bouton tweeter situé en haut à gauche de la page Accueil. Cette action entraine l'ouverture d'un ["modal"]() qui est une sorte de fenêtre qui s'ouvre par-dessus la page. Cette fenêtre permet de saisir un tweet et de le poster en son nom en appuyant sur le bouton "Envoyer". Le tweet est posté grâce à une requête envoyée au back-end.
 Il est possible de fermer le modal sans tweeter, soit en utilisant la croix en haut à droite du modal, soit en cliquant en dehors de celui-ci.
 
 ### Afficher les tweets liés à une personne
 Pour afficher les tweets liés à une personne, nous avons créé la page [User](). Cette page prend en paramètre un nom d'utilisateur qui est récupéré pour permettre d'effectuer la requête permettant de récupérer tous les tweets d'un utilisateur. De cette façon, on peut afficher les tweets de n'importe quel utilisateur  avec une seule page.
 Cette page User est accessible de deux manières :
 - En cliquant sur un nom d'utilisateur dans un tweet 
-- En utilisant le [Finder]() qui s'ouvre en cliquant sur le bouton "trouver un utilisateur"
+- En utilisant le [Finder](#afficher-la-liste-des-utilisateurs) qui s'ouvre en cliquant sur le bouton "trouver un utilisateur"
 Un bouton "retour" permet de retourner à la page Accueil.
 
 ## Détail des fonctionnalités supplémentaires
@@ -77,7 +77,7 @@ En cliquant sur le bouton "trouver un utilisateur" on ouvre le [Finder]() qui es
 Dans le Finder, se trouve une barre de recherche basée sur le même fonctionnement que celles sur la page d'accueil et permet de rechercher un utilisateur par son nom.
 
 ### Se connecter
-La page connexion possède deux champs texte pour remplir un nom d'utilisateur et un mot de passe.
+La page [Connexion]() possède deux champs texte pour remplir un nom d'utilisateur et un mot de passe.
 En cliquant sur le bouton "Se connecter" une requête est envoyé au back pour vérifier les informations saisies.
 Une fois la connexion validée, le nom d'utilisateur est stocké dans le localstorage pour pouvoir le récupérer et l'utiliser dans les requêtes pour tweeter ou retweeter.
 On est ensuite envoyé vers la page Accueil.
