@@ -40,7 +40,7 @@ export class Accueil extends React.Component< any,props>{
    
     //fonction pour récupérer la liste des tweets et des sujet au chargement de la page
     async componentDidMount(){
-        console.log("componentDidMount");
+        
         this.getAllSujet(); 
         this.getAllTweet();
     }
@@ -77,7 +77,7 @@ export class Accueil extends React.Component< any,props>{
         this.setState({filterTweets: sortTweetByMoreRecentId(listOfTweets)});
         //on remet à zéro la recherche
         searchContent = "";
-        console.log("tt")
+       
     };
     
     //fonction pour récupérer tous les tweets par sujet
@@ -265,7 +265,7 @@ export async function retweeter (idTweet: number, usernameTweet: string): Promis
             }),
             
         });
-        console.log("retweet");
+       
         const data = await response.json();
         if (response.status === 200) {
             alert("Retweet effectué");
