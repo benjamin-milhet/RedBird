@@ -9,7 +9,7 @@
 [![Node.js CI - React](https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/actions/workflows/node.js.yml/badge.svg)](https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/actions/workflows/node.js.yml)
 
 
-L'objectif du projet est de reproduire le très célèbre réseau social Tweeter.
+L'objectif du projet est de reproduire le très célèbre réseau social Twitter.
 
 
 ## Membres du groupe
