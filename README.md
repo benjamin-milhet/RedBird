@@ -48,7 +48,7 @@ Pour réaliser notre API, nous avons utiliser le langage Python avec le framewor
 
  - [Readme du backend](https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/blob/main/back/README.md)
  - [Documentation du dockerfile du back](https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/blob/main/back/Readme-Dockerfile.md)
- - [Readme du front](https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/blob/main/front/README.md)
+ - [Readme du frontend](https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/blob/main/front/README.md)
  
 
 </br>
