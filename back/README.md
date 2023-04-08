@@ -17,9 +17,9 @@ Redis
 │   └── retweet.user : Liste des id des retweets (Array)
 │
 ├── rTweet - 1
-│   ├── tweet.id : Tweet correspondant à un id
-│   ├── retweet.id : Retweet correspondant à l'id d'un tweet et de l'utilisateur du tweet original
-│   └── sujet.sujet : Liste des id des tweets ayant ce sujet
+│   ├── tweet.id : Tweet correspondant à un id (String)
+│   ├── retweet.id : Retweet correspondant à l'id d'un tweet et de l'utilisateur du tweet original (Dictionnaire)
+│   └── sujet.sujet : Liste des id des tweets ayant ce sujet (Array)
 ```
 
 ## Fonctionnalités
