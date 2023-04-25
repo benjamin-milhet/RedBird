@@ -1,12 +1,12 @@
 
 
-# <img src="https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/blob/main/images/logo-redbird.png" height="40" width="50" /> Documentation du Front-end
+# <img src="https://github.com/benjamin-milhet/RedBird/blob/main/images/logo-redbird.png" height="40" width="50" /> Documentation du Front-end
 
 <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" /> <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" /> <img src="https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white" />
 
 Le front end est réalisé avec [React](https://reactjs.org/) en TypeScript.
 
-![alt text](https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/blob/main/images/meme5.jpg?raw=true)
+![alt text](https://github.com/benjamin-milhet/RedBird/blob/main/images/meme5.jpg?raw=true)
 
 Il est composé de 4 pages principale et de différents composants :
  - La page de démarrage (fichier app.tsx) a pour but de ne s'afficher qu'une seule fois au lancement du front. Elle permet principalement de peupler la base de donnée Redis au premier démarrage de l'application.
@@ -40,24 +40,24 @@ Il est composé de 4 pages principale et de différents composants :
 ## Détail des Fonctionnalités
 
 ### Affichage de tous les tweets
-Sur la page [Accueil](https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/blob/main/front/captures/accueil.jpg?raw=true) sur la partie de gauche sont affichés les tweets et les retweets triés de manière que les tweets/retweets les plus récents soient affichés en premier. Pour les récupérer, la page fait une requête au back à son lancement puis les stocke dans un tableau de tweet.
+Sur la page [Accueil](https://github.com/benjamin-milhet/RedBird/blob/main/front/captures/accueil.jpg?raw=true) sur la partie de gauche sont affichés les tweets et les retweets triés de manière que les tweets/retweets les plus récents soient affichés en premier. Pour les récupérer, la page fait une requête au back à son lancement puis les stocke dans un tableau de tweet.
 
 ### Affichage de tous les sujets
 La liste de tous les sujets est affichée sur la partie droite de la page Accueil et sont récupérés de manière analogue à la liste des tweets.
 
 ### Afficher les tweets liés à un sujet
-Dans la liste des sujets chaque sujet est cliquable, lorsque l'on [clique sur un sujet](https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/blob/main/front/captures/cliqueSujet.jpg?raw=true), une requête au back-end est effectuée. On récupère ainsi la liste des tweets liés au sujet sélectionné, ceux-ci sont ensuite affichés dans la partie de gauche.
+Dans la liste des sujets chaque sujet est cliquable, lorsque l'on [clique sur un sujet](https://github.com/benjamin-milhet/RedBird/blob/main/front/captures/cliqueSujet.jpg?raw=true), une requête au back-end est effectuée. On récupère ainsi la liste des tweets liés au sujet sélectionné, ceux-ci sont ensuite affichés dans la partie de gauche.
 Pour revenir à la liste de tweet d'origine, il suffit de cliquer sur la croix de la barre de recherche au-dessus de la liste des sujets.
 
 ### Retweeter
 Chaque tweet possède un bouton "retweeter" ce qui permet à l'utilisateur de retweeter le tweet en question en son nom. À noter que nous avons fait en sort qu'il soit impossible pour un même utilisateur de retweeter un même tweet. 
 
 ### Tweeter
-Pour tweeter, il suffit d'appuyer sur le bouton tweeter situé en haut à gauche de la page Accueil. Cette action entraine l'ouverture d'un ["modal"](https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/blob/main/front/captures/tweeter.jpg?raw=true) qui est une sorte de fenêtre qui s'ouvre par-dessus la page. Cette fenêtre permet de saisir un tweet et de le poster en son nom en appuyant sur le bouton "Envoyer". Le tweet est posté grâce à une requête envoyée au back-end.
+Pour tweeter, il suffit d'appuyer sur le bouton tweeter situé en haut à gauche de la page Accueil. Cette action entraine l'ouverture d'un ["modal"](https://github.com/benjamin-milhet/RedBird/blob/main/front/captures/tweeter.jpg?raw=true) qui est une sorte de fenêtre qui s'ouvre par-dessus la page. Cette fenêtre permet de saisir un tweet et de le poster en son nom en appuyant sur le bouton "Envoyer". Le tweet est posté grâce à une requête envoyée au back-end.
 Il est possible de fermer le modal sans tweeter, soit en utilisant la croix en haut à droite du modal, soit en cliquant en dehors de celui-ci.
 
 ### Afficher les tweets liés à une personne
-Pour afficher les tweets liés à une personne, nous avons créé la page [User](https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/blob/main/front/captures/user.jpg?raw=true). Cette page prend en paramètre un nom d'utilisateur qui est récupéré pour permettre d'effectuer la requête permettant de récupérer tous les tweets d'un utilisateur. De cette façon, on peut afficher les tweets de n'importe quel utilisateur  avec une seule page.
+Pour afficher les tweets liés à une personne, nous avons créé la page [User](https://github.com/benjamin-milhet/RedBird/blob/main/front/captures/user.jpg?raw=true). Cette page prend en paramètre un nom d'utilisateur qui est récupéré pour permettre d'effectuer la requête permettant de récupérer tous les tweets d'un utilisateur. De cette façon, on peut afficher les tweets de n'importe quel utilisateur  avec une seule page.
 Cette page User est accessible de deux manières :
 - En cliquant sur un nom d'utilisateur dans un tweet 
 - En utilisant le Finder qui s'ouvre en cliquant sur le bouton "trouver un utilisateur"
@@ -73,19 +73,19 @@ Pour réinitialiser la recherche, il suffit de cliquer sur la croix à droite de
 Au-dessus des deux listes (tweets et sujets) se trouve une grande barre de recherche permettant de rechercher du texte contenu dans un tweet. À noter que les sujets s'actualisent également en fonction des tweets affichés.
 
 ### Afficher la liste des utilisateurs
-En cliquant sur le bouton "trouver un utilisateur" on ouvre le [Finder](https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/blob/main/front/captures/finder.jpg?raw=true) qui est un modal qui permet via une requête d'afficher la liste de tous les utilisateurs. Chaque utilisateur est cliquable et renvoie sur la page User de l'utilisateur sélectionné.
+En cliquant sur le bouton "trouver un utilisateur" on ouvre le [Finder](https://github.com/benjamin-milhet/RedBird/blob/main/front/captures/finder.jpg?raw=true) qui est un modal qui permet via une requête d'afficher la liste de tous les utilisateurs. Chaque utilisateur est cliquable et renvoie sur la page User de l'utilisateur sélectionné.
 
 ### Rechercher un utilisateur
 Dans le Finder, se trouve une barre de recherche basée sur le même fonctionnement que celles sur la page d'accueil et permet de rechercher un utilisateur par son nom.
 
 ### Se connecter
-La page [Connexion](https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/blob/main/front/captures/connexion.jpg?raw=true) possède deux champs texte pour remplir un nom d'utilisateur et un mot de passe.
+La page [Connexion](https://github.com/benjamin-milhet/RedBird/blob/main/front/captures/connexion.jpg?raw=true) possède deux champs texte pour remplir un nom d'utilisateur et un mot de passe.
 En cliquant sur le bouton "Se connecter" une requête est envoyé au back pour vérifier les informations saisies.
 Une fois la connexion validée, le nom d'utilisateur est stocké dans le localstorage pour pouvoir le récupérer et l'utiliser dans les requêtes pour tweeter ou retweeter.
 On est ensuite envoyé vers la page Accueil.
 
 ### S'inscrire
-La page [Inscription](https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/blob/main/front/captures/inscription.jpg?raw=true) est accessible depuis la page connexion et permet à un nouvel utilisateur de saisir un nom et un mot de passe.
+La page [Inscription](https://github.com/benjamin-milhet/RedBird/blob/main/front/captures/inscription.jpg?raw=true) est accessible depuis la page connexion et permet à un nouvel utilisateur de saisir un nom et un mot de passe.
 En cliquant sur le bouton "S'inscrire" une requête est envoyé au back pour vérifier que le nom d'utilisateur n'est pas déjà pris.
 Une fois l'inscription validée, on est envoyé vers la page Connexion pour se connecter au site.
 
@@ -107,4 +107,4 @@ docker run -p 3000:3000 imagefrontend
 
 Moi après avoir fait le front:
 
-![alt text](https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/blob/main/images/meme4.png?raw=true)
+![alt text](https://github.com/benjamin-milhet/RedBird/blob/main/images/meme4.png?raw=true)

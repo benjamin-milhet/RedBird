@@ -1,9 +1,9 @@
-# <img src="https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/blob/main/images/logo-redbird.png" height="40" width="50" /> Documentation du Backend
+# <img src="https://github.com/benjamin-milhet/RedBird/blob/main/images/logo-redbird.png" height="40" width="50" /> Documentation du Backend
 
 <img src="https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue" /> <img src="https://img.shields.io/badge/redis-%23DD0031.svg?&style=for-the-badge&logo=redis&logoColor=white" /> <img src="https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white" />
 
 ## Moi après avoir fini le JSON
-![alt text](https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/blob/main/images/meme3.jpg?raw=true)
+![alt text](https://github.com/benjamin-milhet/RedBird/blob/main/images/meme3.jpg?raw=true)
 
 
 ## Format de la base de données REDIS
@@ -363,7 +363,7 @@ curl -X POST -H "Content-Type: application/json; charset=utf-8" --data "{\"sujet
 
 ## Documentation
 
- - [Documentation du dockerfile](https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/blob/main/back/Readme-Dockerfile.md)
+ - [Documentation du dockerfile](https://github.com/benjamin-milhet/RedBird/blob/main/back/Readme-Dockerfile.md)
 
 
 ## Commandes docker pour lancer le Backend sans utiliser le Docker compose
@@ -383,4 +383,4 @@ docker build . --tag imagebackend
 docker run --name imagebackend -p 5000:5000 imagebackend
 ```
 
-![alt text](https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/blob/main/images/meme2.jpeg?raw=true)
+![alt text](https://github.com/benjamin-milhet/RedBird/blob/main/images/meme2.jpeg?raw=true)
