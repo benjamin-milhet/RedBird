@@ -47,3 +47,16 @@ Pour réaliser notre API, nous avons utiliser le langage Python avec le framewor
  - [Readme du backend](https://github.com/benjamin-milhet/RedBird/blob/main/back/README.md)
  - [Documentation du dockerfile du back](https://github.com/benjamin-milhet/RedBird/blob/main/back/Readme-Dockerfile.md)
  - [Readme du frontend](https://github.com/benjamin-milhet/RedBird/blob/main/front/README.md)
+
+
+ ## Rendu final
+
+### Page d'accueil
+![alt text](https://github.com/benjamin-milhet/RedBird/blob/main/images/menu1.png?raw=true)
+
+### Page de recherche
+![alt text](https://github.com/benjamin-milhet/RedBird/blob/main/images/menu2.png?raw=true)
+
+### Tri par sujet
+![alt text](https://github.com/benjamin-milhet/RedBird/blob/main/images/menu3.png?raw=true)
+
