@@ -3,10 +3,10 @@
 <img src="https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue" /> <img src="https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white" /> <img src="https://img.shields.io/badge/redis-%23DD0031.svg?&style=for-the-badge&logo=redis&logoColor=white" /> <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" /> <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" /> <img src="https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white" /> <img src="https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white" />
 
 
-[![checkSyntax](https://github.com/benjamin-milhet/RedBird/actions/workflows/CheckSyntax.yml/badge.svg)](https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/actions/workflows/CheckSyntax.yml)
-[![Docker Image CI](https://github.com/benjamin-milhet/RedBird/actions/workflows/docker-image.yml/badge.svg)](https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/actions/workflows/docker-image.yml)
-[![Docker Image front](https://github.com/benjamin-milhet/RedBird/actions/workflows/docker-image-front.yml/badge.svg)](https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/actions/workflows/docker-image-front.yml)
-[![Node.js CI - React](https://github.com/benjamin-milhet/RedBird/actions/workflows/node.js.yml/badge.svg)](https://github.com/benjamin-milhet/4A_ILC_GHYS_MILHET_CLOUD_COMPUTING/actions/workflows/node.js.yml)
+[![checkSyntax](https://github.com/benjamin-milhet/RedBird/actions/workflows/CheckSyntax.yml/badge.svg)](https://github.com/benjamin-milhet/RedBird/actions/workflows/CheckSyntax.yml)
+[![Docker Image CI](https://github.com/benjamin-milhet/RedBird/actions/workflows/docker-image.yml/badge.svg)](https://github.com/benjamin-milhet/RedBird/actions/workflows/docker-image.yml)
+[![Docker Image front](https://github.com/benjamin-milhet/RedBird/actions/workflows/docker-image-front.yml/badge.svg)](https://github.com/benjamin-milhet/RedBird/actions/workflows/docker-image-front.yml)
+[![Node.js CI - React](https://github.com/benjamin-milhet/RedBird/actions/workflows/node.js.yml/badge.svg)](https://github.com/benjamin-milhet/RedBird/actions/workflows/node.js.yml)
 
 
 L'objectif du projet est de reproduire le très célèbre réseau social Twitter.
